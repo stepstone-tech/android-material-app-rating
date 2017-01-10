@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_humongous">96dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+    <dimen name="margin_big">48dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_post_medium">24dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_pre_medium">12dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_pre_small">6dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_mini">2dp</dimen>
+    <dimen name="margin_zero">0dp</dimen>
+
+    <dimen name="text_size_xsmall">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_big">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_xlarge">22sp</dimen>
+    <dimen name="text_size_xxlarge">32sp</dimen>
+    <dimen name="text_size_xxxlarge">36sp</dimen>
+
+</resources>

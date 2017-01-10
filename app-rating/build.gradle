@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = POM_ARTIFACT_ID
+
+    publishedGroupId = POM_GROUP_ID
+    libraryName = 'Android Material App Rating'
+    artifact = POM_ARTIFACT_ID
+
+    libraryDescription = 'This library allows to use customized Rating Dialog inside applications.'
+
+    siteUrl = 'https://github.com/stepstone-tech/android-material-app-rating'
+    gitUrl = 'https://github.com/stepstone-tech/android-material-app-rating.git'
+
+    libraryVersion = POM_VERSION
+
+    developerId = 'pglebocki'
+    developerName = 'Piotr Głębocki'
+    developerEmail = 'Piotr.Glebocki@stepstone.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion project.androidCompileSdkVersion
+    buildToolsVersion ("$androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion project.androidMinSdkVersion
+        targetSdkVersion project.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+    compile ("com.android.support:support-annotations:$androidSupportLibraryVersion")
+}
+
+gradle.taskGraph.beforeTask { Task task ->
+    if (task instanceof Javadoc) {
+        def releaseVariant = android.libraryVariants.find { it.buildType.name == 'release' }
+        Javadoc javadocTask = (Javadoc) task
+        javadocTask.source = android.sourceSets.main.java.srcDirs
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        javadocTask.classpath = files(releaseVariant.javaCompile.classpath.files) + files(ext.androidJar)
+    }
+}
+
+apply from: '../installv1.gradle'
+apply from: '../bintrayv1.gradle'
