@@ -165,7 +165,7 @@ public class AppRatingDialog {
          *
          * @param title
          * @return
-         * @see {@link #setTitle(int)}
+         * @see#setTitle(int)
          */
         public Builder setTitle(String title) {
             Preconditions.checkArgument(!TextUtils.isEmpty(title), "title cannot be empty");
@@ -180,7 +180,7 @@ public class AppRatingDialog {
          *
          * @param resId
          * @return
-         * @see {@link #setTitle(String)}
+         * @see#setTitle(String)
          */
         public Builder setTitle(@StringRes int resId) {
             data.titleResId = resId;
@@ -194,7 +194,7 @@ public class AppRatingDialog {
          *
          * @param content
          * @return
-         * @see {@link #setContent(int)}
+         * @see#setContent(int)
          */
         public Builder setContent(String content) {
             Preconditions.checkArgument(!TextUtils.isEmpty(content), "content cannot be empty");
@@ -209,7 +209,7 @@ public class AppRatingDialog {
          *
          * @param resId
          * @return
-         * @see {@link #setContent(String)}
+         * @see#setContent(String)
          */
         public Builder setContent(@StringRes int resId) {
             data.contentResId = resId;
@@ -222,7 +222,7 @@ public class AppRatingDialog {
          *
          * @param positiveButtonText
          * @return
-         * @see {@link #setPositiveButtonText(int)}
+         * @see#setPositiveButtonText(int)
          */
         public Builder setPositiveButtonText(String positiveButtonText) {
             Preconditions.checkArgument(!TextUtils.isEmpty(positiveButtonText), "text cannot be empty");
@@ -236,7 +236,7 @@ public class AppRatingDialog {
          *
          * @param resId
          * @return
-         * @see {@link #setPositiveButtonText(String)}
+         * @see#setPositiveButtonText(String)
          */
         public Builder setPositiveButtonText(@StringRes int resId) {
             data.positiveButtonTextResId = resId;
@@ -249,7 +249,7 @@ public class AppRatingDialog {
          *
          * @param negativeButtonText
          * @return
-         * @see {@link #setNegativeButtonText(int)}
+         * @see#setNegativeButtonText(int)
          */
         public Builder setNegativeButtonText(String negativeButtonText) {
             Preconditions.checkArgument(!TextUtils.isEmpty(negativeButtonText), "text cannot be empty");
@@ -263,7 +263,7 @@ public class AppRatingDialog {
          *
          * @param resId
          * @return
-         * @see {@link #setNegativeButtonText(String)}
+         * @see#setNegativeButtonText(String)
          */
         public Builder setNegativeButtonText(@StringRes int resId) {
             data.negativeButtonTextResId = resId;
