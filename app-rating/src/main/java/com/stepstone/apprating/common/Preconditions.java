@@ -11,8 +11,8 @@ public class Preconditions {
      * Verifies if given expression it correct.
      * It throws {@link IllegalArgumentException} it expression is false.
      *
-     * @param expression
-     * @param errorMessage
+     * @param expression an expression to be checked
+     * @param errorMessage error message which will be thrown with exception
      */
     public static void checkArgument(boolean expression, @Nullable Object errorMessage) {
         if (!expression) {
@@ -24,10 +24,10 @@ public class Preconditions {
      * Verifies if given object reference is not null.
      * It throws {@link NullPointerException} if object is null.
      *
-     * @param obj
-     * @param errorMessage
-     * @param <T>
-     * @return
+     * @param obj object reference to che checked
+     * @param errorMessage error message which will be thrown with exception
+     * @param <T> type of object
+     * @return object reference which was passed to method
      */
     public static <T> T checkNotNull(T obj, @Nullable Object errorMessage) {
         if (obj == null) {

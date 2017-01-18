@@ -1,4 +1,4 @@
-package com.stepstone.appratingtest;
+package com.stepstone.apprating.sample;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,7 +11,7 @@ import com.stepstone.apprating.listener.OnPositiveButtonClickedListener;
 
 import java.util.Arrays;
 
-public class MainActivity extends FragmentActivity {
+public class SampleActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity {
                 .setTitleColor(R.color.titleTextColor)
                 .setContentColor(R.color.contentTextColor)
                 .setPositiveButtonClickedListener(listener)
-                .create(MainActivity.this)
+                .create(SampleActivity.this)
                 .show();
     }
 
@@ -65,7 +65,7 @@ public class MainActivity extends FragmentActivity {
                 .setDefaultRating(4)
                 .setTitle("Rate this application")
                 .setPositiveButtonClickedListener(listener)
-                .create(MainActivity.this)
+                .create(SampleActivity.this)
                 .show();
     }
 
@@ -80,14 +80,14 @@ public class MainActivity extends FragmentActivity {
                 .setContent(R.string.content)
                 .setContentColor(R.color.contentTextColor)
                 .setPositiveButtonClickedListener(listener)
-                .create(MainActivity.this)
+                .create(SampleActivity.this)
                 .show();
     }
 
     private OnPositiveButtonClickedListener listener = new OnPositiveButtonClickedListener() {
         @Override
         public void onClicked(int rate, String comment) {
-            Toast.makeText(MainActivity.this, "Rate : " + rate + "\nComment : " + comment, Toast.LENGTH_LONG).show();
+            Toast.makeText(SampleActivity.this, "Rate : " + rate + "\nComment : " + comment, Toast.LENGTH_LONG).show();
         }
     };
 }
