@@ -207,7 +207,7 @@ public class AppRatingDialog {
          * This method sets dialog content description text, which is visible below title.
          * The description content is optional.
          *
-         * @param resId resource if of dialog's content text
+         * @param resId resource id of dialog's content text
          * @return Builder for chaining
          * @see#setContent(String)
          */
@@ -289,7 +289,7 @@ public class AppRatingDialog {
          * If not set then if uses default primary text color
          * defined in theme.
          *
-         * @param colorResId color resource if for content label
+         * @param colorResId color resource id for content label
          * @return Builder for chaining
          */
         public Builder setContentColor(@ColorRes int colorResId) {
