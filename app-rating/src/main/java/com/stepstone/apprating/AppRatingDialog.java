@@ -22,9 +22,9 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
+import com.stepstone.apprating.common.Preconditions;
 import com.stepstone.apprating.listener.OnNegativeButtonClickedListener;
 import com.stepstone.apprating.listener.OnPositiveButtonClickedListener;
-import com.stepstone.apprating.common.Preconditions;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class AppRatingDialog {
      * This method shows rating dialog.
      */
     public void show() {
-        AppRatingDialogFragment fragment = new AppRatingDialogFragment(data);
+        AppRatingDialogFragment fragment = AppRatingDialogFragment.newInstance(data);
         fragment.show(activity.getSupportFragmentManager(), "");
     }
 
@@ -105,8 +105,8 @@ public class AppRatingDialog {
          * This method creates {@link AppRatingDialog} object. It should be called
          * after setup.
          *
-         * @param activity
-         * @return
+         * @param activity an activity where dialog belongs to
+         * @return instance of dialog
          */
         public AppRatingDialog create(@NonNull FragmentActivity activity) {
             Preconditions.checkNotNull(activity, "FragmentActivity cannot be null");
@@ -118,8 +118,8 @@ public class AppRatingDialog {
          * Default value is 6. If want to add some note descriptions below rating bar
          * then need to use {@link #setNoteDescriptions(List)} method instead of this one.
          *
-         * @param maxRating
-         * @return
+         * @param maxRating maximum number of stars
+         * @return Builder for chaining
          */
         public Builder setNumberOfStars(int maxRating) {
             Preconditions.checkArgument(maxRating > 0 && maxRating <= C.InitialValues.MAX_RATING,
@@ -133,8 +133,8 @@ public class AppRatingDialog {
          * If note descriptions were set by this then {@link #setNumberOfStars(int)}
          * method will be ignored.
          *
-         * @param noteDescriptions
-         * @return
+         * @param noteDescriptions list of note descriptions
+         * @return Builder for chaining
          */
         public Builder setNoteDescriptions(List<String> noteDescriptions) {
             Preconditions.checkNotNull(noteDescriptions, "list cannot be null");
@@ -149,8 +149,8 @@ public class AppRatingDialog {
          * This method sets number of stars which are selected by default
          * when dialog is opened.
          *
-         * @param defaultRating
-         * @return
+         * @param defaultRating number of stars which should be selected
+         * @return Builder for chaining
          */
         public Builder setDefaultRating(int defaultRating) {
             Preconditions.checkArgument(defaultRating >= 0 && defaultRating <= data.numberOfStars,
@@ -163,8 +163,8 @@ public class AppRatingDialog {
          * This method sets dialog title.
          * The title is optional.
          *
-         * @param title
-         * @return
+         * @param title dialog's title text
+         * @return Builder for chaining
          * @see#setTitle(int)
          */
         public Builder setTitle(String title) {
@@ -178,8 +178,8 @@ public class AppRatingDialog {
          * This method sets dialog title.
          * The title is optional.
          *
-         * @param resId
-         * @return
+         * @param resId resource id of dialog's title
+         * @return Builder for chaining
          * @see#setTitle(String)
          */
         public Builder setTitle(@StringRes int resId) {
@@ -192,8 +192,8 @@ public class AppRatingDialog {
          * This method sets dialog content description text, which is visible below title.
          * The description content is optional.
          *
-         * @param content
-         * @return
+         * @param content dialog's content text
+         * @return Builder for chaining
          * @see#setContent(int)
          */
         public Builder setContent(String content) {
@@ -207,8 +207,8 @@ public class AppRatingDialog {
          * This method sets dialog content description text, which is visible below title.
          * The description content is optional.
          *
-         * @param resId
-         * @return
+         * @param resId resource if of dialog's content text
+         * @return Builder for chaining
          * @see#setContent(String)
          */
         public Builder setContent(@StringRes int resId) {
@@ -220,8 +220,8 @@ public class AppRatingDialog {
         /**
          * This method sets text of dialog's positive button.
          *
-         * @param positiveButtonText
-         * @return
+         * @param positiveButtonText text for positive button
+         * @return Builder for chaining
          * @see#setPositiveButtonText(int)
          */
         public Builder setPositiveButtonText(String positiveButtonText) {
@@ -234,8 +234,8 @@ public class AppRatingDialog {
         /**
          * This method sets text of dialog's positive button.
          *
-         * @param resId
-         * @return
+         * @param resId resource id of positive button text
+         * @return Builder for chaining
          * @see#setPositiveButtonText(String)
          */
         public Builder setPositiveButtonText(@StringRes int resId) {
@@ -247,8 +247,8 @@ public class AppRatingDialog {
         /**
          * This method sets text of dialog's negative button.
          *
-         * @param negativeButtonText
-         * @return
+         * @param negativeButtonText text for negative button
+         * @return Builder for chaining
          * @see#setNegativeButtonText(int)
          */
         public Builder setNegativeButtonText(String negativeButtonText) {
@@ -261,8 +261,8 @@ public class AppRatingDialog {
         /**
          * This method sets text of dialog's negative button.
          *
-         * @param resId
-         * @return
+         * @param resId resource id of negative button text
+         * @return Builder for chaining
          * @see#setNegativeButtonText(String)
          */
         public Builder setNegativeButtonText(@StringRes int resId) {
@@ -276,8 +276,8 @@ public class AppRatingDialog {
          * If not set then if uses default primary text color
          * defined in theme.
          *
-         * @param colorResId
-         * @return
+         * @param colorResId color resource id for title label
+         * @return Builder for chaining
          */
         public Builder setTitleColor(@ColorRes int colorResId) {
             data.titleColorResId = colorResId;
@@ -289,8 +289,8 @@ public class AppRatingDialog {
          * If not set then if uses default primary text color
          * defined in theme.
          *
-         * @param colorResId
-         * @return
+         * @param colorResId color resource if for content label
+         * @return Builder for chaining
          */
         public Builder setContentColor(@ColorRes int colorResId) {
             data.contentColorResId = colorResId;
@@ -301,8 +301,8 @@ public class AppRatingDialog {
          * This method registers listener which notify when
          * positive button was clicked.
          *
-         * @param positiveButtonClickedListener
-         * @return
+         * @param positiveButtonClickedListener click listener for positive button action
+         * @return Builder for chaining
          */
         public Builder setPositiveButtonClickedListener(@NonNull OnPositiveButtonClickedListener positiveButtonClickedListener) {
             Preconditions.checkNotNull(positiveButtonClickedListener, "listener cannot be null");
@@ -314,8 +314,8 @@ public class AppRatingDialog {
          * This method registers listener which notify when
          * negative button was clicked.
          *
-         * @param negativeButtonClickedListener
-         * @return
+         * @param negativeButtonClickedListener click listener for negative button action
+         * @return Builder for chaining
          */
         public Builder setNegativeButtonClickedListener(@NonNull OnNegativeButtonClickedListener negativeButtonClickedListener) {
             Preconditions.checkNotNull(negativeButtonClickedListener, "listener cannot be null");

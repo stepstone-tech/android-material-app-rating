@@ -16,7 +16,6 @@ limitations under the License.
 
 package com.stepstone.apprating;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,15 +30,15 @@ import android.text.TextUtils;
  *
  * @see AppRatingDialog
  */
-@SuppressLint("ValidFragment")
-class AppRatingDialogFragment extends DialogFragment {
+public class AppRatingDialogFragment extends DialogFragment {
 
-    private final AppRatingDialog.Builder.Data data;
-
-    @SuppressLint("ValidFragment")
-    public AppRatingDialogFragment(AppRatingDialog.Builder.Data data) {
-        this.data = data;
+    public static AppRatingDialogFragment newInstance(AppRatingDialog.Builder.Data data) {
+        AppRatingDialogFragment fragment = new AppRatingDialogFragment();
+        fragment.setData(data);
+        return fragment;
     }
+
+    private AppRatingDialog.Builder.Data data;
 
     @NonNull
     @Override
@@ -148,5 +147,9 @@ class AppRatingDialogFragment extends DialogFragment {
             return getString(data.negativeButtonTextResId);
         }
         return data.negativeButtonText;
+    }
+
+    public void setData(AppRatingDialog.Builder.Data data) {
+        this.data = data;
     }
 }
