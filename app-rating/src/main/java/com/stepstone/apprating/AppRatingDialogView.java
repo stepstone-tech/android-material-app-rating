@@ -56,7 +56,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method returns current rating.
      *
-     * @return
+     * @return number of current selected stars
      */
     public float getRateNumber() {
         return ratingBar.getRating();
@@ -65,7 +65,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method returns rating comment.
      *
-     * @return
+     * @return comment text from edit box
      */
     public String getComment() {
         return editText.getText().toString();
@@ -74,7 +74,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets maximum numbers of start which are visible.
      *
-     * @param numberOfStars
+     * @param numberOfStars maximum number of stars
      */
     public void setNumberOfStars(int numberOfStars) {
         ratingBar.setNumStars(numberOfStars);
@@ -84,7 +84,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets note descriptions for each rating value.
      *
-     * @param noteDescriptions
+     * @param noteDescriptions list of note descriptions
      */
     public void setNoteDescriptions(List<String> noteDescriptions) {
         int numberOfStars = noteDescriptions.size();
@@ -95,7 +95,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets default number of stars.
      *
-     * @param defaultRating
+     * @param defaultRating number of stars
      */
     public void setDefaultRating(float defaultRating) {
         ratingBar.setRating(defaultRating);
@@ -104,7 +104,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets dialog's title.
      *
-     * @param title
+     * @param title dialog's title text
      */
     public void setTitleText(String title) {
         titleText.setText(title);
@@ -114,7 +114,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets dialog's content text.
      *
-     * @param content
+     * @param content dialog's content text
      */
     public void setContentText(String content) {
         contentText.setText(content);
@@ -124,7 +124,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets color of dialog's title.
      *
-     * @param color
+     * @param color resource id of title label color
      */
     public void setTitleColor(@ColorRes int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -138,7 +138,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     /**
      * This method sets color of dialog's content.
      *
-     * @param color
+     * @param color resource id of content label color
      */
     public void setContentColor(@ColorRes int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
