@@ -64,7 +64,7 @@ public class AppRatingDialog {
 
             int numberOfStars = C.InitialValues.MAX_RATING;
 
-            float defaultRating = C.InitialValues.DEFAULT_RATING;
+            int defaultRating = C.InitialValues.DEFAULT_RATING;
 
             String positiveButtonText;
 

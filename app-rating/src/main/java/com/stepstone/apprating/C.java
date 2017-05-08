@@ -25,6 +25,8 @@ public interface C {
 
         int MAX_RATING = 6;
 
-        float DEFAULT_RATING = 4.0f;
+        int DEFAULT_NUMBER_OF_STARS = 5;
+
+        int DEFAULT_RATING = 4;
     }
 }

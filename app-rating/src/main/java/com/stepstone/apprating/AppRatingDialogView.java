@@ -23,9 +23,9 @@ import android.support.annotation.ColorRes;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.stepstone.apprating.listener.OnRatingBarChangedListener;
 import com.stepstone.apprating.ratingbar.CustomRatingBar;
 
 import java.util.List;
@@ -34,7 +34,7 @@ import java.util.List;
  * This class represents custom dialog view which contains
  * rating bar, edit box and labels.
  */
-public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRatingBarChangeListener {
+public class AppRatingDialogView extends LinearLayout implements OnRatingBarChangedListener {
 
     private CustomRatingBar ratingBar;
 
@@ -78,7 +78,6 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
      */
     public void setNumberOfStars(int numberOfStars) {
         ratingBar.setNumStars(numberOfStars);
-        ratingBar.setMax(numberOfStars);
     }
 
     /**
@@ -97,7 +96,7 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
      *
      * @param defaultRating number of stars
      */
-    public void setDefaultRating(float defaultRating) {
+    public void setDefaultRating(int defaultRating) {
         ratingBar.setRating(defaultRating);
     }
 
@@ -150,8 +149,8 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
     }
 
     @Override
-    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-        updateNoteDescriptionText(((int) rating) - 1);
+    public void onRatingChanged(int rating) {
+        updateNoteDescriptionText(rating - 1);
     }
 
     private void updateNoteDescriptionText(int rating) {
@@ -173,7 +172,6 @@ public class AppRatingDialogView extends LinearLayout implements RatingBar.OnRat
         contentText = (TextView) findViewById(R.id.app_rate_dialog_content_text);
         noteDescriptionText = (TextView) findViewById(R.id.app_rate_dialog_note_description);
         ratingBar.setIsIndicator(false);
-        ratingBar.setStepSize(1.0f);
         ratingBar.setOnRatingBarChangeListener(this);
     }
 

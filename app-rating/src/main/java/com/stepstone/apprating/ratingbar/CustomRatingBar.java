@@ -21,11 +21,14 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.LinearLayout;
 
-import com.stepstone.apprating.AppRatingDialogView;
 import com.stepstone.apprating.R;
+import com.stepstone.apprating.common.Preconditions;
+import com.stepstone.apprating.listener.OnRatingBarChangedListener;
+
+import java.util.ArrayList;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -35,28 +38,44 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  */
 public class CustomRatingBar extends LinearLayout {
 
+    private ArrayList<StarButton> starList = new ArrayList<>();
+
     private LinearLayout container;
 
     private int numStars;
-    private int max;
+
     private float rating;
+
     private boolean isIndicator;
-    private float stepSize;
-    private AppRatingDialogView onRatingBarChangeListener;
+
+    private OnRatingBarChangedListener onRatingBarChangedListener;
 
     public CustomRatingBar(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.component_custom_rating_bar, this);
         container = (LinearLayout) findViewById(R.id.rating_bar_container);
-
-        drawStars();
     }
 
-    private void drawStars() {
+    private void addStars(int numberOfAll, int numberOfChecked) {
+        Preconditions.checkArgument(numberOfChecked <= numberOfAll, "wrong argument");
+
+        starList.clear();
+        container.removeAllViews();
+
+        for (int index = 0; index < numberOfAll; index++) {
+            addStar()
+                    .setChecked(index < numberOfChecked)
+                    .setColor(getThemeAccentColor(getContext()))
+                    .setOnClickListener(new OnStarClickedHandler(index + 1));
+        }
+    }
+
+    private StarButton addStar() {
         StarButton starButton = new StarButton(getContext());
-        starButton.setImageResource(R.drawable.ic_star_full_48dp);
         starButton.setLayoutParams(new LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+        starList.add(starButton);
         container.addView(starButton);
+        return starButton;
     }
 
     public float getRating() {
@@ -65,26 +84,28 @@ public class CustomRatingBar extends LinearLayout {
 
     public void setNumStars(int numStars) {
         this.numStars = numStars;
+
+        addStars(numStars, 0);
     }
 
-    public void setMax(int max) {
-        this.max = max;
-    }
-
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
+
+        if (rating <= starList.size()) {
+            for (int index = 0; index < starList.size(); index++) {
+                starList.get(index).setChecked(index < rating);
+            }
+        }
+
+        onRatingBarChangedListener.onRatingChanged(rating);
     }
 
     public void setIsIndicator(boolean isIndicator) {
         this.isIndicator = isIndicator;
     }
 
-    public void setStepSize(float stepSize) {
-        this.stepSize = stepSize;
-    }
-
-    public void setOnRatingBarChangeListener(AppRatingDialogView onRatingBarChangeListener) {
-        this.onRatingBarChangeListener = onRatingBarChangeListener;
+    public void setOnRatingBarChangeListener(OnRatingBarChangedListener onRatingBarChangedListener) {
+        this.onRatingBarChangedListener = onRatingBarChangedListener;
     }
 
     private static int getThemeAccentColor(Context context) {
@@ -98,5 +119,19 @@ public class CustomRatingBar extends LinearLayout {
         TypedValue outValue = new TypedValue();
         context.getTheme().resolveAttribute(colorAttr, outValue, true);
         return outValue.data;
+    }
+
+    private class OnStarClickedHandler implements OnClickListener {
+
+        private final int number;
+
+        public OnStarClickedHandler(int number) {
+            this.number = number;
+        }
+
+        @Override
+        public void onClick(View v) {
+            setRating(number);
+        }
     }
 }
