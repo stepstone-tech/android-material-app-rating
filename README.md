@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="./graphics/logo.png" width="256" height="256"/>
+</p>
+
 # Android Material App Rating
 
 This library allows to use customized Rating Dialog inside applications.
@@ -14,8 +18,8 @@ compile 'com.stepstone.apprating:app-rating:1.0.1'
   - note descriptions below rating bar, which describes each note
   - defining custom dialog's title and description
 
-<img src ="./screenshots/rating_dialog_sample_1.png" width="402" height="640"/>&nbsp;&nbsp;
-<img src ="./screenshots/rating_dialog_sample_2.png" width="402" height="640"/>
+<img src ="./graphics/rating_dialog_sample_1.png" width="402" height="640"/>&nbsp;&nbsp;
+<img src ="./graphics/rating_dialog_sample_2.png" width="402" height="640"/>
 
 ## Getting started
 
@@ -109,3 +113,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+## Maintained by
+<a href="http://www.stepstone.com"><img src ="./graphics/stepstone-logo.png" alt="Stepstone" /></a>
