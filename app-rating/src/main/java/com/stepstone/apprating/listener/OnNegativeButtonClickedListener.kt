@@ -14,21 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.apprating.listener;
+package com.stepstone.apprating.listener
 
 /**
  * This listener notify when user clicked on dialog's negative button.
- *
+
  * @see com.stepstone.apprating.AppRatingDialog
  */
-public interface OnNegativeButtonClickedListener {
+interface OnNegativeButtonClickedListener {
 
-    void onClicked();
+    fun onClicked()
 
-    OnNegativeButtonClickedListener NULL = new OnNegativeButtonClickedListener() {
+    companion object {
 
-        public void onClicked() {
+        val NULL: OnNegativeButtonClickedListener = object : OnNegativeButtonClickedListener {
 
+            override fun onClicked() {
+
+            }
         }
-    };
+    }
 }

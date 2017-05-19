@@ -14,21 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.apprating.listener;
+package com.stepstone.apprating
 
 /**
- * This listener notify when user clicked on dialog's positive button.
- *
- * @see com.stepstone.apprating.AppRatingDialog
+ * This interface contains all constants values used in library.
  */
-public interface OnPositiveButtonClickedListener {
+interface C {
 
-    void onClicked(int rate, String comment);
+    interface InitialValues {
 
-    OnPositiveButtonClickedListener NULL = new OnPositiveButtonClickedListener() {
+        companion object {
 
-        public void onClicked(int rate, String comment) {
+            val MAX_RATING = 6
 
+            val DEFAULT_RATING = 4
         }
-    };
+    }
 }

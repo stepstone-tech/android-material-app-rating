@@ -1,38 +1,40 @@
-package com.stepstone.apprating.common;
-
-import android.support.annotation.Nullable;
+package com.stepstone.apprating.common
 
 /**
  * @author Piotr Głębocki (Piotr.Glebocki@stepstone.com) on 06/01/2017.
  */
-public class Preconditions {
+object Preconditions {
 
     /**
      * Verifies if given expression it correct.
-     * It throws {@link IllegalArgumentException} it expression is false.
-     *
+     * It throws [IllegalArgumentException] it expression is false.
+
      * @param expression an expression to be checked
+     * *
      * @param errorMessage error message which will be thrown with exception
      */
-    public static void checkArgument(boolean expression, @Nullable Object errorMessage) {
+    fun checkArgument(expression: Boolean, errorMessage: Any?) {
         if (!expression) {
-            throw new IllegalArgumentException(String.valueOf(errorMessage));
+            throw IllegalArgumentException(errorMessage.toString())
         }
     }
 
     /**
      * Verifies if given object reference is not null.
-     * It throws {@link NullPointerException} if object is null.
-     *
+     * It throws [NullPointerException] if object is null.
+
      * @param obj object reference to che checked
+     * *
      * @param errorMessage error message which will be thrown with exception
+     * *
      * @param <T> type of object
+     * *
      * @return object reference which was passed to method
-     */
-    public static <T> T checkNotNull(T obj, @Nullable Object errorMessage) {
+    </T> */
+    fun <T> checkNotNull(obj: T?, errorMessage: Any?): T {
         if (obj == null) {
-            throw new NullPointerException(String.valueOf(errorMessage));
+            throw NullPointerException(errorMessage.toString())
         }
-        return obj;
+        return obj
     }
 }
