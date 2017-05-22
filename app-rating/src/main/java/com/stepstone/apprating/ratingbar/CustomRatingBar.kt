@@ -24,8 +24,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
-import com.google.common.base.Preconditions
 import com.stepstone.apprating.R
+import com.stepstone.apprating.common.Preconditions
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
 import java.util.*
 

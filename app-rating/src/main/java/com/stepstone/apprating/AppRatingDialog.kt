@@ -20,8 +20,8 @@ import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
-import com.google.common.base.Preconditions
 import com.stepstone.apprating.AppRatingDialog.Builder
+import com.stepstone.apprating.common.Preconditions
 import com.stepstone.apprating.listener.OnNegativeButtonClickedListener
 import com.stepstone.apprating.listener.OnPositiveButtonClickedListener
 import java.io.Serializable
