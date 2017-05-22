@@ -22,15 +22,12 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
-
-import com.stepstone.apprating.R
-import com.stepstone.apprating.common.Preconditions
-import com.stepstone.apprating.listener.OnRatingBarChangedListener
-
-import java.util.ArrayList
-
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.LinearLayout
+import com.google.common.base.Preconditions
+import com.stepstone.apprating.R
+import com.stepstone.apprating.listener.OnRatingBarChangedListener
+import java.util.*
 
 /**
  * This class is a custom rating bar. It handles displaying of
@@ -44,7 +41,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     private var numStars: Int = 0
 
-    var rating: Float = 0.toFloat()
+    var rating: Float = 0.0f
         private set
 
     private var isIndicator: Boolean = false

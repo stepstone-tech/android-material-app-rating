@@ -35,7 +35,7 @@ import com.stepstone.apprating.ratingbar.CustomRatingBar
  */
 class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBarChangedListener {
 
-    private var ratingBar: CustomRatingBar? = null
+    private lateinit var ratingBar: CustomRatingBar
 
     private var editText: EditText? = null
 
@@ -57,7 +57,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @return number of current selected stars
      */
     val rateNumber: Float
-        get() = ratingBar!!.rating
+        get() = ratingBar.rating
 
     /**
      * This method returns rating comment.
@@ -73,7 +73,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param numberOfStars maximum number of stars
      */
     fun setNumberOfStars(numberOfStars: Int) {
-        ratingBar!!.setNumStars(numberOfStars)
+        ratingBar.setNumStars(numberOfStars)
     }
 
     /**
@@ -93,7 +93,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param defaultRating number of stars
      */
     fun setDefaultRating(defaultRating: Int) {
-        ratingBar!!.setRating(defaultRating)
+        ratingBar.setRating(defaultRating)
     }
 
     /**
@@ -166,8 +166,8 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         titleText = findViewById(R.id.app_rate_dialog_title_text) as TextView
         contentText = findViewById(R.id.app_rate_dialog_content_text) as TextView
         noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description) as TextView
-        ratingBar!!.setIsIndicator(false)
-        ratingBar!!.setOnRatingBarChangeListener(this)
+        ratingBar.setIsIndicator(false)
+        ratingBar.setOnRatingBarChangeListener(this)
     }
 
     private val theme: Resources.Theme

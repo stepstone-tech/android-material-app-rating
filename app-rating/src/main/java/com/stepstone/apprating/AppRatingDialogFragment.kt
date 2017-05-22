@@ -38,8 +38,8 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private fun setupAlertDialog(context: Context): AlertDialog {
         val dialogView = AppRatingDialogView(context)
-
         val builder = AlertDialog.Builder(activity)
+        data = arguments.getSerializable(C.ExtraKeys.DATA) as AppRatingDialog.Builder.Data?
 
         setupPositiveButton(dialogView, builder)
         setupNegativeButton(builder)
@@ -143,7 +143,9 @@ class AppRatingDialogFragment : DialogFragment() {
 
         fun newInstance(data: AppRatingDialog.Builder.Data): AppRatingDialogFragment {
             val fragment = AppRatingDialogFragment()
-            fragment.setData(data)
+            val bundle = Bundle()
+            bundle.putSerializable(C.ExtraKeys.DATA, data)
+            fragment.arguments = bundle
             return fragment
         }
     }

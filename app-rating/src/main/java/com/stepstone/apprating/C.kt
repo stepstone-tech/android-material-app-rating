@@ -30,4 +30,12 @@ interface C {
             val DEFAULT_RATING = 4
         }
     }
+
+    interface  ExtraKeys {
+
+        companion object {
+
+            val DATA = "data"
+        }
+    }
 }
