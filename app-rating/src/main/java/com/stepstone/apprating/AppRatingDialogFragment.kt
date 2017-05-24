@@ -30,7 +30,7 @@ import android.text.TextUtils
  */
 class AppRatingDialogFragment : DialogFragment() {
 
-    private var data: AppRatingDialog.Builder.Data? = null
+    private lateinit var data: AppRatingDialog.Builder.Data
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return setupAlertDialog(activity)
@@ -39,30 +39,31 @@ class AppRatingDialogFragment : DialogFragment() {
     private fun setupAlertDialog(context: Context): AlertDialog {
         val dialogView = AppRatingDialogView(context)
         val builder = AlertDialog.Builder(activity)
-        data = arguments.getSerializable(C.ExtraKeys.DATA) as AppRatingDialog.Builder.Data?
+        data = arguments.getSerializable(C.ExtraKeys.DATA) as AppRatingDialog.Builder.Data
 
         setupPositiveButton(dialogView, builder)
         setupNegativeButton(builder)
         setupTitleAndContentMessages(dialogView)
         setupColors(dialogView)
 
-        dialogView.setNumberOfStars(data!!.numberOfStars)
+        dialogView.setNumberOfStars(data.numberOfStars)
 
-        if (data!!.noteDescriptions != null && !data!!.noteDescriptions!!.isEmpty()) {
-            dialogView.setNoteDescriptions(data!!.noteDescriptions!!)
+        val isEmpty = data.noteDescriptions?.isEmpty() ?: true
+        if (!isEmpty) {
+            dialogView.setNoteDescriptions(data.noteDescriptions!!)
         }
 
-        dialogView.setDefaultRating(data!!.defaultRating)
+        dialogView.setDefaultRating(data.defaultRating)
         builder.setView(dialogView)
         return builder.create()
     }
 
     private fun setupColors(dialogView: AppRatingDialogView) {
-        if (data!!.titleColorResId != 0) {
-            dialogView.setTitleColor(data!!.titleColorResId)
+        if (data.titleColorResId != 0) {
+            dialogView.setTitleColor(data.titleColorResId)
         }
-        if (data!!.contentColorResId != 0) {
-            dialogView.setContentColor(data!!.contentColorResId)
+        if (data.contentColorResId != 0) {
+            dialogView.setContentColor(data.contentColorResId)
         }
     }
 
@@ -77,7 +78,7 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private fun setupNegativeButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(negativeButtonText)) {
-            builder.setNegativeButton(negativeButtonText) { dialog, which -> data!!.negativeButtonClickedListener.onClicked() }
+            builder.setNegativeButton(negativeButtonText) { dialog, which -> data.negativeButtonClickedListener.onClicked() }
         }
     }
 
@@ -86,53 +87,53 @@ class AppRatingDialogFragment : DialogFragment() {
             builder.setPositiveButton(positiveButtonText) { dialog, which ->
                 val rateNumber = dialogView.rateNumber.toInt()
                 val comment = dialogView.comment
-                data!!.positiveButtonClickedListener.onClicked(rateNumber, comment)
+                data.positiveButtonClickedListener.onClicked(rateNumber, comment)
             }
         }
     }
 
     private val title: String?
         get() {
-            if (TextUtils.isEmpty(data!!.title)) {
-                if (data!!.titleResId == 0) {
+            if (TextUtils.isEmpty(data.title)) {
+                if (data.titleResId == 0) {
                     return null
                 }
-                return getString(data!!.titleResId)
+                return getString(data.titleResId)
             }
-            return data!!.title
+            return data.title
         }
 
     private val content: String?
         get() {
-            if (TextUtils.isEmpty(data!!.content)) {
-                if (data!!.contentResId == 0) {
+            if (TextUtils.isEmpty(data.content)) {
+                if (data.contentResId == 0) {
                     return null
                 }
-                return getString(data!!.contentResId)
+                return getString(data.contentResId)
             }
-            return data!!.content
+            return data.content
         }
 
     private val positiveButtonText: String?
         get() {
-            if (TextUtils.isEmpty(data!!.positiveButtonText)) {
-                if (data!!.positiveButtonTextResId == 0) {
+            if (TextUtils.isEmpty(data.positiveButtonText)) {
+                if (data.positiveButtonTextResId == 0) {
                     return null
                 }
-                return getString(data!!.positiveButtonTextResId)
+                return getString(data.positiveButtonTextResId)
             }
-            return data!!.positiveButtonText
+            return data.positiveButtonText
         }
 
     private val negativeButtonText: String?
         get() {
-            if (TextUtils.isEmpty(data!!.negativeButtonText)) {
-                if (data!!.negativeButtonTextResId == 0) {
+            if (TextUtils.isEmpty(data.negativeButtonText)) {
+                if (data.negativeButtonTextResId == 0) {
                     return null
                 }
-                return getString(data!!.negativeButtonTextResId)
+                return getString(data.negativeButtonTextResId)
             }
-            return data!!.negativeButtonText
+            return data.negativeButtonText
         }
 
     fun setData(data: AppRatingDialog.Builder.Data) {
