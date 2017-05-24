@@ -14,17 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.apprating;
+package com.stepstone.apprating
 
 /**
  * This interface contains all constants values used in library.
  */
-public interface C {
+interface C {
 
     interface InitialValues {
 
-        int MAX_RATING = 6;
+        companion object {
 
-        float DEFAULT_RATING = 4.0f;
+            val MAX_RATING = 6
+
+            val DEFAULT_RATING = 4
+        }
+    }
+
+    interface  ExtraKeys {
+
+        companion object {
+
+            val DATA = "data"
+        }
     }
 }

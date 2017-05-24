@@ -14,21 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-package com.stepstone.apprating.listener;
+package com.stepstone.apprating.listener
 
 /**
  * This listener notify when user clicked on dialog's positive button.
- *
+
  * @see com.stepstone.apprating.AppRatingDialog
  */
-public interface OnPositiveButtonClickedListener {
+interface OnPositiveButtonClickedListener {
 
-    void onClicked(int rate, String comment);
+    fun onClicked(rate: Int, comment: String)
 
-    OnPositiveButtonClickedListener NULL = new OnPositiveButtonClickedListener() {
+    companion object {
 
-        public void onClicked(int rate, String comment) {
+        val NULL: OnPositiveButtonClickedListener = object : OnPositiveButtonClickedListener {
 
+            override fun onClicked(rate: Int, comment: String) {
+
+            }
         }
-    };
+    }
 }
