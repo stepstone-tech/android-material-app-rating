@@ -37,13 +37,13 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     private lateinit var ratingBar: CustomRatingBar
 
-    private var editText: EditText? = null
+    private lateinit var editText: EditText
 
-    private var titleText: TextView? = null
+    private lateinit var titleText: TextView
 
-    private var contentText: TextView? = null
+    private lateinit var contentText: TextView
 
-    private var noteDescriptionText: TextView? = null
+    private lateinit var noteDescriptionText: TextView
 
     private var noteDescriptions: List<String>? = null
 
@@ -65,7 +65,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @return comment text from edit box
      */
     val comment: String
-        get() = editText!!.text.toString()
+        get() = editText.text.toString()
 
     /**
      * This method sets maximum numbers of start which are visible.
@@ -82,7 +82,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param noteDescriptions list of note descriptions
      */
     fun setNoteDescriptions(noteDescriptions: List<String>) {
-        val numberOfStars = noteDescriptions.size
+        val numberOfStars = noteDescriptions?.size
         setNumberOfStars(numberOfStars)
         this.noteDescriptions = noteDescriptions
     }
@@ -102,8 +102,8 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param title dialog's title text
      */
     fun setTitleText(title: String) {
-        titleText!!.text = title
-        titleText!!.visibility = View.VISIBLE
+        titleText.text = title
+        titleText.visibility = View.VISIBLE
     }
 
     /**
@@ -112,8 +112,8 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param content dialog's content text
      */
     fun setContentText(content: String) {
-        contentText!!.text = content
-        contentText!!.visibility = View.VISIBLE
+        contentText.text = content
+        contentText.visibility = View.VISIBLE
     }
 
     /**
@@ -123,9 +123,9 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      */
     fun setTitleColor(@ColorRes color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            titleText!!.setTextColor(resources.getColor(color, theme))
+            titleText.setTextColor(resources.getColor(color, theme))
         } else {
-            titleText!!.setTextColor(resources.getColor(color))
+            titleText.setTextColor(resources.getColor(color))
 
         }
     }
@@ -137,9 +137,9 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      */
     fun setContentColor(@ColorRes color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            contentText!!.setTextColor(resources.getColor(color, theme))
+            contentText.setTextColor(resources.getColor(color, theme))
         } else {
-            contentText!!.setTextColor(resources.getColor(color))
+            contentText.setTextColor(resources.getColor(color))
 
         }
     }
@@ -149,14 +149,14 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     private fun updateNoteDescriptionText(rating: Int) {
-        if (noteDescriptions == null || noteDescriptions!!.isEmpty()) {
-            noteDescriptionText!!.visibility = View.GONE
+        if (noteDescriptions == null || (noteDescriptions?.isEmpty() ?: true)) {
+            noteDescriptionText.visibility = View.GONE
             return
         }
 
         val text = noteDescriptions!![rating]
-        noteDescriptionText!!.text = text
-        noteDescriptionText!!.visibility = View.VISIBLE
+        noteDescriptionText.text = text
+        noteDescriptionText.visibility = View.VISIBLE
     }
 
     private fun setup(context: Context) {
