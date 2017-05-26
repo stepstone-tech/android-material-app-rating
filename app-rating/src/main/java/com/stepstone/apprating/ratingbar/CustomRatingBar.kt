@@ -61,7 +61,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
         for (index in 0..numberOfAll - 1) {
             addStar()
-                    .setChecked(index < numberOfChecked)
+                    .setCheckedWithoutAnimation(index < numberOfChecked)
                     .setColor(getThemeAccentColor(context))
                     .setOnClickListener(OnStarClickedHandler(index + 1))
         }
@@ -81,12 +81,16 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
         addStars(numStars, 0)
     }
 
-    fun setRating(rating: Int) {
+    fun setRating(rating: Int, withAnimation : Boolean = false) {
         this.rating = rating.toFloat()
 
         if (rating <= starList.size) {
             for (index in starList.indices) {
-                starList[index].setChecked(index < rating)
+                if (withAnimation) {
+                    starList[index].setChecked(index < rating)
+                } else {
+                    starList[index].setCheckedWithoutAnimation(index < rating)
+                }
             }
         }
 
@@ -117,7 +121,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
     private inner class OnStarClickedHandler(private val number: Int) : View.OnClickListener {
 
         override fun onClick(v: View) {
-            setRating(number)
+            setRating(number, true)
         }
     }
 }

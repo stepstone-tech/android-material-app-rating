@@ -38,4 +38,16 @@ interface C {
             val DATA = "data"
         }
     }
+
+    interface Animation {
+
+        companion object {
+
+            val VISIBLE = 1.0f
+
+            val INVISIBLE = 0.0f
+
+            val CHECK_STAR_DURATION : Long = 200
+        }
+    }
 }
