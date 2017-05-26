@@ -28,10 +28,10 @@ configure(allprojects) {
     /* Android config and dependency versions */
     ext {
         androidMinSdkVersion 		        = 16
-        androidTargetSdkVersion             = 24
-        androidCompileSdkVersion            = 24
-        androidBuildToolsVersion            = "25.0.0"
-        androidSupportLibraryVersion        = "25.1.0"
+        androidTargetSdkVersion             = 25
+        androidCompileSdkVersion            = 25
+        androidBuildToolsVersion            = "25.0.2"
+        androidSupportLibraryVersion        = "25.3.1"
     }
 
 }
