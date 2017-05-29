@@ -2,7 +2,7 @@
   <img src ="./graphics/logo.png" width="256" height="256"/>
 </p>
 
-# Android Material App Rating
+# Android Material App Rating [![Build Status](https://travis-ci.org/stepstone-tech/android-material-app-rating.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-app-rating)
 
 This library allows to use customized Rating Dialog inside applications.
 
