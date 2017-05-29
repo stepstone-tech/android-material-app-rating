@@ -31,4 +31,3 @@ before_script:
 
 script:
   - ./gradlew assembleDebug
-
