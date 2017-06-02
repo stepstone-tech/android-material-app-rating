@@ -33,7 +33,7 @@ class AppRatingDialogFragment : DialogFragment() {
     private lateinit var data: AppRatingDialog.Builder.Data
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return setupAlertDialog(activity)
+      return setupAlertDialog(activity)
     }
 
     private fun setupAlertDialog(context: Context): AlertDialog {
@@ -55,7 +55,13 @@ class AppRatingDialogFragment : DialogFragment() {
 
         dialogView.setDefaultRating(data.defaultRating)
         builder.setView(dialogView)
-        return builder.create()
+        val alertDialog = builder.create()
+
+        if (data.windowAnimationResId != 0) {
+            alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
+        }
+
+        return  alertDialog
     }
 
     private fun setupColors(dialogView: AppRatingDialogView) {

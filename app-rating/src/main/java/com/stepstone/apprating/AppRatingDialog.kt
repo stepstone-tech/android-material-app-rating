@@ -18,6 +18,7 @@ package com.stepstone.apprating
 
 import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
+import android.support.annotation.StyleRes
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.stepstone.apprating.AppRatingDialog.Builder
@@ -74,6 +75,8 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
             var titleColorResId: Int = 0
 
             var contentColorResId: Int = 0
+
+            var windowAnimationResId: Int = 0
 
             var noteDescriptions: List<String>? = null
 
@@ -280,11 +283,21 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
          * defined in theme.
 
          * @param colorResId color resource id for title label
-         * *
          * @return Builder for chaining
          */
         fun setTitleColor(@ColorRes colorResId: Int): Builder {
             data.titleColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets window's animation resource.
+         *
+         * @param animationResId resource if of animation
+         * @return Builder for chaining
+         */
+        fun setWindowAnimation(@StyleRes animationResId: Int): Builder {
+            data.windowAnimationResId = animationResId
             return this
         }
 

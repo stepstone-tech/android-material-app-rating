@@ -17,6 +17,7 @@ compile 'com.stepstone.apprating:app-rating:1.0.1'
   - custom rating scope (number of stars)
   - note descriptions below rating bar, which describes each note
   - defining custom dialog's title and description
+  - enter/exit window animation
 
 <img src ="./graphics/rating_dialog_sample_1.png" width="402" height="640"/>&nbsp;&nbsp;
 <img src ="./graphics/rating_dialog_sample_2.png" width="402" height="640"/>
@@ -41,6 +42,11 @@ Just need to define own style for your dialog.
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="MyDialogFadeAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
 </resources>
@@ -80,6 +86,7 @@ private void showDialog() {
                 .setTitleColor(R.color.titleTextColor)
                 .setContentColor(R.color.contentTextColor)
                 .setPositiveButtonClickedListener(listener)
+                .setWindowAnimation(R.style.MyDialogFadeAnimation)
                 .create(MainActivity.this)
                 .show();
     }
