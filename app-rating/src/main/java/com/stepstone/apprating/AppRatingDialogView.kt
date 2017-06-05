@@ -161,7 +161,6 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         }
 
         commentEditText.setTextColor(textColor)
-        setCursorColor(commentEditText, textColor)
     }
 
     /**
@@ -197,32 +196,6 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description) as TextView
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
-    }
-
-    fun setCursorColor(view: EditText, @ColorInt color: Int) {
-        try {
-            // Get the cursor resource id
-            var field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
-            field.isAccessible = true
-            val drawableResId = field.getInt(view)
-
-            // Get the editor
-            field = TextView::class.java.getDeclaredField("mEditor")
-            field.isAccessible = true
-            val editor = field.get(view)
-
-            // Get the drawable and set a color filter
-            val drawable = ContextCompat.getDrawable(view.context, drawableResId)
-            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-            val drawables = arrayOf(drawable, drawable)
-
-            // Set the drawables
-            field = editor.javaClass.getDeclaredField("mCursorDrawable")
-            field.isAccessible = true
-            field.set(editor, drawables)
-        } catch (ignored: Exception) {
-        }
-
     }
 
     private val theme: Resources.Theme
