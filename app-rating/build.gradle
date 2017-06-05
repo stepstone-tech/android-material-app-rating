@@ -64,6 +64,10 @@ gradle.taskGraph.beforeTask { Task task ->
     }
 }
 
+tasks.withType(Javadoc).all {
+    excludes = ['**/*.kt']
+}
+
 apply from: '../installv1.gradle'
 apply from: '../bintrayv1.gradle'
 repositories {
