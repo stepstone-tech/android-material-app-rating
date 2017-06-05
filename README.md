@@ -11,6 +11,9 @@ This library allows to use customized Rating Dialog inside applications.
 compile 'com.stepstone.apprating:app-rating:1.0.1'
 ```
 
+&nbsp;
+<img src ="./graphics/sample.png" width="720" height="640"/>&nbsp;&nbsp
+
 ## Supported features
   - colors for dialog's background, title, description
   - accent color for stars and action buttons
@@ -19,8 +22,8 @@ compile 'com.stepstone.apprating:app-rating:1.0.1'
   - defining custom dialog's title and description
   - enter/exit window animation
 
-<img src ="./graphics/sample.png" width="720" height="640"/>&nbsp;&nbsp;
-<img src ="./gifs/firstDialog.gif" width="360" height="640"/>
+### Using different app themes
+<img src ="./gifs/firstDialog.gif" width="360" height="640"/>&nbsp;&nbsp;
 <img src ="./gifs/secondDialog.gif" width="360" height="640"/>
 
 ## Getting started
