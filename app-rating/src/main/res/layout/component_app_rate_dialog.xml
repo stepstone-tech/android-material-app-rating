@@ -27,7 +27,7 @@
         android:visibility="gone"
         android:gravity="center_horizontal"
         tools:visibility="visible"
-        tools:text="content" />
+        tools:text="description" />
 
     <com.stepstone.apprating.ratingbar.CustomRatingBar
         android:id="@+id/app_rate_dialog_rating_bar"

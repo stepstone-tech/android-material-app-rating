@@ -89,8 +89,8 @@ class AppRatingDialogFragment : DialogFragment() {
         if (!TextUtils.isEmpty(title)) {
             dialogView.setTitleText(title!!)
         }
-        if (!TextUtils.isEmpty(content)) {
-            dialogView.setContentText(content!!)
+        if (!TextUtils.isEmpty(description)) {
+            dialogView.setDescriptionText(description!!)
         }
     }
 
@@ -121,15 +121,15 @@ class AppRatingDialogFragment : DialogFragment() {
             return data.title
         }
 
-    private val content: String?
+    private val description: String?
         get() {
-            if (TextUtils.isEmpty(data.content)) {
-                if (data.contentResId == 0) {
+            if (TextUtils.isEmpty(data.description)) {
+                if (data.descriptionResId == 0) {
                     return null
                 }
-                return getString(data.contentResId)
+                return getString(data.descriptionResId)
             }
-            return data.content
+            return data.description
         }
 
     private val positiveButtonText: String?

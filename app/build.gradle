@@ -20,6 +20,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        first {
+            applicationId = "com.stepstone.apprating.sample.first"
+            buildConfigField "String", "GROUP", "\"first\""
+        }
+
+        second {
+            applicationId = "com.stepstone.apprating.sample.second"
+            buildConfigField "String", "GROUP", "\"second\""
+        }
+    }
+    buildToolsVersion '25.0.2'
 }
 
 dependencies {

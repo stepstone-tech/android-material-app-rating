@@ -111,11 +111,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     /**
-     * This method sets dialog's content text.
+     * This method sets dialog's description text.
 
-     * @param content dialog's content text
+     * @param content dialog's description text
      */
-    fun setContentText(content: String) {
+    fun setDescriptionText(content: String) {
         descriptionText.text = content
         descriptionText.visibility = View.VISIBLE
     }
