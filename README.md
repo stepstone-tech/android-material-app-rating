@@ -6,13 +6,12 @@
 
 This library allows to use customized Rating Dialog inside applications.
 
+<img src ="./graphics/sample.png" width="720" height="640"/>
+
 ## Download (TO BE UPLOADED to JCENTER)
 ```groovy
 compile 'com.stepstone.apprating:app-rating:1.0.1'
 ```
-
-&nbsp;
-<img src ="./graphics/sample.png" width="720" height="640"/>&nbsp;&nbsp
 
 ## Supported features
   - colors for dialog's background, title, description
@@ -23,7 +22,7 @@ compile 'com.stepstone.apprating:app-rating:1.0.1'
   - enter/exit window animation
 
 ### Using different app themes
-<img src ="./gifs/firstDialog.gif" width="360" height="640"/>&nbsp;&nbsp;
+<img src ="./gifs/firstDialog.gif" width="360" height="640"/>&nbsp;&nbsp;&nbsp;&nbsp;
 <img src ="./gifs/secondDialog.gif" width="360" height="640"/>
 
 ## Getting started
