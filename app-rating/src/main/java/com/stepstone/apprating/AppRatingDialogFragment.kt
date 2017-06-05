@@ -22,7 +22,6 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 /**
  * This class represents rating dialog created by [com.stepstone.apprating.AppRatingDialog.Builder].
@@ -34,11 +33,6 @@ class AppRatingDialogFragment : DialogFragment() {
     private lateinit var data: AppRatingDialog.Builder.Data
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build())
-
         return setupAlertDialog(activity)
     }
 

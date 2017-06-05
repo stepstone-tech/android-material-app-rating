@@ -10,7 +10,7 @@
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text_size_small</item>
-        <item name="fontPath">@string/font_roboto_medium</item> 
+        <item name="android:fontFamily">sans-serif-medium</item> 
     </style>
 
     <style name="MyDialogSlideHorizontalAnimation">
