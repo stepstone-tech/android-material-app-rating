@@ -3,8 +3,22 @@
     <!-- Text Appearance -->
     <style name="TextAppearance" parent="TextAppearance.AppCompat" />
 
-    <style name="TextAppearance.NoteLabel">
-        <item name="android:textSize">@dimen/text_size_big</item> 
+    <style name="TextAppearance.AppRatingDialog"/>
+
+    <style name="TextAppearance.AppRatingDialog.Title">
+        <item name="fontPath">@string/font_roboto_medium</item> 
+        <item name="android:textSize">@dimen/text_size_large</item> 
+    </style>
+
+    <style name="TextAppearance.AppRatingDialog.Description">
+        <item name="fontPath">@string/font_roboto_regular</item> 
+        <item name="android:textSize">@dimen/text_size_medium</item> 
+    </style>
+
+
+    <style name="TextAppearance.AppRatingDialog.NoteLabel">
+        <item name="fontPath">@string/font_roboto_regular</item> 
+        <item name="android:textSize">@dimen/text_size_small</item> 
     </style>
 
 </resources>

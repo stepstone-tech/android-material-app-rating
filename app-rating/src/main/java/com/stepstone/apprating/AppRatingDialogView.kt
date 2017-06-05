@@ -18,16 +18,20 @@ package com.stepstone.apprating
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.PorterDuff
 import android.os.Build
+import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
 import com.stepstone.apprating.ratingbar.CustomRatingBar
+
 
 /**
  * This class represents custom dialog view which contains
@@ -37,11 +41,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     private lateinit var ratingBar: CustomRatingBar
 
-    private lateinit var editText: EditText
+    private lateinit var commentEditText: EditText
 
     private lateinit var titleText: TextView
 
-    private lateinit var contentText: TextView
+    private lateinit var descriptionText: TextView
 
     private lateinit var noteDescriptionText: TextView
 
@@ -65,7 +69,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @return comment text from edit box
      */
     val comment: String
-        get() = editText.text.toString()
+        get() = commentEditText.text.toString()
 
     /**
      * This method sets maximum numbers of start which are visible.
@@ -112,8 +116,8 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param content dialog's content text
      */
     fun setContentText(content: String) {
-        contentText.text = content
-        contentText.visibility = View.VISIBLE
+        descriptionText.text = content
+        descriptionText.visibility = View.VISIBLE
     }
 
     /**
@@ -121,7 +125,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
      * @param color resource id of title label color
      */
-    fun setTitleColor(@ColorRes color: Int) {
+    fun setTitleTextColor(@ColorRes color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             titleText.setTextColor(resources.getColor(color, theme))
         } else {
@@ -131,17 +135,42 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     /**
-     * This method sets color of dialog's content.
+     * This method sets color of dialog's description.
 
-     * @param color resource id of content label color
+     * @param color resource id of description label color
      */
-    fun setContentColor(@ColorRes color: Int) {
+    fun setDescriptionTextColor(@ColorRes color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            contentText.setTextColor(resources.getColor(color, theme))
+            descriptionText.setTextColor(resources.getColor(color, theme))
         } else {
-            contentText.setTextColor(resources.getColor(color))
+            descriptionText.setTextColor(resources.getColor(color))
 
         }
+    }
+
+    /**
+     * This method sets color of dialog's comment.
+
+     * @param color resource id of comment text color
+     */
+    fun setEditTextColor(@ColorRes color: Int) {
+        val textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            resources.getColor(color, theme)
+        } else {
+            resources.getColor(color)
+        }
+
+        commentEditText.setTextColor(textColor)
+        setCursorColor(commentEditText, textColor)
+    }
+
+    /**
+     * This method sets color of dialog's edit text.
+
+     * @param color resource id of edit text
+     */
+    fun setEditBackgroundColor(@ColorRes color: Int) {
+        DrawableCompat.setTint(commentEditText.background, ContextCompat.getColor(context, color))
     }
 
     override fun onRatingChanged(rating: Int) {
@@ -162,12 +191,38 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     private fun setup(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.component_app_rate_dialog, this, true)
         ratingBar = findViewById(R.id.app_rate_dialog_rating_bar) as CustomRatingBar
-        editText = findViewById(R.id.app_rate_dialog_edit_text) as EditText
+        commentEditText = findViewById(R.id.app_rate_dialog_comment_edit_text) as EditText
         titleText = findViewById(R.id.app_rate_dialog_title_text) as TextView
-        contentText = findViewById(R.id.app_rate_dialog_content_text) as TextView
+        descriptionText = findViewById(R.id.app_rate_dialog_description_text) as TextView
         noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description) as TextView
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
+    }
+
+    fun setCursorColor(view: EditText, @ColorInt color: Int) {
+        try {
+            // Get the cursor resource id
+            var field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+            field.isAccessible = true
+            val drawableResId = field.getInt(view)
+
+            // Get the editor
+            field = TextView::class.java.getDeclaredField("mEditor")
+            field.isAccessible = true
+            val editor = field.get(view)
+
+            // Get the drawable and set a color filter
+            val drawable = ContextCompat.getDrawable(view.context, drawableResId)
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+            val drawables = arrayOf(drawable, drawable)
+
+            // Set the drawables
+            field = editor.javaClass.getDeclaredField("mCursorDrawable")
+            field.isAccessible = true
+            field.set(editor, drawables)
+        } catch (ignored: Exception) {
+        }
+
     }
 
     private val theme: Resources.Theme

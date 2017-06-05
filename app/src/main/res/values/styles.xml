@@ -2,14 +2,15 @@
 
     <!-- Dialog -->
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">#9B26AF</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyAlertDialogButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/MyAlertDialogButtonStyle</item>
     </style>
 
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="fontPath">@string/font_roboto_medium</item> 
     </style>
 
     <style name="MyDialogSlideHorizontalAnimation">

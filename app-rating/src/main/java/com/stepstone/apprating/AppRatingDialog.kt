@@ -72,9 +72,13 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
 
             var contentResId: Int = 0
 
-            var titleColorResId: Int = 0
+            var titleTextColorResId: Int = 0
 
-            var contentColorResId: Int = 0
+            var descriptionTextColorResId: Int = 0
+
+            var commentTextColorResId: Int = 0
+
+            var commentBackgroundColorResId: Int = 0
 
             var windowAnimationResId: Int = 0
 
@@ -278,15 +282,56 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
         }
 
         /**
-         * This method sets title's color resource.
+         * This method sets title's text color resource.
          * If not set then if uses default primary text color
          * defined in theme.
 
          * @param colorResId color resource id for title label
          * @return Builder for chaining
          */
-        fun setTitleColor(@ColorRes colorResId: Int): Builder {
-            data.titleColorResId = colorResId
+        fun setTitleTextColor(@ColorRes colorResId: Int): Builder {
+            data.titleTextColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets description's text color resource.
+         * If not set then if uses default primary text color
+         * defined in theme.
+
+         * @param colorResId color resource id for description label
+         * *
+         * @return Builder for chaining
+         */
+        fun setDescriptionTextColor(@ColorRes colorResId: Int): Builder {
+            data.descriptionTextColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets comment's color resource.
+         * If not set then if uses default primary text color
+         * defined in theme.
+
+         * @param colorResId color resource id for comment edit text
+         * *
+         * @return Builder for chaining
+         */
+        fun setCommentTextColor(@ColorRes colorResId: Int): Builder {
+            data.commentTextColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets comments edit text's background color resource.
+         * If not set then if uses default white color will be used.
+
+         * @param colorResId color resource id for edit text background
+         * *
+         * @return Builder for chaining
+         */
+        fun setCommentBackgroundColor(@ColorRes colorResId: Int): Builder {
+            data.commentBackgroundColorResId = colorResId
             return this
         }
 
@@ -298,20 +343,6 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
          */
         fun setWindowAnimation(@StyleRes animationResId: Int): Builder {
             data.windowAnimationResId = animationResId
-            return this
-        }
-
-        /**
-         * This method sets content's color resource.
-         * If not set then if uses default primary text color
-         * defined in theme.
-
-         * @param colorResId color resource id for content label
-         * *
-         * @return Builder for chaining
-         */
-        fun setContentColor(@ColorRes colorResId: Int): Builder {
-            data.contentColorResId = colorResId
             return this
         }
 

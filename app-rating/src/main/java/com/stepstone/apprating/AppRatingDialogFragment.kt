@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 /**
  * This class represents rating dialog created by [com.stepstone.apprating.AppRatingDialog.Builder].
@@ -33,7 +34,12 @@ class AppRatingDialogFragment : DialogFragment() {
     private lateinit var data: AppRatingDialog.Builder.Data
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-      return setupAlertDialog(activity)
+        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build())
+
+        return setupAlertDialog(activity)
     }
 
     private fun setupAlertDialog(context: Context): AlertDialog {
@@ -61,15 +67,21 @@ class AppRatingDialogFragment : DialogFragment() {
             alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
         }
 
-        return  alertDialog
+        return alertDialog
     }
 
     private fun setupColors(dialogView: AppRatingDialogView) {
-        if (data.titleColorResId != 0) {
-            dialogView.setTitleColor(data.titleColorResId)
+        if (data.titleTextColorResId != 0) {
+            dialogView.setTitleTextColor(data.titleTextColorResId)
         }
-        if (data.contentColorResId != 0) {
-            dialogView.setContentColor(data.contentColorResId)
+        if (data.descriptionTextColorResId != 0) {
+            dialogView.setDescriptionTextColor(data.descriptionTextColorResId)
+        }
+        if (data.commentTextColorResId != 0) {
+            dialogView.setEditTextColor(data.commentTextColorResId)
+        }
+        if (data.commentBackgroundColorResId != 0) {
+            dialogView.setEditBackgroundColor(data.commentBackgroundColorResId)
         }
     }
 

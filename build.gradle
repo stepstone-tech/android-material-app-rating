@@ -32,6 +32,7 @@ configure(allprojects) {
         androidCompileSdkVersion            = 25
         androidBuildToolsVersion            = "25.0.2"
         androidSupportLibraryVersion        = "25.3.1"
+        calligraphyVersion                  = "2.3.0"
     }
 
 }
