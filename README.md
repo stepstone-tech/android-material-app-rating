@@ -19,8 +19,9 @@ compile 'com.stepstone.apprating:app-rating:1.0.1'
   - defining custom dialog's title and description
   - enter/exit window animation
 
-<img src ="./graphics/rating_dialog_sample_1.png" width="402" height="640"/>&nbsp;&nbsp;
-<img src ="./graphics/rating_dialog_sample_2.png" width="402" height="640"/>
+<img src ="./graphics/sample.png" width="640" height="640"/>&nbsp;&nbsp;
+<img src ="./gifs/firstDialog.gif" width="640" height="360"/>
+<img src ="./gifs/secondDialog.gif" width="640" height="360"/>
 
 ## Getting started
 
