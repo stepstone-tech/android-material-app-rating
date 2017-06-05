@@ -6,6 +6,8 @@
 
 This library allows to use customized Rating Dialog inside applications.
 
+<img src ="./graphics/sample.png" width="720" height="640"/>
+
 ## Download (TO BE UPLOADED to JCENTER)
 ```groovy
 compile 'com.stepstone.apprating:app-rating:1.0.1'
@@ -17,9 +19,11 @@ compile 'com.stepstone.apprating:app-rating:1.0.1'
   - custom rating scope (number of stars)
   - note descriptions below rating bar, which describes each note
   - defining custom dialog's title and description
+  - enter/exit window animation
 
-<img src ="./graphics/rating_dialog_sample_1.png" width="402" height="640"/>&nbsp;&nbsp;
-<img src ="./graphics/rating_dialog_sample_2.png" width="402" height="640"/>
+### Using different app themes
+<img src ="./gifs/firstDialog.gif" width="360" height="640"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src ="./gifs/secondDialog.gif" width="360" height="640"/>
 
 ## Getting started
 
@@ -41,6 +45,11 @@ Just need to define own style for your dialog.
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="MyDialogFadeAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
 </resources>
@@ -76,10 +85,13 @@ private void showDialog() {
                 .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
-                .setContent("Please select some stars and give your feedback")
-                .setTitleColor(R.color.titleTextColor)
-                .setContentColor(R.color.contentTextColor)
+                .setDescription("Please select some stars and give your feedback")
+                .setTitleTextColor(R.color.titleTextColor)
+                .setDescriptionTextColor(R.color.contentTextColor)
+                .setCommentTextColor(R.color.commentTextColor)
+                .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setPositiveButtonClickedListener(listener)
+                .setWindowAnimation(R.style.MyDialogFadeAnimation)
                 .create(MainActivity.this)
                 .show();
     }

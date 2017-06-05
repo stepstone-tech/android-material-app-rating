@@ -55,15 +55,27 @@ class AppRatingDialogFragment : DialogFragment() {
 
         dialogView.setDefaultRating(data.defaultRating)
         builder.setView(dialogView)
-        return builder.create()
+        val alertDialog = builder.create()
+
+        if (data.windowAnimationResId != 0) {
+            alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
+        }
+
+        return alertDialog
     }
 
     private fun setupColors(dialogView: AppRatingDialogView) {
-        if (data.titleColorResId != 0) {
-            dialogView.setTitleColor(data.titleColorResId)
+        if (data.titleTextColorResId != 0) {
+            dialogView.setTitleTextColor(data.titleTextColorResId)
         }
-        if (data.contentColorResId != 0) {
-            dialogView.setContentColor(data.contentColorResId)
+        if (data.descriptionTextColorResId != 0) {
+            dialogView.setDescriptionTextColor(data.descriptionTextColorResId)
+        }
+        if (data.commentTextColorResId != 0) {
+            dialogView.setEditTextColor(data.commentTextColorResId)
+        }
+        if (data.commentBackgroundColorResId != 0) {
+            dialogView.setEditBackgroundColor(data.commentBackgroundColorResId)
         }
     }
 
@@ -71,8 +83,8 @@ class AppRatingDialogFragment : DialogFragment() {
         if (!TextUtils.isEmpty(title)) {
             dialogView.setTitleText(title!!)
         }
-        if (!TextUtils.isEmpty(content)) {
-            dialogView.setContentText(content!!)
+        if (!TextUtils.isEmpty(description)) {
+            dialogView.setDescriptionText(description!!)
         }
     }
 
@@ -103,15 +115,15 @@ class AppRatingDialogFragment : DialogFragment() {
             return data.title
         }
 
-    private val content: String?
+    private val description: String?
         get() {
-            if (TextUtils.isEmpty(data.content)) {
-                if (data.contentResId == 0) {
+            if (TextUtils.isEmpty(data.description)) {
+                if (data.descriptionResId == 0) {
                     return null
                 }
-                return getString(data.contentResId)
+                return getString(data.descriptionResId)
             }
-            return data.content
+            return data.description
         }
 
     private val positiveButtonText: String?

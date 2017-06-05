@@ -3,8 +3,22 @@
     <!-- Text Appearance -->
     <style name="TextAppearance" parent="TextAppearance.AppCompat" />
 
-    <style name="TextAppearance.NoteLabel">
-        <item name="android:textSize">@dimen/text_size_big</item> 
+    <style name="TextAppearance.AppRatingDialog"/>
+
+    <style name="TextAppearance.AppRatingDialog.Title">
+        <item name="android:fontFamily">sans-serif-medium</item> 
+        <item name="android:textSize">@dimen/text_size_large</item> 
+    </style>
+
+    <style name="TextAppearance.AppRatingDialog.Description">
+        <item name="android:fontFamily">sans-serif</item> 
+        <item name="android:textSize">@dimen/text_size_medium</item> 
+    </style>
+
+
+    <style name="TextAppearance.AppRatingDialog.NoteLabel">
+        <item name="android:fontFamily">sans-serif</item> 
+        <item name="android:textSize">@dimen/text_size_small</item> 
     </style>
 
 </resources>

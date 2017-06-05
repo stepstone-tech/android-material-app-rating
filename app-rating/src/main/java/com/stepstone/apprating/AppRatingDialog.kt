@@ -18,6 +18,7 @@ package com.stepstone.apprating
 
 import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
+import android.support.annotation.StyleRes
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.stepstone.apprating.AppRatingDialog.Builder
@@ -61,7 +62,7 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
 
             var title: String? = null
 
-            var content: String? = null
+            var description: String? = null
 
             var positiveButtonTextResId: Int = 0
 
@@ -69,11 +70,17 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
 
             var titleResId: Int = 0
 
-            var contentResId: Int = 0
+            var descriptionResId: Int = 0
 
-            var titleColorResId: Int = 0
+            var titleTextColorResId: Int = 0
 
-            var contentColorResId: Int = 0
+            var descriptionTextColorResId: Int = 0
+
+            var commentTextColorResId: Int = 0
+
+            var commentBackgroundColorResId: Int = 0
+
+            var windowAnimationResId: Int = 0
 
             var noteDescriptions: List<String>? = null
 
@@ -180,35 +187,35 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
         }
 
         /**
-         * This method sets dialog content description text, which is visible below title.
-         * The description content is optional.
+         * This method sets dialog description description text, which is visible below title.
+         * The description description is optional.
 
-         * @param content dialog's content text
+         * @param content dialog's description text
          * *
          * @return Builder for chaining
          * *
-         * @see#setContent(int)
+         * @see#setDescription(int)
          */
-        fun setContent(content: String): Builder {
-            Preconditions.checkArgument(!TextUtils.isEmpty(content), "content cannot be empty")
-            data.content = content
-            data.contentResId = 0
+        fun setDescription(content: String): Builder {
+            Preconditions.checkArgument(!TextUtils.isEmpty(content), "description cannot be empty")
+            data.description = content
+            data.descriptionResId = 0
             return this
         }
 
         /**
-         * This method sets dialog content description text, which is visible below title.
-         * The description content is optional.
+         * This method sets dialog description description text, which is visible below title.
+         * The description description is optional.
 
-         * @param resId resource id of dialog's content text
+         * @param resId resource id of dialog's description text
          * *
          * @return Builder for chaining
          * *
-         * @see#setContent(String)
+         * @see#setDescription(String)
          */
-        fun setContent(@StringRes resId: Int): Builder {
-            data.contentResId = resId
-            data.content = null
+        fun setDescription(@StringRes resId: Int): Builder {
+            data.descriptionResId = resId
+            data.description = null
             return this
         }
 
@@ -275,30 +282,67 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
         }
 
         /**
-         * This method sets title's color resource.
+         * This method sets title's text color resource.
          * If not set then if uses default primary text color
          * defined in theme.
 
          * @param colorResId color resource id for title label
-         * *
          * @return Builder for chaining
          */
-        fun setTitleColor(@ColorRes colorResId: Int): Builder {
-            data.titleColorResId = colorResId
+        fun setTitleTextColor(@ColorRes colorResId: Int): Builder {
+            data.titleTextColorResId = colorResId
             return this
         }
 
         /**
-         * This method sets content's color resource.
+         * This method sets description's text color resource.
          * If not set then if uses default primary text color
          * defined in theme.
 
-         * @param colorResId color resource id for content label
+         * @param colorResId color resource id for description label
          * *
          * @return Builder for chaining
          */
-        fun setContentColor(@ColorRes colorResId: Int): Builder {
-            data.contentColorResId = colorResId
+        fun setDescriptionTextColor(@ColorRes colorResId: Int): Builder {
+            data.descriptionTextColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets comment's color resource.
+         * If not set then if uses default primary text color
+         * defined in theme.
+
+         * @param colorResId color resource id for comment edit text
+         * *
+         * @return Builder for chaining
+         */
+        fun setCommentTextColor(@ColorRes colorResId: Int): Builder {
+            data.commentTextColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets comments edit text's background color resource.
+         * If not set then if uses default white color will be used.
+
+         * @param colorResId color resource id for edit text background
+         * *
+         * @return Builder for chaining
+         */
+        fun setCommentBackgroundColor(@ColorRes colorResId: Int): Builder {
+            data.commentBackgroundColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets window's animation resource.
+         *
+         * @param animationResId resource if of animation
+         * @return Builder for chaining
+         */
+        fun setWindowAnimation(@StyleRes animationResId: Int): Builder {
+            data.windowAnimationResId = animationResId
             return this
         }
 

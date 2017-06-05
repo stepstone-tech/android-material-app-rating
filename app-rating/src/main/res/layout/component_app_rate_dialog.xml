@@ -9,23 +9,25 @@
 
     <TextView
         android:id="@+id/app_rate_dialog_title_text"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.AppRatingDialog.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_tiny"
         android:gravity="center_horizontal"
         android:visibility="gone"
+        tools:visibility="visible"
         tools:text="title" />
 
     <TextView
-        android:id="@+id/app_rate_dialog_content_text"
-        style="@style/TextAppearance.AppCompat.Medium"
+        android:id="@+id/app_rate_dialog_description_text"
+        style="@style/TextAppearance.AppRatingDialog.Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_tiny"
         android:visibility="gone"
         android:gravity="center_horizontal"
-        tools:text="content" />
+        tools:visibility="visible"
+        tools:text="description" />
 
     <com.stepstone.apprating.ratingbar.CustomRatingBar
         android:id="@+id/app_rate_dialog_rating_bar"
@@ -34,7 +36,7 @@
 
     <TextView
         android:id="@+id/app_rate_dialog_note_description"
-        style="@style/TextAppearance.NoteLabel"
+        style="@style/TextAppearance.AppRatingDialog.NoteLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
@@ -43,10 +45,11 @@
         tools:text="Very good" />
 
     <EditText
-        android:id="@+id/app_rate_dialog_edit_text"
+        android:id="@+id/app_rate_dialog_comment_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:textCursorDrawable="@null"
+        android:background="@drawable/edit_text_background"
         android:gravity="top"
         android:inputType="text|textMultiLine"
         android:lines="5"
