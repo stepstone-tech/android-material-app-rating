@@ -8,9 +8,9 @@ This library allows to use customized Rating Dialog inside applications.
 
 <img src ="./graphics/sample.png" width="720" height="640"/>
 
-## Download (TO BE UPLOADED to JCENTER)
+## Download
 ```groovy
-compile 'com.stepstone.apprating:app-rating:1.1.1'
+compile 'com.stepstone.apprating:app-rating:1.2.0'
 ```
 
 ## Supported features

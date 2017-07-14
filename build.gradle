@@ -27,7 +27,7 @@ task clean(type: Delete) {
 configure(allprojects) {
     /* Android config and dependency versions */
     ext {
-        androidMinSdkVersion 		        = 16
+        androidMinSdkVersion 		        = 14
         androidTargetSdkVersion             = 25
         androidCompileSdkVersion            = 25
         androidBuildToolsVersion            = "25.0.2"
