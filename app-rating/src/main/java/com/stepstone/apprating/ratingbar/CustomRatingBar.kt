@@ -106,13 +106,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
     }
 
     private fun getThemeAccentColor(context: Context): Int {
-        val colorAttr: Int
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            colorAttr = android.R.attr.colorAccent
-        } else {
-            //Get colorAccent defined for AppCompat
-            colorAttr = context.resources.getIdentifier("colorAccent", "attr", context.packageName)
-        }
+        val colorAttr: Int = context.resources.getIdentifier("colorAccent", "attr", context.packageName)
         val outValue = TypedValue()
         context.theme.resolveAttribute(colorAttr, outValue, true)
         return outValue.data
