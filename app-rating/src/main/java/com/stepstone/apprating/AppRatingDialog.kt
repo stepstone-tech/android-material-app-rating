@@ -25,7 +25,6 @@ import com.stepstone.apprating.AppRatingDialog.Builder
 import com.stepstone.apprating.common.Preconditions
 import com.stepstone.apprating.listener.OnNegativeButtonClickedListener
 import com.stepstone.apprating.listener.OnPositiveButtonClickedListener
-import java.io.Serializable
 
 
 /**
@@ -50,7 +49,7 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
      */
     class Builder {
 
-        inner class Data : Serializable {
+        inner class Data {
 
             var numberOfStars = C.InitialValues.MAX_RATING
 

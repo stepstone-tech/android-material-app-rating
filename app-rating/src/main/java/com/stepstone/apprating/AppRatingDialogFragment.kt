@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import com.stepstone.apprating.common.Preconditions
 
 /**
  * This class represents rating dialog created by [com.stepstone.apprating.AppRatingDialog.Builder].
@@ -33,13 +34,13 @@ class AppRatingDialogFragment : DialogFragment() {
     private lateinit var data: AppRatingDialog.Builder.Data
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        Preconditions.checkNotNull(data, "data cannot be null")
         return setupAlertDialog(activity)
     }
 
     private fun setupAlertDialog(context: Context): AlertDialog {
         val dialogView = AppRatingDialogView(context)
         val builder = AlertDialog.Builder(activity)
-        data = arguments.getSerializable(C.ExtraKeys.DATA) as AppRatingDialog.Builder.Data
 
         setupPositiveButton(dialogView, builder)
         setupNegativeButton(builder)
@@ -148,17 +149,11 @@ class AppRatingDialogFragment : DialogFragment() {
             return data.negativeButtonText
         }
 
-    fun setData(data: AppRatingDialog.Builder.Data) {
-        this.data = data
-    }
-
     companion object {
 
         fun newInstance(data: AppRatingDialog.Builder.Data): AppRatingDialogFragment {
             val fragment = AppRatingDialogFragment()
-            val bundle = Bundle()
-            bundle.putSerializable(C.ExtraKeys.DATA, data)
-            fragment.arguments = bundle
+            fragment.data = data
             return fragment
         }
     }
