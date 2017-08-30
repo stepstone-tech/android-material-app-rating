@@ -32,8 +32,15 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private lateinit var data: AppRatingDialog.Builder.Data
 
+    private lateinit var alertDialog: AlertDialog
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return setupAlertDialog(activity)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        alertDialog?.dismiss()
     }
 
     private fun setupAlertDialog(context: Context): AlertDialog {
@@ -55,7 +62,7 @@ class AppRatingDialogFragment : DialogFragment() {
 
         dialogView.setDefaultRating(data.defaultRating)
         builder.setView(dialogView)
-        val alertDialog = builder.create()
+        alertDialog = builder.create()
 
         if (data.windowAnimationResId != 0) {
             alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
