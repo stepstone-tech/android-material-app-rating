@@ -6,11 +6,11 @@ import android.widget.Button
 import android.widget.Toast
 
 import com.stepstone.apprating.AppRatingDialog
-import com.stepstone.apprating.listener.OnPositiveButtonClickedListener
+import com.stepstone.apprating.listener.RatingDialogListener
 
 import java.util.Arrays
 
-class SampleActivity : FragmentActivity() {
+class SampleActivity : FragmentActivity(), RatingDialogListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class SampleActivity : FragmentActivity() {
                 .setDescriptionTextColor(R.color.descriptionTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
-                .setPositiveButtonClickedListener(listener)
+                //.setPositiveButtonClickedListener(listener)
                 .setWindowAnimation(R.style.MyDialogSlideHorizontalAnimation)
                 .create(this@SampleActivity)
                 .show()
@@ -51,7 +51,6 @@ class SampleActivity : FragmentActivity() {
                 .setDefaultRating(4)
                 .setTitle("Rate this application")
                 .setTitleTextColor(R.color.titleTextColor)
-                .setPositiveButtonClickedListener(listener)
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
@@ -71,15 +70,15 @@ class SampleActivity : FragmentActivity() {
                 .setDescriptionTextColor(R.color.descriptionTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
-                .setPositiveButtonClickedListener(listener)
                 .setWindowAnimation(R.style.MyDialogSlideVerticalAnimation)
                 .create(this@SampleActivity)
                 .show()
     }
 
-    private val listener = object : OnPositiveButtonClickedListener {
-        override fun onClicked(rate: Int, comment: String) {
-            Toast.makeText(this@SampleActivity, "Rate : $rate\nComment : $comment", Toast.LENGTH_LONG).show()
-        }
+    override fun onPositiveButtonClicked(rate: Int, comment: String) {
+        Toast.makeText(this@SampleActivity, "Rate : $rate\nComment : $comment", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNegativeButtonClicked() {
     }
 }

@@ -31,11 +31,13 @@ interface C {
         }
     }
 
-    interface  ExtraKeys {
+    interface ExtraKeys {
 
         companion object {
 
             val DATA = "data"
+
+            val CURRENT_RATE_NUMBER = "currentRateNumber"
         }
     }
 
@@ -47,7 +49,7 @@ interface C {
 
             val INVISIBLE = 0.0f
 
-            val CHECK_STAR_DURATION : Long = 200
+            val CHECK_STAR_DURATION: Long = 200
         }
     }
 }
