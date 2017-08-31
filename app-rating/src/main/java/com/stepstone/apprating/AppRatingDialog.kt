@@ -220,13 +220,11 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         }
 
         /**
-         * This method sets comment hint text.
+         * This method sets hint text.
          * The hint is optional.
-
-         * @param hint comment hint text
-         * *
+         *
+         * @param hint a hint text
          * @return Builder for chaining
-         * *
          * @see#setHint(int)
          */
         fun setHint(hint: String): Builder {
@@ -237,13 +235,11 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         }
 
         /**
-         * This method sets comment hint text.
+         * This method sets hint text.
          * The hint is optional.
 
          * @param resId resource id of hint text
-         * *
          * @return Builder for chaining
-         * *
          * @see#setHint(String)
          */
         fun setHint(@StringRes resId: Int): Builder {
