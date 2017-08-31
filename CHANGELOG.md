@@ -6,4 +6,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [2.0]
 ### Changed
-- **Breaking change:** Replaced "positive/nagative button" clicked listener by global listener which need to be implemented by host activity
+- **Breaking change:** Replaced "positive/nagative button" clicked listener by a global listener which needs to be implemented by the host activity

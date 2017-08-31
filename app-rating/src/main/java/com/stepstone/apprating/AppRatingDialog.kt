@@ -80,7 +80,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var windowAnimationResId: Int = 0
 
-            var noteDescriptions: List<String>? = null
+            var noteDescriptions: ArrayList<String>? = null
         }
 
         val data = Data()
@@ -128,7 +128,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
             Preconditions.checkArgument(!noteDescriptions.isEmpty(), "list cannot be empty")
             Preconditions.checkArgument(noteDescriptions.size <= C.InitialValues.MAX_RATING,
                     "size of the list can be maximally " + C.InitialValues.MAX_RATING)
-            data.noteDescriptions = noteDescriptions
+            data.noteDescriptions = ArrayList(noteDescriptions)
             return this
         }
 
