@@ -18,9 +18,7 @@ package com.stepstone.apprating
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.PorterDuff
 import android.os.Build
-import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat

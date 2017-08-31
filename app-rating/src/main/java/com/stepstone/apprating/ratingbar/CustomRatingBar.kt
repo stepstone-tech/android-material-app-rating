@@ -81,7 +81,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
         addStars(numStars, 0)
     }
 
-    fun setRating(rating: Int, withAnimation : Boolean = false) {
+    fun setRating(rating: Int, withAnimation: Boolean = false) {
         this.rating = rating.toFloat()
 
         if (rating <= starList.size) {

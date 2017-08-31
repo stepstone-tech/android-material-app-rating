@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import com.stepstone.apprating.listener.RatingDialogListener
 
 /**
  * This class represents rating dialog created by [com.stepstone.apprating.AppRatingDialog.Builder].
@@ -30,14 +31,45 @@ import android.text.TextUtils
  */
 class AppRatingDialogFragment : DialogFragment() {
 
+    private lateinit var listener: RatingDialogListener
+
     private lateinit var data: AppRatingDialog.Builder.Data
+
+    private lateinit var alertDialog: AlertDialog
+
+    private lateinit var dialogView: AppRatingDialogView
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return setupAlertDialog(activity)
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        if (dialogView != null) {
+            outState?.putFloat(C.ExtraKeys.CURRENT_RATE_NUMBER, dialogView.rateNumber)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val rateNumber: Float? = savedInstanceState?.getFloat(C.ExtraKeys.CURRENT_RATE_NUMBER)
+        if (rateNumber != null) {
+            dialogView?.setDefaultRating(rateNumber.toInt())
+        }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if (host is RatingDialogListener) {
+            listener = host as RatingDialogListener
+        } else {
+            throw AssertionError("Host does not implement RatingDialogListener!")
+        }
+    }
+
     private fun setupAlertDialog(context: Context): AlertDialog {
-        val dialogView = AppRatingDialogView(context)
+        dialogView = AppRatingDialogView(context)
         val builder = AlertDialog.Builder(activity)
         data = arguments.getSerializable(C.ExtraKeys.DATA) as AppRatingDialog.Builder.Data
 
@@ -55,7 +87,7 @@ class AppRatingDialogFragment : DialogFragment() {
 
         dialogView.setDefaultRating(data.defaultRating)
         builder.setView(dialogView)
-        val alertDialog = builder.create()
+        alertDialog = builder.create()
 
         if (data.windowAnimationResId != 0) {
             alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
@@ -90,7 +122,9 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private fun setupNegativeButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(negativeButtonText)) {
-            builder.setNegativeButton(negativeButtonText) { dialog, which -> data.negativeButtonClickedListener.onClicked() }
+            builder.setNegativeButton(negativeButtonText) { dialog, which ->
+                listener?.onNegativeButtonClicked()
+            }
         }
     }
 
@@ -99,7 +133,7 @@ class AppRatingDialogFragment : DialogFragment() {
             builder.setPositiveButton(positiveButtonText) { dialog, which ->
                 val rateNumber = dialogView.rateNumber.toInt()
                 val comment = dialogView.comment
-                data.positiveButtonClickedListener.onClicked(rateNumber, comment)
+                listener?.onPositiveButtonClicked(rateNumber, comment)
             }
         }
     }
@@ -147,10 +181,6 @@ class AppRatingDialogFragment : DialogFragment() {
             }
             return data.negativeButtonText
         }
-
-    fun setData(data: AppRatingDialog.Builder.Data) {
-        this.data = data
-    }
 
     companion object {
 

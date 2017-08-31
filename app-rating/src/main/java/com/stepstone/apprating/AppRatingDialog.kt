@@ -23,8 +23,6 @@ import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.stepstone.apprating.AppRatingDialog.Builder
 import com.stepstone.apprating.common.Preconditions
-import com.stepstone.apprating.listener.OnNegativeButtonClickedListener
-import com.stepstone.apprating.listener.OnPositiveButtonClickedListener
 import java.io.Serializable
 
 
@@ -34,7 +32,7 @@ import java.io.Serializable
 
  * @see Builder
  */
-class AppRatingDialog protected constructor(private val activity: FragmentActivity, private val data: Builder.Data) {
+class AppRatingDialog private constructor(private val activity: FragmentActivity, private val data: Builder.Data) {
 
     /**
      * This method shows rating dialog.
@@ -48,7 +46,7 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
      * This class allows to setup rating dialog
      * using builder pattern.
      */
-    class Builder {
+    class Builder : Serializable {
 
         inner class Data : Serializable {
 
@@ -82,11 +80,7 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
 
             var windowAnimationResId: Int = 0
 
-            var noteDescriptions: List<String>? = null
-
-            var positiveButtonClickedListener = OnPositiveButtonClickedListener.NULL
-
-            var negativeButtonClickedListener = OnNegativeButtonClickedListener.NULL
+            var noteDescriptions: ArrayList<String>? = null
         }
 
         val data = Data()
@@ -134,7 +128,7 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
             Preconditions.checkArgument(!noteDescriptions.isEmpty(), "list cannot be empty")
             Preconditions.checkArgument(noteDescriptions.size <= C.InitialValues.MAX_RATING,
                     "size of the list can be maximally " + C.InitialValues.MAX_RATING)
-            data.noteDescriptions = noteDescriptions
+            data.noteDescriptions = ArrayList(noteDescriptions)
             return this
         }
 
@@ -343,34 +337,6 @@ class AppRatingDialog protected constructor(private val activity: FragmentActivi
          */
         fun setWindowAnimation(@StyleRes animationResId: Int): Builder {
             data.windowAnimationResId = animationResId
-            return this
-        }
-
-        /**
-         * This method registers listener which notify when
-         * positive button was clicked.
-
-         * @param positiveButtonClickedListener click listener for positive button action
-         * *
-         * @return Builder for chaining
-         */
-        fun setPositiveButtonClickedListener(positiveButtonClickedListener: OnPositiveButtonClickedListener): Builder {
-            Preconditions.checkNotNull(positiveButtonClickedListener, "listener cannot be null")
-            data.positiveButtonClickedListener = positiveButtonClickedListener
-            return this
-        }
-
-        /**
-         * This method registers listener which notify when
-         * negative button was clicked.
-
-         * @param negativeButtonClickedListener click listener for negative button action
-         * *
-         * @return Builder for chaining
-         */
-        fun setNegativeButtonClickedListener(negativeButtonClickedListener: OnNegativeButtonClickedListener): Builder {
-            Preconditions.checkNotNull(negativeButtonClickedListener, "listener cannot be null")
-            data.negativeButtonClickedListener = negativeButtonClickedListener
             return this
         }
     }

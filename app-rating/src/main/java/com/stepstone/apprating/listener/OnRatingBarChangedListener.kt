@@ -7,14 +7,4 @@ package com.stepstone.apprating.listener
 interface OnRatingBarChangedListener {
 
     fun onRatingChanged(rating: Int)
-
-    companion object {
-
-        val NULL: OnRatingBarChangedListener = object : OnRatingBarChangedListener {
-
-            override fun onRatingChanged(rating: Int) {
-
-            }
-        }
-    }
 }

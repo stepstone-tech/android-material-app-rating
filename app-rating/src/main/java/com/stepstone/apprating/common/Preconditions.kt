@@ -261,7 +261,8 @@ object Preconditions {
      * *
      * @throws IllegalArgumentException if `size` is negative
      */
-    @JvmOverloads fun checkElementIndex(index: Int, size: Int, desc: String = "index"): Int {
+    @JvmOverloads
+    fun checkElementIndex(index: Int, size: Int, desc: String = "index"): Int {
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index >= size) {
             throw IndexOutOfBoundsException(badElementIndex(index, size, desc))
@@ -298,7 +299,8 @@ object Preconditions {
      * *
      * @throws IllegalArgumentException if `size` is negative
      */
-    @JvmOverloads fun checkPositionIndex(index: Int, size: Int, desc: String = "index"): Int {
+    @JvmOverloads
+    fun checkPositionIndex(index: Int, size: Int, desc: String = "index"): Int {
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index > size) {
             throw IndexOutOfBoundsException(badPositionIndex(index, size, desc))

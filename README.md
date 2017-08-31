@@ -2,7 +2,7 @@
   <img src ="./graphics/logo.png" width="256" height="256"/>
 </p>
 
-# Android Material App Rating [![Build Status](https://travis-ci.org/stepstone-tech/android-material-app-rating.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-app-rating)
+# Android Material App Rating [![Build Status](https://travis-ci.org/stepstone-tech/android-material-app-rating.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-app-rating) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20App%20Rating-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6143)
 
 This library allows to use customized Rating Dialog inside applications.
 
@@ -10,7 +10,7 @@ This library allows to use customized Rating Dialog inside applications.
 
 ## Download
 ```groovy
-compile 'com.stepstone.apprating:app-rating:1.2.0'
+compile 'com.stepstone.apprating:app-rating:2.0.0'
 ```
 
 ## Supported features
@@ -76,6 +76,7 @@ And assign this style to the theme.
 ### Setup and create dialog
 
 This code need to be invoked inside FragmentActivity.
+<b>Activity MUST implement RatingDialogListener !</b> Otherwise an exception will be thrown.
 
 ```java
 private void showDialog() {
@@ -90,7 +91,6 @@ private void showDialog() {
                 .setDescriptionTextColor(R.color.contentTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
-                .setPositiveButtonClickedListener(listener)
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
                 .create(MainActivity.this)
                 .show();
@@ -99,17 +99,25 @@ private void showDialog() {
 
 ### Getting results
 
-Rating and comments can be fetched by listener.
+Rating and comments can be fetched by listener implemented by activity.
 
 ```java
-private OnPositiveButtonClickedListener listener = new OnPositiveButtonClickedListener() {
+class MyActivity implements RatingDialogListener {
+
         @Override
-        public void onClicked(int rate, String comment) {
+        public void onPositiveButtonClicked(int rate, String comment) {
             // interpret results, send it to analytics etc...
         }
-    };
+
+        @Override
+        public void onNegativeButtonClicked() {
+
+        }
 }
 ```
+
+## Changelog
+See [changelog](CHANGELOG.md)
 
 ## License
 Copyright 2017 StepStone Services

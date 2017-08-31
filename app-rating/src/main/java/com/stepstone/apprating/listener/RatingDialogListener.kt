@@ -17,20 +17,23 @@ limitations under the License.
 package com.stepstone.apprating.listener
 
 /**
- * This listener notify when user clicked on dialog's negative button.
+ * This listener notify when user clicked on dialog's positive button.
 
  * @see com.stepstone.apprating.AppRatingDialog
  */
-interface OnNegativeButtonClickedListener {
+interface RatingDialogListener {
 
-    fun onClicked()
+    fun onPositiveButtonClicked(rate: Int, comment: String)
+
+    fun onNegativeButtonClicked()
 
     companion object {
 
-        val NULL: OnNegativeButtonClickedListener = object : OnNegativeButtonClickedListener {
+        val NULL: RatingDialogListener = object : RatingDialogListener {
+            override fun onNegativeButtonClicked() {
+            }
 
-            override fun onClicked() {
-
+            override fun onPositiveButtonClicked(rate: Int, comment: String) {
             }
         }
     }
