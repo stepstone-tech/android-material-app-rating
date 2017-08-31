@@ -170,6 +170,30 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         DrawableCompat.setTint(commentEditText.background, ContextCompat.getColor(context, color))
     }
 
+    /**
+     * This method sets hint for comment edit text.
+     *
+     * @param hint a hint to be displayed
+     */
+    fun setHint(hint: String) {
+        commentEditText.hint = hint
+    }
+
+    /**
+     * This method sets color of dialog's hint.
+
+     * @param color resource id of hint text color
+     */
+    fun setHintColor(@ColorRes color: Int) {
+        val hintColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            resources.getColor(color, theme)
+        } else {
+            resources.getColor(color)
+        }
+
+        commentEditText.setHintTextColor(hintColor)
+    }
+
     override fun onRatingChanged(rating: Int) {
         updateNoteDescriptionText(rating - 1)
     }

@@ -76,6 +76,7 @@ class AppRatingDialogFragment : DialogFragment() {
         setupPositiveButton(dialogView, builder)
         setupNegativeButton(builder)
         setupTitleAndContentMessages(dialogView)
+        setupHint(dialogView)
         setupColors(dialogView)
 
         dialogView.setNumberOfStars(data.numberOfStars)
@@ -109,6 +110,9 @@ class AppRatingDialogFragment : DialogFragment() {
         if (data.commentBackgroundColorResId != 0) {
             dialogView.setEditBackgroundColor(data.commentBackgroundColorResId)
         }
+        if (data.hintTextColorResId != 0) {
+            dialogView.setHintColor(data.hintTextColorResId)
+        }
     }
 
     private fun setupTitleAndContentMessages(dialogView: AppRatingDialogView) {
@@ -117,6 +121,12 @@ class AppRatingDialogFragment : DialogFragment() {
         }
         if (!TextUtils.isEmpty(description)) {
             dialogView.setDescriptionText(description!!)
+        }
+    }
+
+    private fun setupHint(dialogView: AppRatingDialogView) {
+        if (!TextUtils.isEmpty(hint)) {
+            dialogView.setHint(hint!!)
         }
     }
 
@@ -158,6 +168,17 @@ class AppRatingDialogFragment : DialogFragment() {
                 return getString(data.descriptionResId)
             }
             return data.description
+        }
+
+    private val hint: String?
+        get() {
+            if (TextUtils.isEmpty(data.hint)) {
+                if (data.hintResId == 0) {
+                    return null
+                }
+                return getString(data.hintResId)
+            }
+            return data.hint
         }
 
     private val positiveButtonText: String?

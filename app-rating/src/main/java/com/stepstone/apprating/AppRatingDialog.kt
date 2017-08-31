@@ -62,6 +62,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var description: String? = null
 
+            var hint: String? = null
+
             var positiveButtonTextResId: Int = 0
 
             var negativeButtonTextResId: Int = 0
@@ -70,9 +72,13 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var descriptionResId: Int = 0
 
+            var hintResId: Int = 0
+
             var titleTextColorResId: Int = 0
 
             var descriptionTextColorResId: Int = 0
+
+            var hintTextColorResId: Int = 0
 
             var commentTextColorResId: Int = 0
 
@@ -182,7 +188,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets dialog description description text, which is visible below title.
-         * The description description is optional.
+         * The description is optional.
 
          * @param content dialog's description text
          * *
@@ -210,6 +216,39 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         fun setDescription(@StringRes resId: Int): Builder {
             data.descriptionResId = resId
             data.description = null
+            return this
+        }
+
+        /**
+         * This method sets comment hint text.
+         * The hint is optional.
+
+         * @param hint comment hint text
+         * *
+         * @return Builder for chaining
+         * *
+         * @see#setHint(int)
+         */
+        fun setHint(hint: String): Builder {
+            Preconditions.checkArgument(!TextUtils.isEmpty(hint), "hint cannot be empty")
+            data.hint = hint
+            data.hintResId = 0
+            return this
+        }
+
+        /**
+         * This method sets comment hint text.
+         * The hint is optional.
+
+         * @param resId resource id of hint text
+         * *
+         * @return Builder for chaining
+         * *
+         * @see#setHint(String)
+         */
+        fun setHint(@StringRes resId: Int): Builder {
+            data.hintResId = resId
+            data.hint = null
             return this
         }
 
@@ -277,7 +316,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets title's text color resource.
-         * If not set then if uses default primary text color
+         * If not set then it uses default primary text color
          * defined in theme.
 
          * @param colorResId color resource id for title label
@@ -290,7 +329,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets description's text color resource.
-         * If not set then if uses default primary text color
+         * If not set then it uses default primary text color
          * defined in theme.
 
          * @param colorResId color resource id for description label
@@ -303,8 +342,22 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         }
 
         /**
+         * This method sets hint's text color resource.
+         * If not set then it uses default hint text color
+         * defined in theme.
+
+         * @param colorResId color resource id for hint
+         * *
+         * @return Builder for chaining
+         */
+        fun setHintTextColor(@ColorRes colorResId: Int): Builder {
+            data.hintTextColorResId = colorResId
+            return this
+        }
+
+        /**
          * This method sets comment's color resource.
-         * If not set then if uses default primary text color
+         * If not set then it uses default primary text color
          * defined in theme.
 
          * @param colorResId color resource id for comment edit text
@@ -318,7 +371,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets comments edit text's background color resource.
-         * If not set then if uses default white color will be used.
+         * If not set then it uses default white color will be used.
 
          * @param colorResId color resource id for edit text background
          * *

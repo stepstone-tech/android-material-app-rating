@@ -14,7 +14,7 @@ compile 'com.stepstone.apprating:app-rating:2.0.0'
 ```
 
 ## Supported features
-  - colors for dialog's background, title, description
+  - colors for dialog's background, title, description, hint
   - accent color for stars and action buttons
   - custom rating scope (number of stars)
   - note descriptions below rating bar, which describes each note
@@ -89,6 +89,8 @@ private void showDialog() {
                 .setDescription("Please select some stars and give your feedback")
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.contentTextColor)
+                .setHint("Please write your comment here ...")
+                .setHintTextColor(R.color.hintTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
