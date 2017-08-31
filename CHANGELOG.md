@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [2.0.0]
 ### Added
-- hint text and color for comment box
+- support for custom hint text and color in comment box
 
 ### Changed
 - **Breaking change:** Replaced "positive/nagative button" clicked listener by a global listener which needs to be implemented by the host activity
