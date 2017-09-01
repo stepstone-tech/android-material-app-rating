@@ -37,6 +37,8 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogSlideHorizontalAnimation)
+                .setHint("Please write your comment here ...")
+                .setHintTextColor(R.color.hintTextColor)
                 .create(this@SampleActivity)
                 .show()
     }
@@ -51,6 +53,8 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
+                .setHint("Please write your comment here ...")
+                .setHintTextColor(R.color.hintTextColor)
                 .create(this@SampleActivity)
                 .show()
     }
