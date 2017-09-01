@@ -18,7 +18,7 @@ compile 'com.stepstone.apprating:app-rating:2.0.0'
   - accent color for stars and action buttons
   - custom rating scope (number of stars)
   - note descriptions below rating bar, which describes each note
-  - defining custom dialog's title and description
+  - defining custom dialog's title, description and hint
   - enter/exit window animation
 
 ### Using different app themes
