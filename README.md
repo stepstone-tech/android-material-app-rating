@@ -2,7 +2,7 @@
   <img src ="./graphics/logo.png" width="256" height="256"/>
 </p>
 
-# Android Material App Rating [![Build Status](https://travis-ci.org/stepstone-tech/android-material-app-rating.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-app-rating) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20App%20Rating-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6143)
+# Android Material App Rating [![Build Status](https://travis-ci.org/stepstone-tech/android-material-app-rating.svg?branch=master)](https://travis-ci.org/stepstone-tech/android-material-app-rating) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20Material%20App%20Rating-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6143)[![Awesome Android](https://img.shields.io/badge/Awesome%20Android-Material%20App%20Rating-brightgreen.svg?style=flat)](https://android.libhunt.com/project/android-material-app-rating)
 
 This library allows to use customized Rating Dialog inside applications.
 
