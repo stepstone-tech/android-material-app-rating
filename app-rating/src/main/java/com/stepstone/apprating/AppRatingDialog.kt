@@ -58,6 +58,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var negativeButtonText: String? = null
 
+            var neutralButtonText: String? = null
+
             var title: String? = null
 
             var description: String? = null
@@ -67,6 +69,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
             var positiveButtonTextResId: Int = 0
 
             var negativeButtonTextResId: Int = 0
+
+            var neutralButtonTextResId: Int = 0
 
             var titleResId: Int = 0
 
@@ -296,6 +300,22 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         }
 
         /**
+         * This method sets text of dialog's neutral button.
+
+         * @param neutralButtonText text for neutral button
+         * *
+         * @return Builder for chaining
+         * *
+         * @see#setNeutralButtonText(int)
+         */
+        fun setNeutralButtonText(neutralButtonText: String): Builder {
+            Preconditions.checkArgument(!TextUtils.isEmpty(neutralButtonText), "text cannot be empty")
+            data.neutralButtonText = neutralButtonText
+            data.neutralButtonTextResId = 0
+            return this
+        }
+
+        /**
          * This method sets text of dialog's negative button.
 
          * @param resId resource id of negative button text
@@ -307,6 +327,21 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         fun setNegativeButtonText(@StringRes resId: Int): Builder {
             data.negativeButtonTextResId = resId
             data.negativeButtonText = null
+            return this
+        }
+
+        /**
+         * This method sets text of dialog's neutral button.
+
+         * @param resId resource id of neutral button text
+         * *
+         * @return Builder for chaining
+         * *
+         * @see#setNeutralButtonText(String)
+         */
+        fun setNeutralButtonText(@StringRes resId: Int): Builder {
+            data.neutralButtonTextResId = resId
+            data.neutralButtonText = null
             return this
         }
 

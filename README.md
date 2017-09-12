@@ -40,6 +40,7 @@ Just need to define own style for your dialog.
         <item name="android:background">@color/backgroundColor</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyAlertDialogButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/MyAlertDialogButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/MyAlertDialogButtonStyle</item>
     </style>
 
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
@@ -83,6 +84,7 @@ private void showDialog() {
         new AppRatingDialog.Builder()
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
                 .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
@@ -113,6 +115,11 @@ class MyActivity implements RatingDialogListener {
 
         @Override
         public void onNegativeButtonClicked() {
+
+        }
+        
+        @Override
+        public void onNeutralButtonClicked() {
 
         }
 }

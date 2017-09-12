@@ -27,9 +27,14 @@ interface RatingDialogListener {
 
     fun onNegativeButtonClicked()
 
+    fun onNeutralButtonClicked()
+
     companion object {
 
         val NULL: RatingDialogListener = object : RatingDialogListener {
+            override fun onNeutralButtonClicked() {
+            }
+
             override fun onNegativeButtonClicked() {
             }
 
