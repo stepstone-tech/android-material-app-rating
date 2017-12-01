@@ -18,7 +18,7 @@ package com.stepstone.apprating.listener
 
 /**
  * This listener notify when user clicked on dialog's positive button.
-
+ *
  * @see com.stepstone.apprating.AppRatingDialog
  */
 interface RatingDialogListener {

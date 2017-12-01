@@ -83,8 +83,10 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
     }
 
     override fun onNegativeButtonClicked() {
+        Toast.makeText(this@SampleActivity, "Negative button clicked", Toast.LENGTH_LONG).show()
     }
 
     override fun onNeutralButtonClicked() {
+        Toast.makeText(this@SampleActivity, "Neutral button clicked", Toast.LENGTH_LONG).show()
     }
 }

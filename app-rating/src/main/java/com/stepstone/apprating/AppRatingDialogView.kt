@@ -55,7 +55,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method returns current rating.
-
+     *
      * @return number of current selected stars
      */
     val rateNumber: Float
@@ -63,7 +63,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method returns rating comment.
-
+     *
      * @return comment text from edit box
      */
     val comment: String
@@ -71,7 +71,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets maximum numbers of start which are visible.
-
+     *
      * @param numberOfStars maximum number of stars
      */
     fun setNumberOfStars(numberOfStars: Int) {
@@ -80,7 +80,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets note descriptions for each rating value.
-
+     *
      * @param noteDescriptions list of note descriptions
      */
     fun setNoteDescriptions(noteDescriptions: List<String>) {
@@ -91,7 +91,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets default number of stars.
-
+     *
      * @param defaultRating number of stars
      */
     fun setDefaultRating(defaultRating: Int) {
@@ -100,7 +100,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets dialog's title.
-
+     *
      * @param title dialog's title text
      */
     fun setTitleText(title: String) {
@@ -110,7 +110,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets dialog's description text.
-
+     *
      * @param content dialog's description text
      */
     fun setDescriptionText(content: String) {
@@ -120,7 +120,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's title.
-
+     *
      * @param color resource id of title label color
      */
     fun setTitleTextColor(@ColorRes color: Int) {
@@ -134,7 +134,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's description.
-
+     *
      * @param color resource id of description label color
      */
     fun setDescriptionTextColor(@ColorRes color: Int) {
@@ -148,7 +148,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's comment.
-
+     *
      * @param color resource id of comment text color
      */
     fun setEditTextColor(@ColorRes color: Int) {
@@ -163,7 +163,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's edit text.
-
+     *
      * @param color resource id of edit text
      */
     fun setEditBackgroundColor(@ColorRes color: Int) {
@@ -181,7 +181,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's hint.
-
+     *
      * @param color resource id of hint text color
      */
     fun setHintColor(@ColorRes color: Int) {
