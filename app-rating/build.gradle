@@ -28,7 +28,7 @@ ext {
 
 android {
     compileSdkVersion project.androidCompileSdkVersion
-    buildToolsVersion("$androidBuildToolsVersion")
+    buildToolsVersion project.androidBuildToolsVersion
 
     defaultConfig {
         minSdkVersion project.androidMinSdkVersion
@@ -43,15 +43,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '25.0.2'
+    buildToolsVersion project.androidBuildToolsVersion
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
-    compile("com.android.support:support-annotations:$androidSupportLibraryVersion")
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version")
+    implementation("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+    implementation("com.android.support:support-annotations:$androidSupportLibraryVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version")
 }
 
 gradle.taskGraph.beforeTask { Task task ->
@@ -72,4 +72,5 @@ apply from: '../installv1.gradle'
 apply from: '../bintrayv1.gradle'
 repositories {
     mavenCentral()
+    google()
 }
