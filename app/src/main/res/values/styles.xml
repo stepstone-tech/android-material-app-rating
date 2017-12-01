@@ -5,6 +5,7 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyAlertDialogButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/MyAlertDialogButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/MyAlertDialogButtonStyle</item>
     </style>
 
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">

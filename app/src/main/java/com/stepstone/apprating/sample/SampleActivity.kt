@@ -28,6 +28,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         AppRatingDialog.Builder()
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
                 .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
@@ -63,6 +64,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         AppRatingDialog.Builder()
                 .setPositiveButtonText(R.string.send_review)
                 .setNegativeButtonText(R.string.cancel)
+                .setNeutralButtonText(R.string.later)
                 .setNumberOfStars(5)
                 .setDefaultRating(3)
                 .setTitle(R.string.title)
@@ -81,5 +83,8 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
     }
 
     override fun onNegativeButtonClicked() {
+    }
+
+    override fun onNeutralButtonClicked() {
     }
 }
