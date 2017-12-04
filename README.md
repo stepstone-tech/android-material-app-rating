@@ -96,7 +96,7 @@ private void showDialog() {
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
                 .setStarColor(R.color.starColor)
-                .setNoteDescriptionTextColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.contentTextColor)
                 .setHint("Please write your comment here ...")
