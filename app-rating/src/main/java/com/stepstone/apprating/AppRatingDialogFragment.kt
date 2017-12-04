@@ -114,6 +114,9 @@ class AppRatingDialogFragment : DialogFragment() {
         if (data.hintTextColorResId != 0) {
             dialogView.setHintColor(data.hintTextColorResId)
         }
+        if (data.starColorResId != 0) {
+            dialogView.setStarColor(data.starColorResId)
+        }
     }
 
     private fun setupTitleAndContentMessages(dialogView: AppRatingDialogView) {

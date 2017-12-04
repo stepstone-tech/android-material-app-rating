@@ -14,13 +14,13 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button1 = findViewById(R.id.show_dialog_button1) as Button
+        val button1: Button = findViewById(R.id.show_dialog_button1)
         button1.setOnClickListener { showRatingDialog_example1() }
 
-        val button2 = findViewById(R.id.show_dialog_button2) as Button
+        val button2: Button = findViewById(R.id.show_dialog_button2)
         button2.setOnClickListener { showRatingDialog_example2() }
 
-        val button3 = findViewById(R.id.show_dialog_button3) as Button
+        val button3: Button = findViewById(R.id.show_dialog_button3)
         button3.setOnClickListener { showRatingDialog_example3() }
     }
 
@@ -33,6 +33,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
+                .setStarColor(R.color.starColor)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.descriptionTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
