@@ -16,12 +16,15 @@ limitations under the License.
 
 package com.stepstone.apprating
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.widget.TextViewCompat
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -83,6 +86,12 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      */
     fun setStarColor(@ColorRes colorResId: Int) {
         ratingBar.setStarColor(colorResId)
+    }
+
+    /**
+     * This method sets color for note descriptions.
+     */
+    fun setNoteDescriptionTextColor(@ColorRes colorResId: Int) {
         noteDescriptionText.setTextColor(getColorFromRes(colorResId))
     }
 
@@ -195,6 +204,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         noteDescriptionText.visibility = View.VISIBLE
     }
 
+    @SuppressLint("ResourceType")
     private fun setup(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.component_app_rate_dialog, this, true)
         ratingBar = findViewById(R.id.app_rate_dialog_rating_bar)
@@ -204,6 +214,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description)
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
+
+        TextViewCompat.setTextAppearance(titleText, fetchAttributeValue(R.attr.appRatingDialogTitleStyle))
+        TextViewCompat.setTextAppearance(descriptionText, fetchAttributeValue(R.attr.appRatingDialogDescriptionStyle))
+        TextViewCompat.setTextAppearance(noteDescriptionText, fetchAttributeValue(R.attr.appRatingDialogNoteDescriptionStyle))
+        TextViewCompat.setTextAppearance(commentEditText, fetchAttributeValue(R.attr.appRatingDialogCommentStyle))
     }
 
     private val theme: Resources.Theme
@@ -211,5 +226,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     private fun getColorFromRes(@ColorRes colorResId: Int): Int {
         return ResourcesCompat.getColor(context.resources, colorResId, theme)
+    }
+
+    private fun fetchAttributeValue(attr: Int): Int {
+        val outValue = TypedValue()
+        context.theme.resolveAttribute(attr, outValue, true)
+        return outValue.data
     }
 }

@@ -80,6 +80,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var starColorResId: Int = 0
 
+            var noteDescriptionTextColor: Int = 0
+
             var titleTextColorResId: Int = 0
 
             var descriptionTextColorResId: Int = 0
@@ -325,7 +327,6 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets stars's color resource.
-         * The same color will be set for note description labels.
          * If not set then it uses accent color
          * defined in theme.
          *
@@ -334,6 +335,19 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          */
         fun setStarColor(@ColorRes colorResId: Int): Builder {
             data.starColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets note description's color resource.
+         * If not set then it uses accent color
+         * defined in theme.
+         *
+         * @param colorResId color resource id for note descriptions
+         * @return Builder for chaining
+         */
+        fun setNoteDescriptionTextColor(@ColorRes colorResId: Int): Builder {
+            data.noteDescriptionTextColor = colorResId
             return this
         }
 

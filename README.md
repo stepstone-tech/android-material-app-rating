@@ -14,8 +14,7 @@ compile 'com.stepstone.apprating:app-rating:2.0.0'
 ```
 
 ## Supported features
-  - colors for dialog's background, stars, title, description, hint
-  - accent color for stars and action buttons
+  - custom styles for dialog's background, stars, title, description, hint
   - custom rating scope (number of stars)
   - note descriptions below rating bar, which describes each note
   - defining custom dialog's title, description and hint
@@ -70,6 +69,12 @@ And assign this style to the theme.
         <!-- Assign dialog style here. -->
         <item name="alertDialogTheme">@style/MyAlertDialogStyle</item>
         <item name="alertDialogStyle">@style/MyAlertDialogStyle</item>
+
+        <!-- Assign custom text styles for title, description, comment -->
+        <item name="appRatingDialogTitleStyle">@style/MyDialogTitleStyle</item>
+        <item name="appRatingDialogDescriptionStyle">@style/MyDialogDescriptionStyle</item>
+        <item name="appRatingDialogNoteDescriptionStyle">@style/MyDialogNoteDescriptionStyle</item>
+        <item name="appRatingDialogCommentStyle">@style/MyDialogCommentStyle</item>
     </style>
 
 </resources>
@@ -91,6 +96,7 @@ private void showDialog() {
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
                 .setStarColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.contentTextColor)
                 .setHint("Please write your comment here ...")
