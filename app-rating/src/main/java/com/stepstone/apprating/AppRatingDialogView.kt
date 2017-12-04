@@ -22,6 +22,8 @@ import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.widget.TextViewCompat
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -83,6 +85,12 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      */
     fun setStarColor(@ColorRes colorResId: Int) {
         ratingBar.setStarColor(colorResId)
+    }
+
+    /**
+     * This method sets color for note descriptions.
+     */
+    fun setNoteDescriptionTextColor(@ColorRes colorResId: Int) {
         noteDescriptionText.setTextColor(getColorFromRes(colorResId))
     }
 
@@ -204,6 +212,13 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description)
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
+
+        TextViewCompat.setTextAppearance(titleText, fetchAttributeValue("appRatingDialogTitleStyle"))
+        TextViewCompat.setTextAppearance(descriptionText, fetchAttributeValue("appRatingDialogDescriptionStyle"))
+        TextViewCompat.setTextAppearance(noteDescriptionText, fetchAttributeValue("appRatingDialogNoteDescriptionStyle"))
+        TextViewCompat.setTextAppearance(commentEditText, fetchAttributeValue("appRatingDialogCommentStyle"))
+
+
     }
 
     private val theme: Resources.Theme
@@ -211,5 +226,12 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     private fun getColorFromRes(@ColorRes colorResId: Int): Int {
         return ResourcesCompat.getColor(context.resources, colorResId, theme)
+    }
+
+    private fun fetchAttributeValue(attrName: String): Int {
+        val styleAttr: Int = context.resources.getIdentifier(attrName, "attr", context.packageName)
+        val outValue = TypedValue()
+        context.theme.resolveAttribute(styleAttr, outValue, true)
+        return outValue.data
     }
 }

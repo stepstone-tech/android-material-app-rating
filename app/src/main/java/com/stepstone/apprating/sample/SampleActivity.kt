@@ -34,6 +34,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
                 .setStarColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.starColor)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.descriptionTextColor)
                 .setCommentTextColor(R.color.commentTextColor)

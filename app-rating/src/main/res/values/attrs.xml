@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="appRatingDialogTitleStyle" format="reference" />
+    <attr name="appRatingDialogDescriptionStyle" format="reference" />
+    <attr name="appRatingDialogNoteDescriptionStyle" format="reference" />
+    <attr name="appRatingDialogCommentStyle" format="reference" />
+
+</resources>

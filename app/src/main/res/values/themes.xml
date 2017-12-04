@@ -8,6 +8,12 @@
         <!-- Assign dialog style here. -->
         <item name="alertDialogTheme">@style/MyAlertDialogStyle</item>
         <item name="alertDialogStyle">@style/MyAlertDialogStyle</item>
+
+        <!--<item name="appRatingDialogTitleStyle">@style/MyDialogTitleStyle</item>-->
+        <!--<item name="appRatingDialogDescriptionStyle">@style/MyDialogDescriptionStyle</item>-->
+        <!--<item name="appRatingDialogNoteDescriptionStyle">@style/MyDialogNoteDescriptionStyle</item>-->
+        <!--<item name="appRatingDialogCommentStyle">@style/MyDialogCommentStyle</item>-->
+
     </style>
     
 </resources>
