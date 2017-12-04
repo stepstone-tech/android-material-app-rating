@@ -27,8 +27,8 @@ class StarButton : FrameLayout {
     private fun initialize() {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.star_button_layout, this, true)
-        emptyStarImage = findViewById(R.id.empty_star_image_view) as ImageView;
-        fullStarImage = findViewById(R.id.full_star_image_view) as ImageView;
+        emptyStarImage = findViewById(R.id.empty_star_image_view)
+        fullStarImage = findViewById(R.id.full_star_image_view)
     }
 
     fun setChecked(checked: Boolean): StarButton {

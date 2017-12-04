@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#EBECF1</color>
     <color name="colorAccent">#F0577F</color>
 
+    <color name="starColor">#57a6f0</color>
     <color name="titleTextColor">#D9141627</color>
     <color name="descriptionTextColor">#80141627</color>
     <color name="commentTextColor">#D9141627</color>
