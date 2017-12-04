@@ -18,9 +18,9 @@ package com.stepstone.apprating
 
 import android.content.Context
 import android.content.res.Resources
-import android.os.Build
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -210,10 +210,6 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         get() = context.theme
 
     private fun getColorFromRes(@ColorRes colorResId: Int): Int {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            resources.getColor(colorResId, theme)
-        } else {
-            resources.getColor(colorResId)
-        }
+        return ResourcesCompat.getColor(context.resources, colorResId, theme)
     }
 }

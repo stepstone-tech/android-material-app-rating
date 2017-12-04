@@ -17,8 +17,8 @@ limitations under the License.
 package com.stepstone.apprating.ratingbar
 
 import android.content.Context
-import android.os.Build
 import android.support.annotation.ColorRes
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -114,11 +114,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     private fun getStarColor(context: Context): Int {
         if (starColorResId != 0) {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                context.resources.getColor(starColorResId, context.theme)
-            } else {
-                context.resources.getColor(starColorResId)
-            }
+            return ResourcesCompat.getColor(context.resources, starColorResId, context.theme)
         }
         return getThemeAccentColor(context)
     }
