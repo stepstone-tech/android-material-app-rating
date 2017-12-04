@@ -16,6 +16,7 @@ limitations under the License.
 
 package com.stepstone.apprating
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.support.annotation.ColorRes
@@ -203,6 +204,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         noteDescriptionText.visibility = View.VISIBLE
     }
 
+    @SuppressLint("ResourceType")
     private fun setup(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.component_app_rate_dialog, this, true)
         ratingBar = findViewById(R.id.app_rate_dialog_rating_bar)
@@ -213,12 +215,10 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
 
-        TextViewCompat.setTextAppearance(titleText, fetchAttributeValue("appRatingDialogTitleStyle"))
-        TextViewCompat.setTextAppearance(descriptionText, fetchAttributeValue("appRatingDialogDescriptionStyle"))
-        TextViewCompat.setTextAppearance(noteDescriptionText, fetchAttributeValue("appRatingDialogNoteDescriptionStyle"))
-        TextViewCompat.setTextAppearance(commentEditText, fetchAttributeValue("appRatingDialogCommentStyle"))
-
-
+        TextViewCompat.setTextAppearance(titleText, fetchAttributeValue(R.attr.appRatingDialogTitleStyle))
+        TextViewCompat.setTextAppearance(descriptionText, fetchAttributeValue(R.attr.appRatingDialogDescriptionStyle))
+        TextViewCompat.setTextAppearance(noteDescriptionText, fetchAttributeValue(R.attr.appRatingDialogNoteDescriptionStyle))
+        TextViewCompat.setTextAppearance(commentEditText, fetchAttributeValue(R.attr.appRatingDialogCommentStyle))
     }
 
     private val theme: Resources.Theme
@@ -228,10 +228,9 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         return ResourcesCompat.getColor(context.resources, colorResId, theme)
     }
 
-    private fun fetchAttributeValue(attrName: String): Int {
-        val styleAttr: Int = context.resources.getIdentifier(attrName, "attr", context.packageName)
+    private fun fetchAttributeValue(attr: Int): Int {
         val outValue = TypedValue()
-        context.theme.resolveAttribute(styleAttr, outValue, true)
+        context.theme.resolveAttribute(attr, outValue, true)
         return outValue.data
     }
 }
