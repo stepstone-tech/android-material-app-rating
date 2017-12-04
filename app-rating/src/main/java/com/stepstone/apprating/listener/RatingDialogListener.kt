@@ -18,7 +18,7 @@ package com.stepstone.apprating.listener
 
 /**
  * This listener notify when user clicked on dialog's positive button.
-
+ *
  * @see com.stepstone.apprating.AppRatingDialog
  */
 interface RatingDialogListener {
@@ -27,9 +27,14 @@ interface RatingDialogListener {
 
     fun onNegativeButtonClicked()
 
+    fun onNeutralButtonClicked()
+
     companion object {
 
         val NULL: RatingDialogListener = object : RatingDialogListener {
+            override fun onNeutralButtonClicked() {
+            }
+
             override fun onNegativeButtonClicked() {
             }
 

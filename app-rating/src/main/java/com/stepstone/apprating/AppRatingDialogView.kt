@@ -16,12 +16,15 @@ limitations under the License.
 
 package com.stepstone.apprating
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
-import android.os.Build
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.widget.TextViewCompat
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -55,7 +58,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method returns current rating.
-
+     *
      * @return number of current selected stars
      */
     val rateNumber: Float
@@ -63,7 +66,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method returns rating comment.
-
+     *
      * @return comment text from edit box
      */
     val comment: String
@@ -71,7 +74,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets maximum numbers of start which are visible.
-
+     *
      * @param numberOfStars maximum number of stars
      */
     fun setNumberOfStars(numberOfStars: Int) {
@@ -79,8 +82,22 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     /**
-     * This method sets note descriptions for each rating value.
+     * This method sets color for stars.
+     */
+    fun setStarColor(@ColorRes colorResId: Int) {
+        ratingBar.setStarColor(colorResId)
+    }
 
+    /**
+     * This method sets color for note descriptions.
+     */
+    fun setNoteDescriptionTextColor(@ColorRes colorResId: Int) {
+        noteDescriptionText.setTextColor(getColorFromRes(colorResId))
+    }
+
+    /**
+     * This method sets note descriptions for each rating value.
+     *
      * @param noteDescriptions list of note descriptions
      */
     fun setNoteDescriptions(noteDescriptions: List<String>) {
@@ -91,7 +108,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets default number of stars.
-
+     *
      * @param defaultRating number of stars
      */
     fun setDefaultRating(defaultRating: Int) {
@@ -100,7 +117,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets dialog's title.
-
+     *
      * @param title dialog's title text
      */
     fun setTitleText(title: String) {
@@ -110,7 +127,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets dialog's description text.
-
+     *
      * @param content dialog's description text
      */
     fun setDescriptionText(content: String) {
@@ -120,50 +137,34 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's title.
-
+     *
      * @param color resource id of title label color
      */
     fun setTitleTextColor(@ColorRes color: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            titleText.setTextColor(resources.getColor(color, theme))
-        } else {
-            titleText.setTextColor(resources.getColor(color))
-
-        }
+        titleText.setTextColor(getColorFromRes(color))
     }
 
     /**
      * This method sets color of dialog's description.
-
+     *
      * @param color resource id of description label color
      */
     fun setDescriptionTextColor(@ColorRes color: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            descriptionText.setTextColor(resources.getColor(color, theme))
-        } else {
-            descriptionText.setTextColor(resources.getColor(color))
-
-        }
+        descriptionText.setTextColor(getColorFromRes(color))
     }
 
     /**
      * This method sets color of dialog's comment.
-
+     *
      * @param color resource id of comment text color
      */
     fun setEditTextColor(@ColorRes color: Int) {
-        val textColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            resources.getColor(color, theme)
-        } else {
-            resources.getColor(color)
-        }
-
-        commentEditText.setTextColor(textColor)
+        commentEditText.setTextColor(getColorFromRes(color))
     }
 
     /**
      * This method sets color of dialog's edit text.
-
+     *
      * @param color resource id of edit text
      */
     fun setEditBackgroundColor(@ColorRes color: Int) {
@@ -181,17 +182,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     /**
      * This method sets color of dialog's hint.
-
+     *
      * @param color resource id of hint text color
      */
     fun setHintColor(@ColorRes color: Int) {
-        val hintColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            resources.getColor(color, theme)
-        } else {
-            resources.getColor(color)
-        }
-
-        commentEditText.setHintTextColor(hintColor)
+        commentEditText.setHintTextColor(getColorFromRes(color))
     }
 
     override fun onRatingChanged(rating: Int) {
@@ -209,17 +204,33 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         noteDescriptionText.visibility = View.VISIBLE
     }
 
+    @SuppressLint("ResourceType")
     private fun setup(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.component_app_rate_dialog, this, true)
-        ratingBar = findViewById(R.id.app_rate_dialog_rating_bar) as CustomRatingBar
-        commentEditText = findViewById(R.id.app_rate_dialog_comment_edit_text) as EditText
-        titleText = findViewById(R.id.app_rate_dialog_title_text) as TextView
-        descriptionText = findViewById(R.id.app_rate_dialog_description_text) as TextView
-        noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description) as TextView
+        ratingBar = findViewById(R.id.app_rate_dialog_rating_bar)
+        commentEditText = findViewById(R.id.app_rate_dialog_comment_edit_text)
+        titleText = findViewById(R.id.app_rate_dialog_title_text)
+        descriptionText = findViewById(R.id.app_rate_dialog_description_text)
+        noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description)
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
+
+        TextViewCompat.setTextAppearance(titleText, fetchAttributeValue(R.attr.appRatingDialogTitleStyle))
+        TextViewCompat.setTextAppearance(descriptionText, fetchAttributeValue(R.attr.appRatingDialogDescriptionStyle))
+        TextViewCompat.setTextAppearance(noteDescriptionText, fetchAttributeValue(R.attr.appRatingDialogNoteDescriptionStyle))
+        TextViewCompat.setTextAppearance(commentEditText, fetchAttributeValue(R.attr.appRatingDialogCommentStyle))
     }
 
     private val theme: Resources.Theme
         get() = context.theme
+
+    private fun getColorFromRes(@ColorRes colorResId: Int): Int {
+        return ResourcesCompat.getColor(context.resources, colorResId, theme)
+    }
+
+    private fun fetchAttributeValue(attr: Int): Int {
+        val outValue = TypedValue()
+        context.theme.resolveAttribute(attr, outValue, true)
+        return outValue.data
+    }
 }

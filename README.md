@@ -10,15 +10,15 @@ This library allows to use customized Rating Dialog inside applications.
 
 ## Download
 ```groovy
-compile 'com.stepstone.apprating:app-rating:2.0.0'
+compile 'com.stepstone.apprating:app-rating:2.1.0'
 ```
 
 ## Supported features
-  - colors for dialog's background, title, description, hint
-  - accent color for stars and action buttons
+  - custom styles for dialog's background, stars, title, description, hint
   - custom rating scope (number of stars)
   - note descriptions below rating bar, which describes each note
   - defining custom dialog's title, description and hint
+  - defining text for positive, negative and neutral button
   - enter/exit window animation
 
 ### Using different app themes
@@ -40,6 +40,7 @@ Just need to define own style for your dialog.
         <item name="android:background">@color/backgroundColor</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyAlertDialogButtonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/MyAlertDialogButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/MyAlertDialogButtonStyle</item>
     </style>
 
     <style name="MyAlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
@@ -68,6 +69,12 @@ And assign this style to the theme.
         <!-- Assign dialog style here. -->
         <item name="alertDialogTheme">@style/MyAlertDialogStyle</item>
         <item name="alertDialogStyle">@style/MyAlertDialogStyle</item>
+
+        <!-- Assign custom text styles for title, description, comment -->
+        <item name="appRatingDialogTitleStyle">@style/MyDialogTitleStyle</item>
+        <item name="appRatingDialogDescriptionStyle">@style/MyDialogDescriptionStyle</item>
+        <item name="appRatingDialogNoteDescriptionStyle">@style/MyDialogNoteDescriptionStyle</item>
+        <item name="appRatingDialogCommentStyle">@style/MyDialogCommentStyle</item>
     </style>
 
 </resources>
@@ -83,10 +90,13 @@ private void showDialog() {
         new AppRatingDialog.Builder()
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
                 .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
+                .setStarColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.contentTextColor)
                 .setHint("Please write your comment here ...")
@@ -113,6 +123,11 @@ class MyActivity implements RatingDialogListener {
 
         @Override
         public void onNegativeButtonClicked() {
+
+        }
+        
+        @Override
+        public void onNeutralButtonClicked() {
 
         }
 }

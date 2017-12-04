@@ -14,13 +14,13 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button1 = findViewById(R.id.show_dialog_button1) as Button
+        val button1: Button = findViewById(R.id.show_dialog_button1)
         button1.setOnClickListener { showRatingDialog_example1() }
 
-        val button2 = findViewById(R.id.show_dialog_button2) as Button
+        val button2: Button = findViewById(R.id.show_dialog_button2)
         button2.setOnClickListener { showRatingDialog_example2() }
 
-        val button3 = findViewById(R.id.show_dialog_button3) as Button
+        val button3: Button = findViewById(R.id.show_dialog_button3)
         button3.setOnClickListener { showRatingDialog_example3() }
     }
 
@@ -28,10 +28,13 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         AppRatingDialog.Builder()
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
                 .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
+                .setStarColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescriptionTextColor(R.color.descriptionTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
@@ -63,6 +66,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         AppRatingDialog.Builder()
                 .setPositiveButtonText(R.string.send_review)
                 .setNegativeButtonText(R.string.cancel)
+                .setNeutralButtonText(R.string.later)
                 .setNumberOfStars(5)
                 .setDefaultRating(3)
                 .setTitle(R.string.title)
@@ -81,5 +85,10 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
     }
 
     override fun onNegativeButtonClicked() {
+        Toast.makeText(this@SampleActivity, "Negative button clicked", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNeutralButtonClicked() {
+        Toast.makeText(this@SampleActivity, "Neutral button clicked", Toast.LENGTH_LONG).show()
     }
 }

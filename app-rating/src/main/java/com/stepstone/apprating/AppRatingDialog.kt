@@ -29,7 +29,7 @@ import java.io.Serializable
 /**
  * This class represents dialog object produced by [Builder].
  * Dialog can be fully configurable.
-
+ *
  * @see Builder
  */
 class AppRatingDialog private constructor(private val activity: FragmentActivity, private val data: Builder.Data) {
@@ -58,6 +58,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var negativeButtonText: String? = null
 
+            var neutralButtonText: String? = null
+
             var title: String? = null
 
             var description: String? = null
@@ -68,11 +70,17 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var negativeButtonTextResId: Int = 0
 
+            var neutralButtonTextResId: Int = 0
+
             var titleResId: Int = 0
 
             var descriptionResId: Int = 0
 
             var hintResId: Int = 0
+
+            var starColorResId: Int = 0
+
+            var noteDescriptionTextColor: Int = 0
 
             var titleTextColorResId: Int = 0
 
@@ -94,9 +102,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method creates [AppRatingDialog] object. It should be called
          * after setup.
-
+         *
          * @param activity an activity where dialog belongs to
-         * *
          * @return instance of dialog
          */
         fun create(activity: FragmentActivity): AppRatingDialog {
@@ -108,9 +115,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          * This method sets maximum number of start which will be visible in the dialog.
          * Default value is 6. If want to add some note descriptions below rating bar
          * then need to use [.setNoteDescriptions] method instead of this one.
-
+         *
          * @param maxRating maximum number of stars
-         * *
          * @return Builder for chaining
          */
         fun setNumberOfStars(maxRating: Int): Builder {
@@ -124,9 +130,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          * This method sets note description for appropriate rating numbers.
          * If note descriptions were set by this then [.setNumberOfStars]
          * method will be ignored.
-
+         *
          * @param noteDescriptions list of note descriptions
-         * *
          * @return Builder for chaining
          */
         fun setNoteDescriptions(noteDescriptions: List<String>): Builder {
@@ -141,9 +146,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets number of stars which are selected by default
          * when dialog is opened.
-
+         *
          * @param defaultRating number of stars which should be selected
-         * *
          * @return Builder for chaining
          */
         fun setDefaultRating(defaultRating: Int): Builder {
@@ -156,11 +160,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets dialog title.
          * The title is optional.
-
+         *
          * @param title dialog's title text
-         * *
          * @return Builder for chaining
-         * *
          * @see#setTitle(int)
          */
         fun setTitle(title: String): Builder {
@@ -173,11 +175,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets dialog title.
          * The title is optional.
-
+         *
          * @param resId resource id of dialog's title
-         * *
          * @return Builder for chaining
-         * *
          * @see#setTitle(String)
          */
         fun setTitle(@StringRes resId: Int): Builder {
@@ -189,11 +189,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets dialog description description text, which is visible below title.
          * The description is optional.
-
+         *
          * @param content dialog's description text
-         * *
          * @return Builder for chaining
-         * *
          * @see#setDescription(int)
          */
         fun setDescription(content: String): Builder {
@@ -206,11 +204,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets dialog description description text, which is visible below title.
          * The description description is optional.
-
+         *
          * @param resId resource id of dialog's description text
-         * *
          * @return Builder for chaining
-         * *
          * @see#setDescription(String)
          */
         fun setDescription(@StringRes resId: Int): Builder {
@@ -237,7 +233,7 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets hint text.
          * The hint is optional.
-
+         *
          * @param resId resource id of hint text
          * @return Builder for chaining
          * @see#setHint(String)
@@ -250,11 +246,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets text of dialog's positive button.
-
+         *
          * @param positiveButtonText text for positive button
-         * *
          * @return Builder for chaining
-         * *
          * @see#setPositiveButtonText(int)
          */
         fun setPositiveButtonText(positiveButtonText: String): Builder {
@@ -266,11 +260,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets text of dialog's positive button.
-
+         *
          * @param resId resource id of positive button text
-         * *
          * @return Builder for chaining
-         * *
          * @see#setPositiveButtonText(String)
          */
         fun setPositiveButtonText(@StringRes resId: Int): Builder {
@@ -281,11 +273,9 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
         /**
          * This method sets text of dialog's negative button.
-
+         *
          * @param negativeButtonText text for negative button
-         * *
          * @return Builder for chaining
-         * *
          * @see#setNegativeButtonText(int)
          */
         fun setNegativeButtonText(negativeButtonText: String): Builder {
@@ -296,12 +286,24 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         }
 
         /**
-         * This method sets text of dialog's negative button.
-
-         * @param resId resource id of negative button text
-         * *
+         * This method sets text of dialog's neutral button.
+         *
+         * @param neutralButtonText text for neutral button
          * @return Builder for chaining
-         * *
+         * @see#setNeutralButtonText(int)
+         */
+        fun setNeutralButtonText(neutralButtonText: String): Builder {
+            Preconditions.checkArgument(!TextUtils.isEmpty(neutralButtonText), "text cannot be empty")
+            data.neutralButtonText = neutralButtonText
+            data.neutralButtonTextResId = 0
+            return this
+        }
+
+        /**
+         * This method sets text of dialog's negative button.
+         *
+         * @param resId resource id of negative button text
+         * @return Builder for chaining
          * @see#setNegativeButtonText(String)
          */
         fun setNegativeButtonText(@StringRes resId: Int): Builder {
@@ -311,10 +313,49 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         }
 
         /**
+         * This method sets text of dialog's neutral button.
+         *
+         * @param resId resource id of neutral button text
+         * @return Builder for chaining
+         * @see#setNeutralButtonText(String)
+         */
+        fun setNeutralButtonText(@StringRes resId: Int): Builder {
+            data.neutralButtonTextResId = resId
+            data.neutralButtonText = null
+            return this
+        }
+
+        /**
+         * This method sets stars's color resource.
+         * If not set then it uses accent color
+         * defined in theme.
+         *
+         * @param colorResId color resource id for stars
+         * @return Builder for chaining
+         */
+        fun setStarColor(@ColorRes colorResId: Int): Builder {
+            data.starColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets note description's color resource.
+         * If not set then it uses accent color
+         * defined in theme.
+         *
+         * @param colorResId color resource id for note descriptions
+         * @return Builder for chaining
+         */
+        fun setNoteDescriptionTextColor(@ColorRes colorResId: Int): Builder {
+            data.noteDescriptionTextColor = colorResId
+            return this
+        }
+
+        /**
          * This method sets title's text color resource.
          * If not set then it uses default primary text color
          * defined in theme.
-
+         *
          * @param colorResId color resource id for title label
          * @return Builder for chaining
          */
@@ -327,9 +368,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          * This method sets description's text color resource.
          * If not set then it uses default primary text color
          * defined in theme.
-
+         *
          * @param colorResId color resource id for description label
-         * *
          * @return Builder for chaining
          */
         fun setDescriptionTextColor(@ColorRes colorResId: Int): Builder {
@@ -341,9 +381,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          * This method sets hint's text color resource.
          * If not set then it uses default hint text color
          * defined in theme.
-
+         *
          * @param colorResId color resource id for hint
-         * *
          * @return Builder for chaining
          */
         fun setHintTextColor(@ColorRes colorResId: Int): Builder {
@@ -355,9 +394,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          * This method sets comment's color resource.
          * If not set then it uses default primary text color
          * defined in theme.
-
+         *
          * @param colorResId color resource id for comment edit text
-         * *
          * @return Builder for chaining
          */
         fun setCommentTextColor(@ColorRes colorResId: Int): Builder {
@@ -368,9 +406,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         /**
          * This method sets comments edit text's background color resource.
          * If not set then it uses default white color will be used.
-
+         *
          * @param colorResId color resource id for edit text background
-         * *
          * @return Builder for chaining
          */
         fun setCommentBackgroundColor(@ColorRes colorResId: Int): Builder {

@@ -75,6 +75,7 @@ class AppRatingDialogFragment : DialogFragment() {
 
         setupPositiveButton(dialogView, builder)
         setupNegativeButton(builder)
+        setupNeutralButton(builder)
         setupTitleAndContentMessages(dialogView)
         setupHint(dialogView)
         setupColors(dialogView)
@@ -113,6 +114,12 @@ class AppRatingDialogFragment : DialogFragment() {
         if (data.hintTextColorResId != 0) {
             dialogView.setHintColor(data.hintTextColorResId)
         }
+        if (data.starColorResId != 0) {
+            dialogView.setStarColor(data.starColorResId)
+        }
+        if (data.noteDescriptionTextColor != 0) {
+            dialogView.setNoteDescriptionTextColor(data.noteDescriptionTextColor)
+        }
     }
 
     private fun setupTitleAndContentMessages(dialogView: AppRatingDialogView) {
@@ -144,6 +151,14 @@ class AppRatingDialogFragment : DialogFragment() {
                 val rateNumber = dialogView.rateNumber.toInt()
                 val comment = dialogView.comment
                 listener?.onPositiveButtonClicked(rateNumber, comment)
+            }
+        }
+    }
+
+    private fun setupNeutralButton(builder: AlertDialog.Builder) {
+        if (!TextUtils.isEmpty(neutralButtonText)) {
+            builder.setNeutralButton(neutralButtonText) { dialog, which ->
+                listener?.onNeutralButtonClicked()
             }
         }
     }
@@ -190,6 +205,17 @@ class AppRatingDialogFragment : DialogFragment() {
                 return getString(data.positiveButtonTextResId)
             }
             return data.positiveButtonText
+        }
+
+    private val neutralButtonText: String?
+        get() {
+            if (TextUtils.isEmpty(data.neutralButtonText)) {
+                if (data.neutralButtonTextResId == 0) {
+                    return null
+                }
+                return getString(data.neutralButtonTextResId)
+            }
+            return data.neutralButtonText
         }
 
     private val negativeButtonText: String?

@@ -17,7 +17,8 @@ limitations under the License.
 package com.stepstone.apprating.ratingbar
 
 import android.content.Context
-import android.os.Build
+import android.support.annotation.ColorRes
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -41,6 +42,8 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     private var numStars: Int = 0
 
+    private var starColorResId: Int = 0
+
     var rating: Float = 0.0f
         private set
 
@@ -50,7 +53,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     init {
         LayoutInflater.from(context).inflate(R.layout.component_custom_rating_bar, this)
-        container = findViewById(R.id.rating_bar_container) as LinearLayout
+        container = findViewById(R.id.rating_bar_container)
     }
 
     private fun addStars(numberOfAll: Int, numberOfChecked: Int) {
@@ -59,10 +62,10 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
         starList.clear()
         container.removeAllViews()
 
-        for (index in 0..numberOfAll - 1) {
+        for (index in 0 until numberOfAll) {
             addStar()
                     .setCheckedWithoutAnimation(index < numberOfChecked)
-                    .setColor(getThemeAccentColor(context))
+                    .setColor(getStarColor(context))
                     .setOnClickListener(OnStarClickedHandler(index + 1))
         }
     }
@@ -73,6 +76,10 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
         starList.add(starButton)
         container.addView(starButton)
         return starButton
+    }
+
+    fun setStarColor(@ColorRes colorResId: Int) {
+        this.starColorResId = colorResId
     }
 
     fun setNumStars(numStars: Int) {
@@ -103,6 +110,13 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     fun setOnRatingBarChangeListener(onRatingBarChangedListener: OnRatingBarChangedListener) {
         this.onRatingBarChangedListener = onRatingBarChangedListener
+    }
+
+    private fun getStarColor(context: Context): Int {
+        if (starColorResId != 0) {
+            return ResourcesCompat.getColor(context.resources, starColorResId, context.theme)
+        }
+        return getThemeAccentColor(context)
     }
 
     private fun getThemeAccentColor(context: Context): Int {

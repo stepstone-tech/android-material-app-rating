@@ -21,6 +21,8 @@ android {
         }
     }
 
+    flavorDimensions "sample"
+
     productFlavors {
         first {
             applicationId = "com.stepstone.apprating.sample.first"
@@ -32,11 +34,12 @@ android {
             buildConfigField "String", "GROUP", "\"second\""
         }
     }
-    buildToolsVersion '25.0.2'
+    buildToolsVersion project.androidBuildToolsVersion
 }
 
 dependencies {
-    compile project(':app-rating')
-    compile ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
-    testCompile 'junit:junit:4.12'
+    implementation project(':app-rating')
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version")
+    implementation ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+    testImplementation 'junit:junit:4.12'
 }
