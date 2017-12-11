@@ -10,7 +10,7 @@ This library allows to use customized Rating Dialog inside applications.
 
 ## Download
 ```groovy
-compile 'com.stepstone.apprating:app-rating:2.1.0'
+compile 'com.stepstone.apprating:app-rating:2.1.1'
 ```
 
 ## Supported features

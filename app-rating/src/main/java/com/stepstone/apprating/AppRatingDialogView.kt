@@ -19,10 +19,11 @@ package com.stepstone.apprating
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v4.widget.TextViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -168,7 +169,8 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param color resource id of edit text
      */
     fun setEditBackgroundColor(@ColorRes color: Int) {
-        DrawableCompat.setTint(commentEditText.background, ContextCompat.getColor(context, color))
+        val drawable = commentEditText.background
+        drawable.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.SRC_IN)
     }
 
     /**
