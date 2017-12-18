@@ -129,6 +129,9 @@ class AppRatingDialogFragment : DialogFragment() {
         if (!TextUtils.isEmpty(description)) {
             dialogView.setDescriptionText(description!!)
         }
+        if (!TextUtils.isEmpty(defaultComment)) {
+            dialogView.setDefaultComment(defaultComment!!)
+        }
     }
 
     private fun setupHint(dialogView: AppRatingDialogView) {
@@ -183,6 +186,17 @@ class AppRatingDialogFragment : DialogFragment() {
                 return getString(data.descriptionResId)
             }
             return data.description
+        }
+
+    private val defaultComment: String?
+        get() {
+            if (TextUtils.isEmpty(data.defaultComment)) {
+                if (data.defaultCommentResId == 0) {
+                    return null
+                }
+                return getString(data.defaultCommentResId)
+            }
+            return data.defaultComment
         }
 
     private val hint: String?

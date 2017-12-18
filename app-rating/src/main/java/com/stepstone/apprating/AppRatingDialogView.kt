@@ -137,6 +137,15 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     /**
+     * This method sets dialog's default comment text.
+     *
+     * @param comment dialog's comment text
+     */
+    fun setDefaultComment(comment: String) {
+        commentEditText.setText(comment)
+    }
+
+    /**
      * This method sets color of dialog's title.
      *
      * @param color resource id of title label color

@@ -72,6 +72,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setTitle(R.string.title)
                 .setTitleTextColor(R.color.titleTextColor)
                 .setDescription(R.string.description)
+                .setDefaultComment(R.string.defaultComment)
                 .setDescriptionTextColor(R.color.descriptionTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)

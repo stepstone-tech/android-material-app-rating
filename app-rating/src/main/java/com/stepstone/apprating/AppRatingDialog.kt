@@ -64,6 +64,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
 
             var description: String? = null
 
+            var defaultComment: String? = null
+
             var hint: String? = null
 
             var positiveButtonTextResId: Int = 0
@@ -75,6 +77,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
             var titleResId: Int = 0
 
             var descriptionResId: Int = 0
+
+            var defaultCommentResId: Int = 0
 
             var hintResId: Int = 0
 
@@ -212,6 +216,35 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         fun setDescription(@StringRes resId: Int): Builder {
             data.descriptionResId = resId
             data.description = null
+            return this
+        }
+
+        /**
+         * This method sets dialog default comment text.
+         * The comment is optional.
+         *
+         * @param comment dialog's comment text
+         * @return Builder for chaining
+         * @see#setDefaultComment(int)
+         */
+        fun setDefaultComment(comment: String): Builder {
+            Preconditions.checkArgument(!TextUtils.isEmpty(comment), "comment cannot be empty")
+            data.defaultComment = comment
+            data.defaultCommentResId = 0
+            return this
+        }
+
+        /**
+         * This method sets dialog default comment text.
+         * The comment is optional.
+         *
+         * @param resId resource id of dialog's comment
+         * @return Builder for chaining
+         * @see#setDefaultComment(String)
+         */
+        fun setDefaultComment(@StringRes resId: Int): Builder {
+            data.defaultCommentResId = resId
+            data.defaultComment = null
             return this
         }
 
