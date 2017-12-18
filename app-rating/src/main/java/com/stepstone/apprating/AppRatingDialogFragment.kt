@@ -123,13 +123,13 @@ class AppRatingDialogFragment : DialogFragment() {
     }
 
     private fun setupTitleAndContentMessages(dialogView: AppRatingDialogView) {
-        if (!TextUtils.isEmpty(title)) {
+        if (!title.isNullOrEmpty()) {
             dialogView.setTitleText(title!!)
         }
-        if (!TextUtils.isEmpty(description)) {
+        if (!description.isNullOrEmpty()) {
             dialogView.setDescriptionText(description!!)
         }
-        if (!TextUtils.isEmpty(defaultComment)) {
+        if (!defaultComment.isNullOrEmpty()) {
             dialogView.setDefaultComment(defaultComment!!)
         }
     }
