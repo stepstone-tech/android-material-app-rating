@@ -123,11 +123,14 @@ class AppRatingDialogFragment : DialogFragment() {
     }
 
     private fun setupTitleAndContentMessages(dialogView: AppRatingDialogView) {
-        if (!TextUtils.isEmpty(title)) {
+        if (!title.isNullOrEmpty()) {
             dialogView.setTitleText(title!!)
         }
-        if (!TextUtils.isEmpty(description)) {
+        if (!description.isNullOrEmpty()) {
             dialogView.setDescriptionText(description!!)
+        }
+        if (!defaultComment.isNullOrEmpty()) {
+            dialogView.setDefaultComment(defaultComment!!)
         }
     }
 
@@ -183,6 +186,17 @@ class AppRatingDialogFragment : DialogFragment() {
                 return getString(data.descriptionResId)
             }
             return data.description
+        }
+
+    private val defaultComment: String?
+        get() {
+            if (TextUtils.isEmpty(data.defaultComment)) {
+                if (data.defaultCommentResId == 0) {
+                    return null
+                }
+                return getString(data.defaultCommentResId)
+            }
+            return data.defaultComment
         }
 
     private val hint: String?

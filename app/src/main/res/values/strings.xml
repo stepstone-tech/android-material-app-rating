@@ -6,4 +6,5 @@
     <string name="later">Later</string>
     <string name="title">App rating</string>
     <string name="description">Please write your feedback</string>
+    <string name="defaultComment">This app is pretty cool !</string>
 </resources>
