@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import com.stepstone.apprating.extensions.applyIfNotZero
 import com.stepstone.apprating.listener.RatingDialogListener
 
 /**
@@ -40,21 +41,19 @@ class AppRatingDialogFragment : DialogFragment() {
     private lateinit var dialogView: AppRatingDialogView
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return setupAlertDialog(activity)
+        return setupAlertDialog(activity!!)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        if (dialogView != null) {
-            outState?.putFloat(C.ExtraKeys.CURRENT_RATE_NUMBER, dialogView.rateNumber)
-        }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putFloat(CURRENT_RATE_NUMBER, dialogView.rateNumber)
         super.onSaveInstanceState(outState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val rateNumber: Float? = savedInstanceState?.getFloat(C.ExtraKeys.CURRENT_RATE_NUMBER)
+        val rateNumber: Float? = savedInstanceState?.getFloat(CURRENT_RATE_NUMBER)
         if (rateNumber != null) {
-            dialogView?.setDefaultRating(rateNumber.toInt())
+            dialogView.setDefaultRating(rateNumber.toInt())
         }
     }
 
@@ -70,8 +69,8 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private fun setupAlertDialog(context: Context): AlertDialog {
         dialogView = AppRatingDialogView(context)
-        val builder = AlertDialog.Builder(activity)
-        data = arguments.getSerializable(C.ExtraKeys.DATA) as AppRatingDialog.Builder.Data
+        val builder = AlertDialog.Builder(activity!!)
+        data = arguments?.getSerializable(DIALOG_DATA) as AppRatingDialog.Builder.Data
 
         setupPositiveButton(dialogView, builder)
         setupNegativeButton(builder)
@@ -99,26 +98,26 @@ class AppRatingDialogFragment : DialogFragment() {
     }
 
     private fun setupColors(dialogView: AppRatingDialogView) {
-        if (data.titleTextColorResId != 0) {
-            dialogView.setTitleTextColor(data.titleTextColorResId)
+        data.titleTextColorResId.applyIfNotZero {
+            dialogView.setTitleTextColor(this)
         }
-        if (data.descriptionTextColorResId != 0) {
-            dialogView.setDescriptionTextColor(data.descriptionTextColorResId)
+        data.descriptionTextColorResId.applyIfNotZero {
+            dialogView.setDescriptionTextColor(this)
         }
-        if (data.commentTextColorResId != 0) {
-            dialogView.setEditTextColor(data.commentTextColorResId)
+        data.commentTextColorResId.applyIfNotZero {
+            dialogView.setEditTextColor(this)
         }
-        if (data.commentBackgroundColorResId != 0) {
-            dialogView.setEditBackgroundColor(data.commentBackgroundColorResId)
+        data.commentBackgroundColorResId.applyIfNotZero {
+            dialogView.setEditBackgroundColor(this)
         }
-        if (data.hintTextColorResId != 0) {
-            dialogView.setHintColor(data.hintTextColorResId)
+        data.hintTextColorResId.applyIfNotZero {
+            dialogView.setHintColor(this)
         }
-        if (data.starColorResId != 0) {
-            dialogView.setStarColor(data.starColorResId)
+        data.starColorResId.applyIfNotZero {
+            dialogView.setStarColor(this)
         }
-        if (data.noteDescriptionTextColor != 0) {
-            dialogView.setNoteDescriptionTextColor(data.noteDescriptionTextColor)
+        data.noteDescriptionTextColor.applyIfNotZero {
+            dialogView.setNoteDescriptionTextColor(this)
         }
     }
 
@@ -142,26 +141,26 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private fun setupNegativeButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(negativeButtonText)) {
-            builder.setNegativeButton(negativeButtonText) { dialog, which ->
-                listener?.onNegativeButtonClicked()
+            builder.setNegativeButton(negativeButtonText) { _, _ ->
+                listener.onNegativeButtonClicked()
             }
         }
     }
 
     private fun setupPositiveButton(dialogView: AppRatingDialogView, builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(positiveButtonText)) {
-            builder.setPositiveButton(positiveButtonText) { dialog, which ->
+            builder.setPositiveButton(positiveButtonText) { _, _ ->
                 val rateNumber = dialogView.rateNumber.toInt()
                 val comment = dialogView.comment
-                listener?.onPositiveButtonClicked(rateNumber, comment)
+                listener.onPositiveButtonClicked(rateNumber, comment)
             }
         }
     }
 
     private fun setupNeutralButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(neutralButtonText)) {
-            builder.setNeutralButton(neutralButtonText) { dialog, which ->
-                listener?.onNeutralButtonClicked()
+            builder.setNeutralButton(neutralButtonText) { _, _ ->
+                listener.onNeutralButtonClicked()
             }
         }
     }
@@ -248,7 +247,7 @@ class AppRatingDialogFragment : DialogFragment() {
         fun newInstance(data: AppRatingDialog.Builder.Data): AppRatingDialogFragment {
             val fragment = AppRatingDialogFragment()
             val bundle = Bundle()
-            bundle.putSerializable(C.ExtraKeys.DATA, data)
+            bundle.putSerializable(DIALOG_DATA, data)
             fragment.arguments = bundle
             return fragment
         }

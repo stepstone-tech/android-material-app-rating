@@ -2,11 +2,11 @@ package com.stepstone.apprating.sample
 
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
-import android.widget.Button
 import android.widget.Toast
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
-import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.Arrays
 
 class SampleActivity : FragmentActivity(), RatingDialogListener {
 
@@ -14,14 +14,9 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button1: Button = findViewById(R.id.show_dialog_button1)
-        button1.setOnClickListener { showRatingDialog_example1() }
-
-        val button2: Button = findViewById(R.id.show_dialog_button2)
-        button2.setOnClickListener { showRatingDialog_example2() }
-
-        val button3: Button = findViewById(R.id.show_dialog_button3)
-        button3.setOnClickListener { showRatingDialog_example3() }
+        showDialogButton_1.setOnClickListener { showRatingDialog_example1() }
+        showDialogButton_2.setOnClickListener { showRatingDialog_example2() }
+        showDialogButton_3.setOnClickListener { showRatingDialog_example3() }
     }
 
     private fun showRatingDialog_example1() {

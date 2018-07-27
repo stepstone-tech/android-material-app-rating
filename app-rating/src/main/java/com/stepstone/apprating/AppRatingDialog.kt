@@ -25,21 +25,24 @@ import com.stepstone.apprating.AppRatingDialog.Builder
 import com.stepstone.apprating.common.Preconditions
 import java.io.Serializable
 
-
 /**
  * This class represents dialog object produced by [Builder].
  * Dialog can be fully configurable.
  *
  * @see Builder
  */
-class AppRatingDialog private constructor(private val activity: FragmentActivity, private val data: Builder.Data) {
+class AppRatingDialog private constructor(
+        private val fragmentActivity: FragmentActivity,
+        private val data: Builder.Data
+) {
 
     /**
      * This method shows rating dialog.
      */
     fun show() {
-        val fragment = AppRatingDialogFragment.newInstance(data)
-        fragment.show(activity.supportFragmentManager, "")
+        AppRatingDialogFragment.newInstance(data).apply {
+            show(fragmentActivity.supportFragmentManager, "")
+        }
     }
 
     /**
@@ -48,58 +51,33 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
      */
     class Builder : Serializable {
 
-        inner class Data : Serializable {
-
-            var numberOfStars = C.InitialValues.MAX_RATING
-
-            var defaultRating = C.InitialValues.DEFAULT_RATING
-
-            var positiveButtonText: String? = null
-
-            var negativeButtonText: String? = null
-
-            var neutralButtonText: String? = null
-
-            var title: String? = null
-
-            var description: String? = null
-
-            var defaultComment: String? = null
-
-            var hint: String? = null
-
-            var positiveButtonTextResId: Int = 0
-
-            var negativeButtonTextResId: Int = 0
-
-            var neutralButtonTextResId: Int = 0
-
-            var titleResId: Int = 0
-
-            var descriptionResId: Int = 0
-
-            var defaultCommentResId: Int = 0
-
-            var hintResId: Int = 0
-
-            var starColorResId: Int = 0
-
-            var noteDescriptionTextColor: Int = 0
-
-            var titleTextColorResId: Int = 0
-
-            var descriptionTextColorResId: Int = 0
-
-            var hintTextColorResId: Int = 0
-
-            var commentTextColorResId: Int = 0
-
-            var commentBackgroundColorResId: Int = 0
-
-            var windowAnimationResId: Int = 0
-
-            var noteDescriptions: ArrayList<String>? = null
-        }
+        data class Data(
+                var numberOfStars: Int = MAX_RATING,
+                var defaultRating: Int = DEFAULT_RATING,
+                var positiveButtonText: String? = null,
+                var negativeButtonText: String? = null,
+                var neutralButtonText: String? = null,
+                var title: String? = null,
+                var description: String? = null,
+                var defaultComment: String? = null,
+                var hint: String? = null,
+                var positiveButtonTextResId: Int = 0,
+                var negativeButtonTextResId: Int = 0,
+                var neutralButtonTextResId: Int = 0,
+                var titleResId: Int = 0,
+                var descriptionResId: Int = 0,
+                var defaultCommentResId: Int = 0,
+                var hintResId: Int = 0,
+                var starColorResId: Int = 0,
+                var noteDescriptionTextColor: Int = 0,
+                var titleTextColorResId: Int = 0,
+                var descriptionTextColorResId: Int = 0,
+                var hintTextColorResId: Int = 0,
+                var commentTextColorResId: Int = 0,
+                var commentBackgroundColorResId: Int = 0,
+                var windowAnimationResId: Int = 0,
+                var noteDescriptions: ArrayList<String>? = null
+        ) : Serializable
 
         val data = Data()
 
@@ -124,8 +102,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
          * @return Builder for chaining
          */
         fun setNumberOfStars(maxRating: Int): Builder {
-            Preconditions.checkArgument(maxRating > 0 && maxRating <= C.InitialValues.MAX_RATING,
-                    "max rating value should be between 1 and " + C.InitialValues.MAX_RATING)
+            Preconditions.checkArgument(maxRating in 1..MAX_RATING,
+                    "max rating value should be between 1 and $MAX_RATING")
             data.numberOfStars = maxRating
             return this
         }
@@ -141,8 +119,8 @@ class AppRatingDialog private constructor(private val activity: FragmentActivity
         fun setNoteDescriptions(noteDescriptions: List<String>): Builder {
             Preconditions.checkNotNull(noteDescriptions, "list cannot be null")
             Preconditions.checkArgument(!noteDescriptions.isEmpty(), "list cannot be empty")
-            Preconditions.checkArgument(noteDescriptions.size <= C.InitialValues.MAX_RATING,
-                    "size of the list can be maximally " + C.InitialValues.MAX_RATING)
+            Preconditions.checkArgument(noteDescriptions.size <= MAX_RATING,
+                    "size of the list can be maximally $MAX_RATING")
             data.noteDescriptions = ArrayList(noteDescriptions)
             return this
         }

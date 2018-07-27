@@ -28,7 +28,7 @@ import android.widget.LinearLayout
 import com.stepstone.apprating.R
 import com.stepstone.apprating.common.Preconditions
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
-import java.util.*
+import kotlinx.android.synthetic.main.component_custom_rating_bar.view.*
 
 /**
  * This class is a custom rating bar. It handles displaying of
@@ -37,8 +37,6 @@ import java.util.*
 class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private val starList = ArrayList<StarButton>()
-
-    private val container: LinearLayout
 
     private var numStars: Int = 0
 
@@ -53,14 +51,13 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     init {
         LayoutInflater.from(context).inflate(R.layout.component_custom_rating_bar, this)
-        container = findViewById(R.id.rating_bar_container)
     }
 
     private fun addStars(numberOfAll: Int, numberOfChecked: Int) {
         Preconditions.checkArgument(numberOfChecked <= numberOfAll, "wrong argument")
 
         starList.clear()
-        container.removeAllViews()
+        ratingBarContainer.removeAllViews()
 
         for (index in 0 until numberOfAll) {
             addStar()
@@ -74,7 +71,7 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
         val starButton = StarButton(context)
         starButton.layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         starList.add(starButton)
-        container.addView(starButton)
+        ratingBarContainer.addView(starButton)
         return starButton
     }
 

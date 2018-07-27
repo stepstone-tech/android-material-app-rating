@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,25 +8,24 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.stepstone.appratingtest.MainActivity">
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <Button
-        android:id="@+id/show_dialog_button1"
+        android:id="@+id/showDialogButton_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
         android:text="show rating dialog 1" />
 
     <Button
-        android:id="@+id/show_dialog_button2"
+        android:id="@+id/showDialogButton_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
         android:text="show rating dialog 2" />
 
     <Button
-        android:id="@+id/show_dialog_button3"
+        android:id="@+id/showDialogButton_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="show rating dialog 3" />
