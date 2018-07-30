@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="@dimen/margin_medium">
+    android:paddingTop="@dimen/margin_medium"
+    android:paddingLeft="@dimen/margin_medium"
+    android:paddingRight="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/titleText"
@@ -54,6 +56,7 @@
         android:inputType="text|textMultiLine"
         android:lines="5"
         android:padding="@dimen/margin_pre_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
         tools:ignore="LabelFor" />
 
 </LinearLayout>

@@ -33,12 +33,17 @@ import com.stepstone.apprating.listener.RatingDialogListener
 class AppRatingDialogFragment : DialogFragment() {
 
     private lateinit var listener: RatingDialogListener
-
     private lateinit var data: AppRatingDialog.Builder.Data
-
     private lateinit var alertDialog: AlertDialog
-
     private lateinit var dialogView: AppRatingDialogView
+
+    private val title by lazy { data.title.resolveText(resources) }
+    private val description by lazy { data.description.resolveText(resources) }
+    private val defaultComment by lazy { data.defaultComment.resolveText(resources) }
+    private val hint by lazy { data.hint.resolveText(resources) }
+    private val positiveButtonText by lazy { data.positiveButtonText.resolveText(resources) }
+    private val neutralButtonText by lazy { data.neutralButtonText.resolveText(resources) }
+    private val negativeButtonText by lazy { data.negativeButtonText.resolveText(resources) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return setupAlertDialog(activity!!)
@@ -80,6 +85,7 @@ class AppRatingDialogFragment : DialogFragment() {
         setupColors(dialogView)
 
         dialogView.setNumberOfStars(data.numberOfStars)
+        dialogView.setCommentInputEnabled(data.commentInputEnabled)
 
         val isEmpty = data.noteDescriptions?.isEmpty() ?: true
         if (!isEmpty) {
@@ -164,83 +170,6 @@ class AppRatingDialogFragment : DialogFragment() {
             }
         }
     }
-
-    private val title: String?
-        get() {
-            if (TextUtils.isEmpty(data.title)) {
-                if (data.titleResId == 0) {
-                    return null
-                }
-                return getString(data.titleResId)
-            }
-            return data.title
-        }
-
-    private val description: String?
-        get() {
-            if (TextUtils.isEmpty(data.description)) {
-                if (data.descriptionResId == 0) {
-                    return null
-                }
-                return getString(data.descriptionResId)
-            }
-            return data.description
-        }
-
-    private val defaultComment: String?
-        get() {
-            if (TextUtils.isEmpty(data.defaultComment)) {
-                if (data.defaultCommentResId == 0) {
-                    return null
-                }
-                return getString(data.defaultCommentResId)
-            }
-            return data.defaultComment
-        }
-
-    private val hint: String?
-        get() {
-            if (TextUtils.isEmpty(data.hint)) {
-                if (data.hintResId == 0) {
-                    return null
-                }
-                return getString(data.hintResId)
-            }
-            return data.hint
-        }
-
-    private val positiveButtonText: String?
-        get() {
-            if (TextUtils.isEmpty(data.positiveButtonText)) {
-                if (data.positiveButtonTextResId == 0) {
-                    return null
-                }
-                return getString(data.positiveButtonTextResId)
-            }
-            return data.positiveButtonText
-        }
-
-    private val neutralButtonText: String?
-        get() {
-            if (TextUtils.isEmpty(data.neutralButtonText)) {
-                if (data.neutralButtonTextResId == 0) {
-                    return null
-                }
-                return getString(data.neutralButtonTextResId)
-            }
-            return data.neutralButtonText
-        }
-
-    private val negativeButtonText: String?
-        get() {
-            if (TextUtils.isEmpty(data.negativeButtonText)) {
-                if (data.negativeButtonTextResId == 0) {
-                    return null
-                }
-                return getString(data.negativeButtonTextResId)
-            }
-            return data.negativeButtonText
-        }
 
     companion object {
 
