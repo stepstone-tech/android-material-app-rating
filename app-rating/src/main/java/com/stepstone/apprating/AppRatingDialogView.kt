@@ -28,11 +28,9 @@ import android.support.v4.widget.TextViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
-import com.stepstone.apprating.ratingbar.CustomRatingBar
+import kotlinx.android.synthetic.main.component_app_rate_dialog.view.*
 
 
 /**
@@ -40,16 +38,6 @@ import com.stepstone.apprating.ratingbar.CustomRatingBar
  * rating bar, edit box and labels.
  */
 class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBarChangedListener {
-
-    private lateinit var ratingBar: CustomRatingBar
-
-    private lateinit var commentEditText: EditText
-
-    private lateinit var titleText: TextView
-
-    private lateinit var descriptionText: TextView
-
-    private lateinit var noteDescriptionText: TextView
 
     private var noteDescriptions: List<String>? = null
 
@@ -102,7 +90,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param noteDescriptions list of note descriptions
      */
     fun setNoteDescriptions(noteDescriptions: List<String>) {
-        val numberOfStars = noteDescriptions?.size
+        val numberOfStars = noteDescriptions.size
         setNumberOfStars(numberOfStars)
         this.noteDescriptions = noteDescriptions
     }
@@ -218,18 +206,25 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     @SuppressLint("ResourceType")
     private fun setup(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.component_app_rate_dialog, this, true)
-        ratingBar = findViewById(R.id.app_rate_dialog_rating_bar)
-        commentEditText = findViewById(R.id.app_rate_dialog_comment_edit_text)
-        titleText = findViewById(R.id.app_rate_dialog_title_text)
-        descriptionText = findViewById(R.id.app_rate_dialog_description_text)
-        noteDescriptionText = findViewById(R.id.app_rate_dialog_note_description)
         ratingBar.setIsIndicator(false)
         ratingBar.setOnRatingBarChangeListener(this)
 
-        TextViewCompat.setTextAppearance(titleText, fetchAttributeValue(R.attr.appRatingDialogTitleStyle))
-        TextViewCompat.setTextAppearance(descriptionText, fetchAttributeValue(R.attr.appRatingDialogDescriptionStyle))
-        TextViewCompat.setTextAppearance(noteDescriptionText, fetchAttributeValue(R.attr.appRatingDialogNoteDescriptionStyle))
-        TextViewCompat.setTextAppearance(commentEditText, fetchAttributeValue(R.attr.appRatingDialogCommentStyle))
+        TextViewCompat.setTextAppearance(
+                titleText,
+                fetchAttributeValue(R.attr.appRatingDialogTitleStyle)
+        )
+        TextViewCompat.setTextAppearance(
+                descriptionText,
+                fetchAttributeValue(R.attr.appRatingDialogDescriptionStyle)
+        )
+        TextViewCompat.setTextAppearance(
+                noteDescriptionText,
+                fetchAttributeValue(R.attr.appRatingDialogNoteDescriptionStyle)
+        )
+        TextViewCompat.setTextAppearance(
+                commentEditText,
+                fetchAttributeValue(R.attr.appRatingDialogCommentStyle)
+        )
     }
 
     private val theme: Resources.Theme

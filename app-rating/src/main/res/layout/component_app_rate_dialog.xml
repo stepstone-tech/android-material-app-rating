@@ -8,7 +8,7 @@
     android:padding="@dimen/margin_medium">
 
     <TextView
-        android:id="@+id/app_rate_dialog_title_text"
+        android:id="@+id/titleText"
         style="@style/TextAppearance.AppRatingDialog.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         tools:text="title" />
 
     <TextView
-        android:id="@+id/app_rate_dialog_description_text"
+        android:id="@+id/descriptionText"
         style="@style/TextAppearance.AppRatingDialog.Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,12 +30,12 @@
         tools:text="description" />
 
     <com.stepstone.apprating.ratingbar.CustomRatingBar
-        android:id="@+id/app_rate_dialog_rating_bar"
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/app_rate_dialog_note_description"
+        android:id="@+id/noteDescriptionText"
         style="@style/TextAppearance.AppRatingDialog.NoteLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         tools:text="Very good" />
 
     <EditText
-        android:id="@+id/app_rate_dialog_comment_edit_text"
+        android:id="@+id/commentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textCursorDrawable="@null"

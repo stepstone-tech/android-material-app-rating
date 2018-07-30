@@ -16,40 +16,13 @@ limitations under the License.
 
 package com.stepstone.apprating
 
-/**
- * This interface contains all constants values used in library.
- */
-interface C {
+const val MAX_RATING = 6
+const val DEFAULT_RATING = 4
 
-    interface InitialValues {
+const val DIALOG_DATA = "data"
+const val CURRENT_RATE_NUMBER = "currentRateNumber"
 
-        companion object {
+const val ALPHA_VISIBLE = 1.0f
+const val ALPHA_INVISIBLE = 0.0f
 
-            val MAX_RATING = 6
-
-            val DEFAULT_RATING = 4
-        }
-    }
-
-    interface ExtraKeys {
-
-        companion object {
-
-            val DATA = "data"
-
-            val CURRENT_RATE_NUMBER = "currentRateNumber"
-        }
-    }
-
-    interface Animation {
-
-        companion object {
-
-            val VISIBLE = 1.0f
-
-            val INVISIBLE = 0.0f
-
-            val CHECK_STAR_DURATION: Long = 200
-        }
-    }
-}
+const val CHECK_STAR_DURATION: Long = 200
