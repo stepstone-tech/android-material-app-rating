@@ -125,6 +125,15 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     /**
+     * This method enable/disable comment edit text.
+     *
+     * @param enabled if set to false then comment input will be not visible
+     */
+    fun setCommentInputEnabled(enabled: Boolean) {
+        commentEditText.visibility = if (enabled) View.VISIBLE else View.GONE
+    }
+
+    /**
      * This method sets dialog's default comment text.
      *
      * @param comment dialog's comment text

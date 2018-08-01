@@ -28,6 +28,13 @@
         android:id="@+id/showDialogButton_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
         android:text="show rating dialog 3" />
+
+    <Button
+        android:id="@+id/showDialogButton_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show rating dialog 4" />
 
 </LinearLayout>

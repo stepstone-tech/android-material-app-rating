@@ -54,20 +54,14 @@ class AppRatingDialog private constructor(
         data class Data(
                 var numberOfStars: Int = MAX_RATING,
                 var defaultRating: Int = DEFAULT_RATING,
-                var positiveButtonText: String? = null,
-                var negativeButtonText: String? = null,
-                var neutralButtonText: String? = null,
-                var title: String? = null,
-                var description: String? = null,
-                var defaultComment: String? = null,
-                var hint: String? = null,
-                var positiveButtonTextResId: Int = 0,
-                var negativeButtonTextResId: Int = 0,
-                var neutralButtonTextResId: Int = 0,
-                var titleResId: Int = 0,
-                var descriptionResId: Int = 0,
-                var defaultCommentResId: Int = 0,
-                var hintResId: Int = 0,
+                val positiveButtonText: StringValue = StringValue(),
+                val negativeButtonText: StringValue = StringValue(),
+                val neutralButtonText: StringValue = StringValue(),
+                val title: StringValue = StringValue(),
+                val description: StringValue = StringValue(),
+                val defaultComment: StringValue = StringValue(),
+                val hint: StringValue = StringValue(),
+                var commentInputEnabled: Boolean = true,
                 var starColorResId: Int = 0,
                 var noteDescriptionTextColor: Int = 0,
                 var titleTextColorResId: Int = 0,
@@ -149,8 +143,7 @@ class AppRatingDialog private constructor(
          */
         fun setTitle(title: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(title), "title cannot be empty")
-            data.title = title
-            data.titleResId = 0
+            data.title.text = title
             return this
         }
 
@@ -163,8 +156,7 @@ class AppRatingDialog private constructor(
          * @see#setTitle(String)
          */
         fun setTitle(@StringRes resId: Int): Builder {
-            data.titleResId = resId
-            data.title = null
+            data.title.textResId = resId
             return this
         }
 
@@ -178,8 +170,7 @@ class AppRatingDialog private constructor(
          */
         fun setDescription(content: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(content), "description cannot be empty")
-            data.description = content
-            data.descriptionResId = 0
+            data.description.text = content
             return this
         }
 
@@ -192,8 +183,19 @@ class AppRatingDialog private constructor(
          * @see#setDescription(String)
          */
         fun setDescription(@StringRes resId: Int): Builder {
-            data.descriptionResId = resId
-            data.description = null
+            data.description.textResId = resId
+            return this
+        }
+
+        /**
+         * This method sets comment edit text to be enabled/disabled.
+         * By default it is always enabled.
+         *
+         * @param enabled if set to false then comment input will be not visible
+         * @return Builder for chaining
+         */
+        fun setCommentInputEnabled(enabled: Boolean): Builder {
+            data.commentInputEnabled = enabled
             return this
         }
 
@@ -207,8 +209,7 @@ class AppRatingDialog private constructor(
          */
         fun setDefaultComment(comment: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(comment), "comment cannot be empty")
-            data.defaultComment = comment
-            data.defaultCommentResId = 0
+            data.defaultComment.text = comment
             return this
         }
 
@@ -221,8 +222,7 @@ class AppRatingDialog private constructor(
          * @see#setDefaultComment(String)
          */
         fun setDefaultComment(@StringRes resId: Int): Builder {
-            data.defaultCommentResId = resId
-            data.defaultComment = null
+            data.defaultComment.textResId = resId
             return this
         }
 
@@ -236,8 +236,7 @@ class AppRatingDialog private constructor(
          */
         fun setHint(hint: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(hint), "hint cannot be empty")
-            data.hint = hint
-            data.hintResId = 0
+            data.hint.text = hint
             return this
         }
 
@@ -250,8 +249,7 @@ class AppRatingDialog private constructor(
          * @see#setHint(String)
          */
         fun setHint(@StringRes resId: Int): Builder {
-            data.hintResId = resId
-            data.hint = null
+            data.hint.textResId = resId
             return this
         }
 
@@ -264,8 +262,7 @@ class AppRatingDialog private constructor(
          */
         fun setPositiveButtonText(positiveButtonText: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(positiveButtonText), "text cannot be empty")
-            data.positiveButtonText = positiveButtonText
-            data.positiveButtonTextResId = 0
+            data.positiveButtonText.text = positiveButtonText
             return this
         }
 
@@ -277,8 +274,7 @@ class AppRatingDialog private constructor(
          * @see#setPositiveButtonText(String)
          */
         fun setPositiveButtonText(@StringRes resId: Int): Builder {
-            data.positiveButtonTextResId = resId
-            data.positiveButtonText = null
+            data.positiveButtonText.textResId = resId
             return this
         }
 
@@ -291,8 +287,7 @@ class AppRatingDialog private constructor(
          */
         fun setNegativeButtonText(negativeButtonText: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(negativeButtonText), "text cannot be empty")
-            data.negativeButtonText = negativeButtonText
-            data.negativeButtonTextResId = 0
+            data.negativeButtonText.text = negativeButtonText
             return this
         }
 
@@ -305,8 +300,7 @@ class AppRatingDialog private constructor(
          */
         fun setNeutralButtonText(neutralButtonText: String): Builder {
             Preconditions.checkArgument(!TextUtils.isEmpty(neutralButtonText), "text cannot be empty")
-            data.neutralButtonText = neutralButtonText
-            data.neutralButtonTextResId = 0
+            data.neutralButtonText.text = neutralButtonText
             return this
         }
 
@@ -318,8 +312,7 @@ class AppRatingDialog private constructor(
          * @see#setNegativeButtonText(String)
          */
         fun setNegativeButtonText(@StringRes resId: Int): Builder {
-            data.negativeButtonTextResId = resId
-            data.negativeButtonText = null
+            data.negativeButtonText.textResId = resId
             return this
         }
 
@@ -331,8 +324,7 @@ class AppRatingDialog private constructor(
          * @see#setNeutralButtonText(String)
          */
         fun setNeutralButtonText(@StringRes resId: Int): Builder {
-            data.neutralButtonTextResId = resId
-            data.neutralButtonText = null
+            data.neutralButtonText.textResId = resId
             return this
         }
 

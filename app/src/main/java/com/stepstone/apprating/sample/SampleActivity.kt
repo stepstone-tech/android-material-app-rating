@@ -17,6 +17,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
         showDialogButton_1.setOnClickListener { showRatingDialog_example1() }
         showDialogButton_2.setOnClickListener { showRatingDialog_example2() }
         showDialogButton_3.setOnClickListener { showRatingDialog_example3() }
+        showDialogButton_4.setOnClickListener { showRatingDialog_example4() }
     }
 
     private fun showRatingDialog_example1() {
@@ -72,6 +73,21 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogSlideVerticalAnimation)
+                .create(this@SampleActivity)
+                .show()
+    }
+
+    private fun showRatingDialog_example4() {
+        AppRatingDialog.Builder()
+                .setPositiveButtonText("Send feedback")
+                .setNumberOfStars(6)
+                .setDefaultRating(4)
+                .setTitle("Rate this application")
+                .setTitleTextColor(R.color.titleTextColor)
+                .setCommentInputEnabled(false)
+                .setWindowAnimation(R.style.MyDialogFadeAnimation)
+                .setHint("Please write your comment here ...")
+                .setHintTextColor(R.color.hintTextColor)
                 .create(this@SampleActivity)
                 .show()
     }

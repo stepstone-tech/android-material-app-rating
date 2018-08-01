@@ -95,6 +95,7 @@ private void showDialog() {
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
+                .setCommentInputEnabled(true)
                 .setDefaultComment("This app is pretty cool !")
                 .setStarColor(R.color.starColor)
                 .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
