@@ -27,6 +27,12 @@ compile 'com.stepstone.apprating:app-rating:2.2.0'
 
 ## Getting started
 
+### Browse samples
+
+There are few samples of rating dialog usage.
+Please refer to `SamplesActivity` in `samples` module. There are also two gradle flavors for
+sample app which can switched to see dialog in different themes, styles.
+
 ### Prepare styling for dialog
 
 Styling app rating dialog works in the same way like styling standard android's AlertDialog.

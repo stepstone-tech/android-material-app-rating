@@ -1,1 +1,1 @@
-include ':app', ':app-rating'
+include ':samples', ':app-rating'

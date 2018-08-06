@@ -8,7 +8,7 @@ import com.stepstone.apprating.listener.RatingDialogListener
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.Arrays
 
-class SampleActivity : FragmentActivity(), RatingDialogListener {
+class SamplesActivity : FragmentActivity(), RatingDialogListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setWindowAnimation(R.style.MyDialogSlideHorizontalAnimation)
                 .setHint("Please write your comment here ...")
                 .setHintTextColor(R.color.hintTextColor)
-                .create(this@SampleActivity)
+                .create(this@SamplesActivity)
                 .show()
     }
 
@@ -54,7 +54,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
                 .setHint("Please write your comment here ...")
                 .setHintTextColor(R.color.hintTextColor)
-                .create(this@SampleActivity)
+                .create(this@SamplesActivity)
                 .show()
     }
 
@@ -73,7 +73,7 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogSlideVerticalAnimation)
-                .create(this@SampleActivity)
+                .create(this@SamplesActivity)
                 .show()
     }
 
@@ -88,19 +88,19 @@ class SampleActivity : FragmentActivity(), RatingDialogListener {
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
                 .setHint("Please write your comment here ...")
                 .setHintTextColor(R.color.hintTextColor)
-                .create(this@SampleActivity)
+                .create(this@SamplesActivity)
                 .show()
     }
 
     override fun onPositiveButtonClicked(rate: Int, comment: String) {
-        Toast.makeText(this@SampleActivity, "Rate : $rate\nComment : $comment", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SamplesActivity, "Rate : $rate\nComment : $comment", Toast.LENGTH_LONG).show()
     }
 
     override fun onNegativeButtonClicked() {
-        Toast.makeText(this@SampleActivity, "Negative button clicked", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SamplesActivity, "Negative button clicked", Toast.LENGTH_LONG).show()
     }
 
     override fun onNeutralButtonClicked() {
-        Toast.makeText(this@SampleActivity, "Neutral button clicked", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SamplesActivity, "Neutral button clicked", Toast.LENGTH_LONG).show()
     }
 }
