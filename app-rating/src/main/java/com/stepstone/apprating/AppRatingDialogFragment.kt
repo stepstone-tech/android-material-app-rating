@@ -100,6 +100,9 @@ class AppRatingDialogFragment : DialogFragment() {
             alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
         }
 
+        data.cancelable?.let { isCancelable = it }
+        data.canceledOnTouchOutside?.let { alertDialog.setCanceledOnTouchOutside(it) }
+
         return alertDialog
     }
 

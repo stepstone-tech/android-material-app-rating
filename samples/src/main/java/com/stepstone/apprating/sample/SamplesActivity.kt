@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.Arrays
+import java.util.*
 
 class SamplesActivity : FragmentActivity(), RatingDialogListener {
 
@@ -38,6 +38,8 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
                 .setWindowAnimation(R.style.MyDialogSlideHorizontalAnimation)
                 .setHint("Please write your comment here ...")
                 .setHintTextColor(R.color.hintTextColor)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
                 .create(this@SamplesActivity)
                 .show()
     }
