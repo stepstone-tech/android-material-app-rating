@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import java.util.Arrays
 
 class SamplesActivity : FragmentActivity(), RatingDialogListener {
 
