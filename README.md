@@ -112,6 +112,8 @@ private void showDialog() {
                 .setCommentTextColor(R.color.commentTextColor)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
                 .create(MainActivity.this)
                 .show();
     }

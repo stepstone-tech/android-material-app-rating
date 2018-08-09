@@ -38,6 +38,8 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
                 .setWindowAnimation(R.style.MyDialogSlideHorizontalAnimation)
                 .setHint("Please write your comment here ...")
                 .setHintTextColor(R.color.hintTextColor)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
                 .create(this@SamplesActivity)
                 .show()
     }

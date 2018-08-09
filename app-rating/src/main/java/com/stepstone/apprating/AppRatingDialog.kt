@@ -32,8 +32,8 @@ import java.io.Serializable
  * @see Builder
  */
 class AppRatingDialog private constructor(
-        private val fragmentActivity: FragmentActivity,
-        private val data: Builder.Data
+    private val fragmentActivity: FragmentActivity,
+    private val data: Builder.Data
 ) {
 
     /**
@@ -52,25 +52,27 @@ class AppRatingDialog private constructor(
     class Builder : Serializable {
 
         data class Data(
-                var numberOfStars: Int = MAX_RATING,
-                var defaultRating: Int = DEFAULT_RATING,
-                val positiveButtonText: StringValue = StringValue(),
-                val negativeButtonText: StringValue = StringValue(),
-                val neutralButtonText: StringValue = StringValue(),
-                val title: StringValue = StringValue(),
-                val description: StringValue = StringValue(),
-                val defaultComment: StringValue = StringValue(),
-                val hint: StringValue = StringValue(),
-                var commentInputEnabled: Boolean = true,
-                var starColorResId: Int = 0,
-                var noteDescriptionTextColor: Int = 0,
-                var titleTextColorResId: Int = 0,
-                var descriptionTextColorResId: Int = 0,
-                var hintTextColorResId: Int = 0,
-                var commentTextColorResId: Int = 0,
-                var commentBackgroundColorResId: Int = 0,
-                var windowAnimationResId: Int = 0,
-                var noteDescriptions: ArrayList<String>? = null
+            var numberOfStars: Int = MAX_RATING,
+            var defaultRating: Int = DEFAULT_RATING,
+            val positiveButtonText: StringValue = StringValue(),
+            val negativeButtonText: StringValue = StringValue(),
+            val neutralButtonText: StringValue = StringValue(),
+            val title: StringValue = StringValue(),
+            val description: StringValue = StringValue(),
+            val defaultComment: StringValue = StringValue(),
+            val hint: StringValue = StringValue(),
+            var commentInputEnabled: Boolean = true,
+            var starColorResId: Int = 0,
+            var noteDescriptionTextColor: Int = 0,
+            var titleTextColorResId: Int = 0,
+            var descriptionTextColorResId: Int = 0,
+            var hintTextColorResId: Int = 0,
+            var commentTextColorResId: Int = 0,
+            var commentBackgroundColorResId: Int = 0,
+            var windowAnimationResId: Int = 0,
+            var noteDescriptions: ArrayList<String>? = null,
+            var cancelable: Boolean? = null,
+            var canceledOnTouchOutside: Boolean? = null
         ) : Serializable
 
         val data = Data()
@@ -96,8 +98,10 @@ class AppRatingDialog private constructor(
          * @return Builder for chaining
          */
         fun setNumberOfStars(maxRating: Int): Builder {
-            Preconditions.checkArgument(maxRating in 1..MAX_RATING,
-                    "max rating value should be between 1 and $MAX_RATING")
+            Preconditions.checkArgument(
+                maxRating in 1..MAX_RATING,
+                "max rating value should be between 1 and $MAX_RATING"
+            )
             data.numberOfStars = maxRating
             return this
         }
@@ -113,8 +117,10 @@ class AppRatingDialog private constructor(
         fun setNoteDescriptions(noteDescriptions: List<String>): Builder {
             Preconditions.checkNotNull(noteDescriptions, "list cannot be null")
             Preconditions.checkArgument(!noteDescriptions.isEmpty(), "list cannot be empty")
-            Preconditions.checkArgument(noteDescriptions.size <= MAX_RATING,
-                    "size of the list can be maximally $MAX_RATING")
+            Preconditions.checkArgument(
+                noteDescriptions.size <= MAX_RATING,
+                "size of the list can be maximally $MAX_RATING"
+            )
             data.noteDescriptions = ArrayList(noteDescriptions)
             return this
         }
@@ -127,8 +133,10 @@ class AppRatingDialog private constructor(
          * @return Builder for chaining
          */
         fun setDefaultRating(defaultRating: Int): Builder {
-            Preconditions.checkArgument(defaultRating >= 0 && defaultRating <= data.numberOfStars,
-                    "default rating value should be between 0 and " + data.numberOfStars)
+            Preconditions.checkArgument(
+                defaultRating >= 0 && defaultRating <= data.numberOfStars,
+                "default rating value should be between 0 and " + data.numberOfStars
+            )
             data.defaultRating = defaultRating
             return this
         }
@@ -261,7 +269,10 @@ class AppRatingDialog private constructor(
          * @see#setPositiveButtonText(int)
          */
         fun setPositiveButtonText(positiveButtonText: String): Builder {
-            Preconditions.checkArgument(!TextUtils.isEmpty(positiveButtonText), "text cannot be empty")
+            Preconditions.checkArgument(
+                !TextUtils.isEmpty(positiveButtonText),
+                "text cannot be empty"
+            )
             data.positiveButtonText.text = positiveButtonText
             return this
         }
@@ -286,7 +297,10 @@ class AppRatingDialog private constructor(
          * @see#setNegativeButtonText(int)
          */
         fun setNegativeButtonText(negativeButtonText: String): Builder {
-            Preconditions.checkArgument(!TextUtils.isEmpty(negativeButtonText), "text cannot be empty")
+            Preconditions.checkArgument(
+                !TextUtils.isEmpty(negativeButtonText),
+                "text cannot be empty"
+            )
             data.negativeButtonText.text = negativeButtonText
             return this
         }
@@ -299,7 +313,10 @@ class AppRatingDialog private constructor(
          * @see#setNeutralButtonText(int)
          */
         fun setNeutralButtonText(neutralButtonText: String): Builder {
-            Preconditions.checkArgument(!TextUtils.isEmpty(neutralButtonText), "text cannot be empty")
+            Preconditions.checkArgument(
+                !TextUtils.isEmpty(neutralButtonText),
+                "text cannot be empty"
+            )
             data.neutralButtonText.text = neutralButtonText
             return this
         }
@@ -426,6 +443,29 @@ class AppRatingDialog private constructor(
          */
         fun setWindowAnimation(@StyleRes animationResId: Int): Builder {
             data.windowAnimationResId = animationResId
+            return this
+        }
+
+        /**
+         * Sets whether this dialog is cancelable with the BACK key.
+         *
+         * @param cancelable if false when dialog cannot be canceled
+         * @return Builder for chaining
+         */
+        fun setCancelable(cancelable: Boolean): Builder {
+            data.cancelable = cancelable
+            return this
+        }
+
+        /**
+         * Sets whether this dialog is canceled when touched outside the window's bounds.
+         * If setting to true, the dialog is set to be cancelable if not already set.
+         *
+         * @param cancel whether the dialog should be canceled when touched outside the window.
+         * @return Builder for chaining
+         */
+        fun setCanceledOnTouchOutside(cancel: Boolean): Builder {
+            data.canceledOnTouchOutside = cancel
             return this
         }
     }
