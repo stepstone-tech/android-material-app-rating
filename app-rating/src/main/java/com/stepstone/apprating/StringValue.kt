@@ -3,13 +3,14 @@ package com.stepstone.apprating
 import android.content.res.Resources
 import android.support.annotation.StringRes
 import android.text.TextUtils
+import java.io.Serializable
 
 /**
  * This class in a container for string value which can
  * be represented by java String class or resources id.
  * It provides text based on last given value.
  */
-class StringValue {
+class StringValue : Serializable {
 
     var text: String? = null
         set(value) {
