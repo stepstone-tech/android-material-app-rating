@@ -30,5 +30,5 @@ before_script:
   - printf 'bintray.user=dummy_user\nbintray.apikey=dummy_api_key' > local.properties
 
 script:
-  - ./gradlew detekt
+  - ./gradlew detektCheck
   - ./gradlew assembleDebug

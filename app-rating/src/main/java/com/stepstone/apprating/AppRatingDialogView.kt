@@ -32,7 +32,6 @@ import android.widget.LinearLayout
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
 import kotlinx.android.synthetic.main.component_app_rate_dialog.view.*
 
-
 /**
  * This class represents custom dialog view which contains
  * rating bar, edit box and labels.
