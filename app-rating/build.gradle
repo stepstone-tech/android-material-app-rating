@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven'
-apply from: '../quality/detekt.gradle'
+apply plugin: "io.gitlab.arturbosch.detekt"
 
 ext {
     bintrayRepo = 'maven'
@@ -54,6 +54,8 @@ dependencies {
     implementation("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
     implementation("com.android.support:support-annotations:$androidSupportLibraryVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+
+    detekt "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
 }
 
 gradle.taskGraph.beforeTask { Task task ->
@@ -75,4 +77,14 @@ apply from: '../bintrayv1.gradle'
 repositories {
     mavenCentral()
     google()
+}
+
+detekt {
+    profile("main") {
+        input = "$project.projectDir"
+        output = "$projectDir/build/reports"
+        filters = ".*/resources/.*,.*/build/.*"
+        config = "$project.parent.projectDir/quality/detekt.yml"
+        baseline = "$project.parent.projectDir/quality/baseline.xml"
+    }
 }

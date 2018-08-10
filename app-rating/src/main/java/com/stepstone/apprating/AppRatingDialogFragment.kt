@@ -80,9 +80,18 @@ class AppRatingDialogFragment : DialogFragment() {
         setupTitleAndContentMessages(dialogView)
         setupHint(dialogView)
         setupColors(dialogView)
+        setupInputBox()
+        setupRatingBar()
 
+        builder.setView(dialogView)
+        alertDialog = builder.create()
+        setupAnimation()
+        setupCancelable()
+        return alertDialog
+    }
+
+    private fun setupRatingBar() {
         dialogView.setNumberOfStars(data.numberOfStars)
-        dialogView.setCommentInputEnabled(data.commentInputEnabled)
 
         val isEmpty = data.noteDescriptions?.isEmpty() ?: true
         if (!isEmpty) {
@@ -90,17 +99,21 @@ class AppRatingDialogFragment : DialogFragment() {
         }
 
         dialogView.setDefaultRating(data.defaultRating)
-        builder.setView(dialogView)
-        alertDialog = builder.create()
+    }
 
+    private fun setupInputBox() {
+        dialogView.setCommentInputEnabled(data.commentInputEnabled)
+    }
+
+    private fun setupCancelable() {
+        data.cancelable?.let { isCancelable = it }
+        data.canceledOnTouchOutside?.let { alertDialog.setCanceledOnTouchOutside(it) }
+    }
+
+    private fun setupAnimation() {
         if (data.windowAnimationResId != 0) {
             alertDialog.window.attributes.windowAnimations = data.windowAnimationResId
         }
-
-        data.cancelable?.let { isCancelable = it }
-        data.canceledOnTouchOutside?.let { alertDialog.setCanceledOnTouchOutside(it) }
-
-        return alertDialog
     }
 
     private fun setupColors(dialogView: AppRatingDialogView) {
