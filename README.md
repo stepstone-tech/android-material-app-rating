@@ -115,6 +115,7 @@ private void showDialog() {
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
                 .create(MainActivity.this)
+                .setTargetFragment(this, TAG) // only if listener is implemented by fragment
                 .show();
     }
 ```

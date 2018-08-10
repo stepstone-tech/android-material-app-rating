@@ -32,7 +32,14 @@ import com.stepstone.apprating.listener.RatingDialogListener
  */
 class AppRatingDialogFragment : DialogFragment() {
 
-    private lateinit var listener: RatingDialogListener
+    private var listener: RatingDialogListener? = null
+        get() {
+            if (host is RatingDialogListener) {
+                return host as RatingDialogListener
+            }
+            return targetFragment as RatingDialogListener?
+        }
+
     private lateinit var data: AppRatingDialog.Builder.Data
     private lateinit var alertDialog: AlertDialog
     private lateinit var dialogView: AppRatingDialogView
@@ -59,16 +66,6 @@ class AppRatingDialogFragment : DialogFragment() {
         val rateNumber: Float? = savedInstanceState?.getFloat(CURRENT_RATE_NUMBER)
         if (rateNumber != null) {
             dialogView.setDefaultRating(rateNumber.toInt())
-        }
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        if (host is RatingDialogListener) {
-            listener = host as RatingDialogListener
-        } else {
-            throw AssertionError("Host does not implement RatingDialogListener!")
         }
     }
 
@@ -151,7 +148,7 @@ class AppRatingDialogFragment : DialogFragment() {
     private fun setupNegativeButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText) { _, _ ->
-                listener.onNegativeButtonClicked()
+                listener?.onNegativeButtonClicked()
             }
         }
     }
@@ -161,7 +158,7 @@ class AppRatingDialogFragment : DialogFragment() {
             builder.setPositiveButton(positiveButtonText) { _, _ ->
                 val rateNumber = dialogView.rateNumber.toInt()
                 val comment = dialogView.comment
-                listener.onPositiveButtonClicked(rateNumber, comment)
+                listener?.onPositiveButtonClicked(rateNumber, comment)
             }
         }
     }
@@ -169,7 +166,7 @@ class AppRatingDialogFragment : DialogFragment() {
     private fun setupNeutralButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(neutralButtonText)) {
             builder.setNeutralButton(neutralButtonText) { _, _ ->
-                listener.onNeutralButtonClicked()
+                listener?.onNeutralButtonClicked()
             }
         }
     }

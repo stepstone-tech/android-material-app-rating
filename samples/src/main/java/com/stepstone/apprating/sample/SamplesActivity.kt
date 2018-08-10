@@ -5,14 +5,14 @@ import android.support.v4.app.FragmentActivity
 import android.widget.Toast
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_samples.*
 import java.util.Arrays
 
 class SamplesActivity : FragmentActivity(), RatingDialogListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_samples)
 
         showDialogButton_1.setOnClickListener { showRatingDialog_example1() }
         showDialogButton_2.setOnClickListener { showRatingDialog_example2() }

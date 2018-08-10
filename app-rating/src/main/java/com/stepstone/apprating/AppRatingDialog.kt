@@ -19,6 +19,7 @@ package com.stepstone.apprating
 import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
 import android.support.annotation.StyleRes
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.stepstone.apprating.AppRatingDialog.Builder
@@ -36,11 +37,32 @@ class AppRatingDialog private constructor(
     private val data: Builder.Data
 ) {
 
+    private var fragment: Fragment? = null
+    private var requestCode: Int = 0
+
+    /**
+     * Optional target for this fragment. This may be used, for example,
+     * if this fragment is being started by another,
+     * and when done wants to give a result back to the first
+     *
+     * @param fragment The fragment that is the target of this one.
+     * @param requestCode Optional request code, for convenience if you
+     * are going to call back with {@link #onActivityResult(int, int, Intent)}
+     */
+    fun setTargetFragment(fragment: Fragment, requestCode: Int): AppRatingDialog {
+        this.fragment = fragment
+        this.requestCode = requestCode
+        return this
+    }
+
     /**
      * This method shows rating dialog.
      */
     fun show() {
         AppRatingDialogFragment.newInstance(data).apply {
+            fragment?.let {
+                setTargetFragment(it, requestCode)
+            }
             show(fragmentActivity.supportFragmentManager, "")
         }
     }
