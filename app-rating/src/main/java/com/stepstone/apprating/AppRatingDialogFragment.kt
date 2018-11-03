@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import android.widget.Button
 import com.stepstone.apprating.extensions.applyIfNotZero
 import com.stepstone.apprating.listener.RatingDialogListener
 
@@ -49,6 +50,7 @@ class AppRatingDialogFragment : DialogFragment() {
     private val defaultComment by lazy { data.defaultComment.resolveText(resources) }
     private val hint by lazy { data.hint.resolveText(resources) }
     private val positiveButtonText by lazy { data.positiveButtonText.resolveText(resources) }
+    private val positiveButtonTextOnPositiveReview by lazy { data.positiveButtonTextOnPositiveReview.resolveText(resources) }
     private val neutralButtonText by lazy { data.neutralButtonText.resolveText(resources) }
     private val negativeButtonText by lazy { data.negativeButtonText.resolveText(resources) }
 
@@ -85,6 +87,11 @@ class AppRatingDialogFragment : DialogFragment() {
 
         builder.setView(dialogView)
         alertDialog = builder.create()
+        alertDialog.setOnShowListener {
+            // App doesn't have access to button before they are shown
+            val positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            setupPositiveReviewModifications(positiveButton)
+        }
         setupAnimation()
         setupCancelable()
         return alertDialog
@@ -99,6 +106,12 @@ class AppRatingDialogFragment : DialogFragment() {
         }
 
         dialogView.setDefaultRating(data.defaultRating)
+    }
+
+    private fun setupPositiveReviewModifications(positiveButton: Button) {
+        dialogView.setPositiveReviewModificators(data.positiveReviewStarsNumber
+                , data.hideCommentOnPositiveReview, positiveButtonText, positiveButtonTextOnPositiveReview,
+                positiveButton)
     }
 
     private fun setupInputBox() {

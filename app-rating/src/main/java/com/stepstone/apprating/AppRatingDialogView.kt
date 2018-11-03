@@ -28,6 +28,7 @@ import android.support.v4.widget.TextViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
 import kotlinx.android.synthetic.main.component_app_rate_dialog.view.*
@@ -39,6 +40,13 @@ import kotlinx.android.synthetic.main.component_app_rate_dialog.view.*
 class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBarChangedListener {
 
     private var noteDescriptions: List<String>? = null
+    private var _hideCommentOnPositiveReview: Boolean = false
+    private var _commentEditTextVisibility: Boolean = true
+    private var _positiveReviewStarsNumber: Int = -1
+    private lateinit var _positiveButtonTextOnPositiveReview: String
+    private var _positiveButtonToChangeTextOn: Button? = null
+    private lateinit var _positiveButtonText: String
+
 
     init {
         setup(context)
@@ -129,6 +137,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
      * @param enabled if set to false then comment input will be not visible
      */
     fun setCommentInputEnabled(enabled: Boolean) {
+        _commentEditTextVisibility = enabled
         commentEditText.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
@@ -188,6 +197,32 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
     }
 
     /**
+     * This method setup modificators for positive review.
+     * How many stars counts as possible review, should we hide comment on positive review and
+     * text that should be shown on positive button if review in positive.
+     *
+     * It could be usefull if e.g. you want to navigate to google play in case of positive review
+     * and collect feedback otherwise.
+     *
+     * @param positiveReviewStarsNumber how many stars counts as positive
+     * @param hideCommentOnPositiveReview should we hide comments field in case of positive review
+     * @param positiveButtonTextOnPositiveReview text on positive button in case of positive review
+     * @param positiveButton positive button to apply changes to
+     */
+    fun setPositiveReviewModificators(positiveReviewStarsNumber: Int,
+                                      hideCommentOnPositiveReview: Boolean,
+                                      positiveButtonText: String?,
+                                      positiveButtonTextOnPositiveReview: String?,
+                                      positiveButton: Button) {
+        _positiveReviewStarsNumber = positiveReviewStarsNumber
+        _hideCommentOnPositiveReview = hideCommentOnPositiveReview
+        _positiveButtonTextOnPositiveReview = positiveButtonTextOnPositiveReview?.let { it } ?: let { positiveButtonText!! }
+        _positiveButtonToChangeTextOn = positiveButton
+        _positiveButtonText = positiveButtonText!!
+        applyPositiveRatingModifications(rateNumber.toInt())
+    }
+
+    /**
      * This method sets color of dialog's hint.
      *
      * @param color resource id of hint text color
@@ -198,6 +233,7 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
 
     override fun onRatingChanged(rating: Int) {
         updateNoteDescriptionText(rating - 1)
+        applyPositiveRatingModifications(rating)
     }
 
     private fun updateNoteDescriptionText(rating: Int) {
@@ -209,6 +245,23 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
         val text = noteDescriptions!![rating]
         noteDescriptionText.text = text
         noteDescriptionText.visibility = View.VISIBLE
+    }
+
+    private fun applyPositiveRatingModifications(rating: Int) {
+        if (rating >= _positiveReviewStarsNumber) {
+            if (_hideCommentOnPositiveReview) {
+                commentEditText.visibility = View.GONE
+            } else if (_commentEditTextVisibility) {
+                commentEditText.visibility = View.VISIBLE
+            }
+            _positiveButtonToChangeTextOn?.text = _positiveButtonTextOnPositiveReview
+        } else {
+            if (_commentEditTextVisibility) {
+                commentEditText.visibility = View.VISIBLE
+            }
+            _positiveButtonToChangeTextOn?.text = _positiveButtonText
+        }
+        _positiveButtonToChangeTextOn?.invalidate()
     }
 
     @SuppressLint("ResourceType")

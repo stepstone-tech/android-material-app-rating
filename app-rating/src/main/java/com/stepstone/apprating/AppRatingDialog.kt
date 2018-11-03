@@ -74,28 +74,31 @@ class AppRatingDialog private constructor(
     class Builder : Serializable {
 
         data class Data(
-            var numberOfStars: Int = MAX_RATING,
-            var defaultRating: Int = DEFAULT_RATING,
-            val positiveButtonText: StringValue = StringValue(),
-            val negativeButtonText: StringValue = StringValue(),
-            val neutralButtonText: StringValue = StringValue(),
-            val title: StringValue = StringValue(),
-            val description: StringValue = StringValue(),
-            val defaultComment: StringValue = StringValue(),
-            val hint: StringValue = StringValue(),
-            var commentInputEnabled: Boolean = true,
-            var starColorResId: Int = 0,
-            var noteDescriptionTextColor: Int = 0,
-            var titleTextColorResId: Int = 0,
-            var descriptionTextColorResId: Int = 0,
-            var hintTextColorResId: Int = 0,
-            var commentTextColorResId: Int = 0,
-            var commentBackgroundColorResId: Int = 0,
-            var windowAnimationResId: Int = 0,
-            var noteDescriptions: ArrayList<String>? = null,
-            var cancelable: Boolean? = null,
-            var canceledOnTouchOutside: Boolean? = null
-        ) : Serializable
+                var numberOfStars: Int = MAX_RATING,
+                var defaultRating: Int = DEFAULT_RATING,
+                val positiveButtonText: StringValue = StringValue(),
+                val negativeButtonText: StringValue = StringValue(),
+                val neutralButtonText: StringValue = StringValue(),
+                val title: StringValue = StringValue(),
+                val description: StringValue = StringValue(),
+                val defaultComment: StringValue = StringValue(),
+                val hint: StringValue = StringValue(),
+                var commentInputEnabled: Boolean = true,
+                var starColorResId: Int = 0,
+                var noteDescriptionTextColor: Int = 0,
+                var titleTextColorResId: Int = 0,
+                var descriptionTextColorResId: Int = 0,
+                var hintTextColorResId: Int = 0,
+                var commentTextColorResId: Int = 0,
+                var commentBackgroundColorResId: Int = 0,
+                var windowAnimationResId: Int = 0,
+                var noteDescriptions: ArrayList<String>? = null,
+                var cancelable: Boolean? = null,
+                var canceledOnTouchOutside: Boolean? = null,
+                var positiveReviewStarsNumber: Int = DEFAULT_RATING,
+                var hideCommentOnPositiveReview: Boolean = false,
+                val positiveButtonTextOnPositiveReview: StringValue = StringValue()
+                ) : Serializable
 
         val data = Data()
 
@@ -109,6 +112,48 @@ class AppRatingDialog private constructor(
         fun create(activity: FragmentActivity): AppRatingDialog {
             Preconditions.checkNotNull(activity, "FragmentActivity cannot be null")
             return AppRatingDialog(activity, data)
+        }
+
+        /**
+         * This method sets the value when rating assumed to be positive.
+         * E.g. if you want to hide comment field when rating is positive.
+         *
+         * @param maxRating maximum number of stars
+         * @return Builder for chaining
+         */
+        fun setPositiveReviewStarsNumber(value: Int): Builder {
+            Preconditions.checkArgument(
+                    value in 1..MAX_RATING,
+                    "rating that assumed to be positive should be between 1 and $MAX_RATING"
+            )
+            data.positiveReviewStarsNumber = value
+            return this
+        }
+
+        /**
+        * Set if you want to hide comment field in case of positive review.
+        *
+        * @param shouldHide true if comment field need to be hidden in case of positive review
+        * @return Builder for chaining
+        */
+        fun setHideCommentOnPositiveReview(shouldHide: Boolean): Builder {
+            data.hideCommentOnPositiveReview = shouldHide
+            return this
+        }
+
+        /**
+         * This method sets text of dialog's positive button in case of positive review.
+         *
+         * @param positiveButtonTexOnPositiveReview text for positive button
+         * @return Builder for chaining
+         */
+        fun setPositiveButtonTextOnPositiveReview(positiveButtonTexOnPositiveReview: String): Builder {
+            Preconditions.checkArgument(
+                    !TextUtils.isEmpty(positiveButtonTexOnPositiveReview),
+                    "text cannot be empty"
+            )
+            data.positiveButtonTextOnPositiveReview.text = positiveButtonTexOnPositiveReview
+            return this
         }
 
         /**
