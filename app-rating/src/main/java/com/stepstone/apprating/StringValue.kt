@@ -1,7 +1,7 @@
 package com.stepstone.apprating
 
 import android.content.res.Resources
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.text.TextUtils
 import java.io.Serializable
 
