@@ -21,14 +21,14 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.widget.TextViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.TextViewCompat
 import com.stepstone.apprating.listener.OnRatingBarChangedListener
 import kotlinx.android.synthetic.main.component_app_rate_dialog.view.*
 
@@ -206,9 +206,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
             return
         }
 
-        val text = noteDescriptions!![rating]
-        noteDescriptionText.text = text
-        noteDescriptionText.visibility = View.VISIBLE
+        if (rating >= 0) {
+            val text = noteDescriptions!![rating]
+            noteDescriptionText.text = text
+            noteDescriptionText.visibility = View.VISIBLE
+        }
     }
 
     @SuppressLint("ResourceType")

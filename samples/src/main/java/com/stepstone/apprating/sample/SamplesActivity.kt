@@ -1,12 +1,11 @@
 package com.stepstone.apprating.sample
 
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
 import kotlinx.android.synthetic.main.activity_samples.*
-import java.util.Arrays
 
 class SamplesActivity : FragmentActivity(), RatingDialogListener {
 
@@ -25,7 +24,7 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
                 .setNeutralButtonText("Later")
-                .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
+                .setNoteDescriptions(listOf("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
@@ -48,7 +47,7 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
         AppRatingDialog.Builder()
                 .setPositiveButtonText("Send feedback")
                 .setNumberOfStars(6)
-                .setDefaultRating(4)
+                .setDefaultRating(0)
                 .setTitle("Rate this application")
                 .setTitleTextColor(R.color.titleTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
