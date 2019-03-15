@@ -12,7 +12,7 @@ android {
         applicationId "com.stepstone.apprating.sample"
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -40,6 +40,6 @@ android {
 dependencies {
     implementation project(':app-rating')
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
-    implementation ("androidx.appcompat:appcompat:$androidXLibraryVersion")
+    implementation ("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
     testImplementation 'junit:junit:4.12'
 }

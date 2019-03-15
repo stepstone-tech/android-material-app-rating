@@ -1,7 +1,7 @@
 package com.stepstone.apprating.sample
 
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
+import android.support.v4.app.FragmentActivity
 
 class SamplesFragmentActivity : FragmentActivity() {
 

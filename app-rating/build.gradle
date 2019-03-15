@@ -51,8 +51,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation("androidx.appcompat:appcompat:$androidXLibraryVersion")
-    implementation("androidx.annotation:annotation:$androidXLibraryVersion")
+    implementation("com.android.support:appcompat-v7:$androidSupportLibraryVersion")
+    implementation("com.android.support:support-annotations:$androidSupportLibraryVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
 
     detekt "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
@@ -80,7 +80,7 @@ repositories {
 }
 
 detekt {
-    profile("") {
+    profile("main") {
         input = "$project.projectDir"
         output = "$projectDir/build/reports"
         filters = ".*/resources/.*,.*/build/.*"

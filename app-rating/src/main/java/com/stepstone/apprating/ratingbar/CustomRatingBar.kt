@@ -17,8 +17,8 @@ limitations under the License.
 package com.stepstone.apprating.ratingbar
 
 import android.content.Context
-import androidx.annotation.ColorRes
-import androidx.core.content.res.ResourcesCompat
+import android.support.annotation.ColorRes
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater

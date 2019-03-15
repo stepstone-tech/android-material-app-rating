@@ -21,10 +21,10 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.widget.TextViewCompat
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
+import android.support.v4.widget.TextViewCompat
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
