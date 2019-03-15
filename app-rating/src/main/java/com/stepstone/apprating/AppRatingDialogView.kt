@@ -206,9 +206,11 @@ class AppRatingDialogView(context: Context) : LinearLayout(context), OnRatingBar
             return
         }
 
-        val text = noteDescriptions!![rating]
-        noteDescriptionText.text = text
-        noteDescriptionText.visibility = View.VISIBLE
+        if (rating >= 0) {
+            val text = noteDescriptions!![rating]
+            noteDescriptionText.text = text
+            noteDescriptionText.visibility = View.VISIBLE
+        }
     }
 
     @SuppressLint("ResourceType")

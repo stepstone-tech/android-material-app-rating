@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.stepstone.apprating.AppRatingDialog
 import com.stepstone.apprating.listener.RatingDialogListener
 import kotlinx.android.synthetic.main.activity_samples.*
-import java.util.Arrays
+import java.util.*
 
 class SamplesActivity : FragmentActivity(), RatingDialogListener {
 
@@ -48,7 +48,7 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
         AppRatingDialog.Builder()
                 .setPositiveButtonText("Send feedback")
                 .setNumberOfStars(6)
-                .setDefaultRating(4)
+                .setDefaultRating(0)
                 .setTitle("Rate this application")
                 .setTitleTextColor(R.color.titleTextColor)
                 .setCommentTextColor(R.color.commentTextColor)
