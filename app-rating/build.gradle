@@ -36,7 +36,7 @@ android {
         minSdkVersion project.androidMinSdkVersion
         targetSdkVersion project.androidTargetSdkVersion
         versionCode 1
-        versionName "2.3.0-hotfix1"
+        versionName "2.3.0.1"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
