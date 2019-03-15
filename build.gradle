@@ -41,6 +41,7 @@ configure(allprojects) {
         androidCompileSdkVersion            = 28
         androidBuildToolsVersion            = "28.0.3"
         androidXLibraryVersion              = "1.0.0-beta01"
+        databindigCompilerVersion =         "3.1.4"
     }
 }
 

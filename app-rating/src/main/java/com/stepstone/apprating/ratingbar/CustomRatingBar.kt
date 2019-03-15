@@ -17,17 +17,16 @@ limitations under the License.
 package com.stepstone.apprating.ratingbar
 
 import android.content.Context
-import androidx.annotation.ColorRes
-import androidx.core.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
+import androidx.annotation.ColorRes
+import androidx.core.content.res.ResourcesCompat
 import com.stepstone.apprating.R
 import com.stepstone.apprating.common.Preconditions
-import com.stepstone.apprating.listener.OnRatingBarChangedListener
 import kotlinx.android.synthetic.main.component_custom_rating_bar.view.*
 
 /**
@@ -46,8 +45,6 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
         private set
 
     private var isIndicator: Boolean = false
-
-    private var onRatingBarChangedListener: OnRatingBarChangedListener? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.component_custom_rating_bar, this)
@@ -97,16 +94,11 @@ class CustomRatingBar(context: Context, attrs: AttributeSet) : LinearLayout(cont
                 }
             }
         }
-
-        onRatingBarChangedListener!!.onRatingChanged(rating)
+        // TODO notify listener
     }
 
     fun setIsIndicator(isIndicator: Boolean) {
         this.isIndicator = isIndicator
-    }
-
-    fun setOnRatingBarChangeListener(onRatingBarChangedListener: OnRatingBarChangedListener) {
-        this.onRatingBarChangedListener = onRatingBarChangedListener
     }
 
     private fun getStarColor(context: Context): Int {

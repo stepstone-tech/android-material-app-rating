@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven'
 apply plugin: "io.gitlab.arturbosch.detekt"
@@ -46,6 +47,10 @@ android {
         }
     }
     buildToolsVersion project.androidBuildToolsVersion
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -54,6 +59,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:$androidXLibraryVersion")
     implementation("androidx.annotation:annotation:$androidXLibraryVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    kapt "com.android.databinding:compiler:$databindigCompilerVersion"
 
     detekt "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
 }

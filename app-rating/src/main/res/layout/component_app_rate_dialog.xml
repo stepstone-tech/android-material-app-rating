@@ -1,62 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/margin_medium"
-    android:paddingLeft="@dimen/margin_medium"
-    android:paddingRight="@dimen/margin_medium">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/titleText"
-        style="@style/TextAppearance.AppRatingDialog.Title"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.stepstone.apprating.AppRatingViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_tiny"
+        android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:text="title" />
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_medium"
+        android:paddingTop="@dimen/margin_medium"
+        android:paddingRight="@dimen/margin_medium">
 
-    <TextView
-        android:id="@+id/descriptionText"
-        style="@style/TextAppearance.AppRatingDialog.Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_tiny"
-        android:visibility="gone"
-        android:gravity="center_horizontal"
-        tools:visibility="visible"
-        tools:text="description" />
+        <TextView
+            android:id="@+id/titleText"
+            style="@style/TextAppearance.AppRatingDialog.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_tiny"
+            android:gravity="center_horizontal"
+            android:text="@{viewModel.title}"
+            android:visibility="visible"
+            tools:text="title"
+            tools:visibility="visible" />
 
-    <com.stepstone.apprating.ratingbar.CustomRatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/descriptionText"
+            style="@style/TextAppearance.AppRatingDialog.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_tiny"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            tools:text="description"
+            tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/noteDescriptionText"
-        style="@style/TextAppearance.AppRatingDialog.NoteLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
-        android:gravity="center_horizontal"
-        android:textColor="?attr/colorAccent"
-        tools:text="Very good" />
+        <com.stepstone.apprating.ratingbar.CustomRatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/commentEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textCursorDrawable="@null"
-        android:background="@drawable/edit_text_background"
-        android:gravity="top"
-        android:inputType="text|textMultiLine"
-        android:lines="5"
-        android:padding="@dimen/margin_pre_medium"
-        android:layout_marginBottom="@dimen/margin_medium"
-        tools:ignore="LabelFor" />
+        <TextView
+            android:id="@+id/noteDescriptionText"
+            style="@style/TextAppearance.AppRatingDialog.NoteLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:gravity="center_horizontal"
+            android:textColor="?attr/colorAccent"
+            tools:text="Very good" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/commentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top"
+            android:inputType="text|textMultiLine"
+            android:lines="5"
+            android:padding="@dimen/margin_pre_medium"
+            android:textCursorDrawable="@null"
+            tools:ignore="LabelFor" />
+
+    </LinearLayout>
+
+</layout>
