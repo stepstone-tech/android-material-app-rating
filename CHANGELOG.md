@@ -4,12 +4,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [2.3.1]
-### Fixed
-- crash #56 which occur when set default rating to 0
-
-[2.3.1]: https://github.com/stepstone-tech/android-material-app-rating/compare/v2.3.0...v2.3.1
-
 ## [2.3.0]
 ### Added
 - "setCancelable", "setCancelOnTouchOutside" methods, which allow to control dialog cancelling
