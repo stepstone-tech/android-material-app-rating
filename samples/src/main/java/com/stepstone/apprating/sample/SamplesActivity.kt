@@ -93,8 +93,12 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
                 .show()
     }
 
-    override fun onPositiveButtonClicked(rate: Int, comment: String) {
-        Toast.makeText(this@SamplesActivity, "Rate : $rate\nComment : $comment", Toast.LENGTH_LONG).show()
+    override fun onPositiveButtonClickedWithComment(rate: Int, comment: String) {
+            Toast.makeText(this@SamplesActivity, "Rate : $rate\nComment : $comment", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPositiveButtonClickedWithoutComment(rate: Int) {
+        Toast.makeText(this@SamplesActivity, "Rate : $rate", Toast.LENGTH_LONG).show()
     }
 
     override fun onNegativeButtonClicked() {

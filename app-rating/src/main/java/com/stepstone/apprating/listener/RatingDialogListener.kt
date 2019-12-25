@@ -23,7 +23,9 @@ package com.stepstone.apprating.listener
  */
 interface RatingDialogListener {
 
-    fun onPositiveButtonClicked(rate: Int, comment: String)
+    fun onPositiveButtonClickedWithComment(rate: Int, comment: String)
+
+    fun onPositiveButtonClickedWithoutComment(rate: Int)
 
     fun onNegativeButtonClicked()
 

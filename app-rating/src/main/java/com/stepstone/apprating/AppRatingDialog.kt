@@ -76,6 +76,7 @@ class AppRatingDialog private constructor(
         data class Data(
             var numberOfStars: Int = MAX_RATING,
             var defaultRating: Int = DEFAULT_RATING,
+            var defaultThreshold: Int = DEFAULT_THRESHOLD,
             val positiveButtonText: StringValue = StringValue(),
             val negativeButtonText: StringValue = StringValue(),
             val neutralButtonText: StringValue = StringValue(),
@@ -160,6 +161,22 @@ class AppRatingDialog private constructor(
                 "default rating value should be between 0 and " + data.numberOfStars
             )
             data.defaultRating = defaultRating
+            return this
+        }
+
+        /**
+         * This method sets threshold (number of stars) which the user can send a comment for them.
+         * And for the rest, no comment is needed
+         *
+         * @param defaultThreshold number of stars which the user can send a comment for them
+         * @return Builder for chaining
+         */
+        fun setDefaultThreshold(defaultThreshold: Int): Builder {
+            Preconditions.checkArgument(
+                    defaultThreshold >= 0 && defaultThreshold <= data.numberOfStars,
+                    "default rating value should be between 0 and " + data.numberOfStars
+            )
+            data.defaultThreshold = defaultThreshold
             return this
         }
 
