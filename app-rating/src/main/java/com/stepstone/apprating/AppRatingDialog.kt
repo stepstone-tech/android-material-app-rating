@@ -156,6 +156,7 @@ class AppRatingDialog private constructor(
                 var hintTextColorResId: Int = 0,
                 var commentTextColorResId: Int = 0,
                 var commentBackgroundColorResId: Int = 0,
+                var dialogBackgroundColorResId: Int = 0,
                 var windowAnimationResId: Int = 0,
                 var noteDescriptions: ArrayList<String>? = null,
                 var cancelable: Boolean? = null,
@@ -580,6 +581,18 @@ class AppRatingDialog private constructor(
          */
         fun setCommentBackgroundColor(@ColorRes colorResId: Int): Builder {
             data.commentBackgroundColorResId = colorResId
+            return this
+        }
+
+        /**
+         * This method sets dialog's background color resource.
+         * If not set then it uses default white color will be used.
+         *
+         * @param colorResId color resource id for dialog background
+         * @return Builder for chaining
+         */
+        fun setDialogBackgroundColor(@ColorRes colorResId: Int): Builder {
+            data.dialogBackgroundColorResId = colorResId
             return this
         }
 

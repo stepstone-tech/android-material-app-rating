@@ -7,4 +7,5 @@
     <string name="title">App rating</string>
     <string name="description">Please write your feedback</string>
     <string name="defaultComment">This app is pretty cool !</string>
+    <string name="defaultHint">Please write your comment here...</string>
 </resources>

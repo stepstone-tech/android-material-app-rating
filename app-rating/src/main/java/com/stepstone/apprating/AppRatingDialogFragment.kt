@@ -87,6 +87,9 @@ class AppRatingDialogFragment : DialogFragment() {
 
         builder.setView(dialogView)
         alertDialog = builder.create()
+        if (data.dialogBackgroundColorResId != 0) {
+            alertDialog.window?.setBackgroundDrawableResource(data.dialogBackgroundColorResId)
+        }
         setupAnimation()
         setupCancelable()
         return alertDialog

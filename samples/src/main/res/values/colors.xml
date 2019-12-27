@@ -10,4 +10,13 @@
     <color name="descriptionTextColor">#A6FFFFFF</color>
     <color name="commentTextColor">#FFFFFF</color>
     <color name="hintTextColor">#55000000</color>
+    <color name="rateAppDialogBackgroundColor">#4550B9</color>
+
+    <color name="starColor2">#57A4F0</color>
+    <color name="noteDescriptionTextColor2">#57A4F0</color>
+    <color name="titleTextColor2">#000000</color>
+    <color name="descriptionTextColor2">#8B888F</color>
+    <color name="commentTextColor2">#000000</color>
+    <color name="commentBackgroundColor2">#F9F7F9</color>
+    <color name="hintTextColor2">#8B888F</color>
 </resources>
