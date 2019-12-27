@@ -22,6 +22,8 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.appcompat.app.AlertDialog
 import android.text.TextUtils
+import com.stepstone.apprating.PreferenceHelper.setAgreeShowDialog
+import com.stepstone.apprating.PreferenceHelper.setRemindInterval
 import com.stepstone.apprating.extensions.applyIfNotZero
 import com.stepstone.apprating.listener.RatingDialogListener
 
@@ -162,6 +164,7 @@ class AppRatingDialogFragment : DialogFragment() {
     private fun setupNegativeButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText) { _, _ ->
+                setAgreeShowDialog(context, false)
                 listener?.onNegativeButtonClicked()
             }
         }
@@ -171,6 +174,7 @@ class AppRatingDialogFragment : DialogFragment() {
         if (!TextUtils.isEmpty(positiveButtonText)) {
             builder.setPositiveButton(positiveButtonText) { _, _ ->
                 val rateNumber = dialogView.rateNumber.toInt()
+                setAgreeShowDialog(context, false)
                 if (rateNumber <= data.defaultThreshold) {
                     val comment = dialogView.comment
                     listener?.onPositiveButtonClickedWithComment(rateNumber, comment)
@@ -184,6 +188,7 @@ class AppRatingDialogFragment : DialogFragment() {
     private fun setupNeutralButton(builder: AlertDialog.Builder) {
         if (!TextUtils.isEmpty(neutralButtonText)) {
             builder.setNeutralButton(neutralButtonText) { _, _ ->
+                setRemindInterval(context)
                 listener?.onNeutralButtonClicked()
             }
         }

@@ -19,6 +19,9 @@ package com.stepstone.apprating
 const val MAX_RATING = 6
 const val DEFAULT_RATING = 4
 const val DEFAULT_THRESHOLD = 3
+const val DEFAULT_AFTER_INSTALL_DAY = 0
+const val DEFAULT_NUMBER_OF_LAUNCH = 8
+const val DEFAULT_REMIND_INTERVAL = 1
 
 const val DIALOG_DATA = "data"
 const val CURRENT_RATE_NUMBER = "currentRateNumber"

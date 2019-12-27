@@ -16,15 +16,20 @@ limitations under the License.
 
 package com.stepstone.apprating
 
+import android.content.Context
 import android.text.TextUtils
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.stepstone.apprating.AppRatingDialog.Builder
+import com.stepstone.apprating.PreferenceHelper.*
 import com.stepstone.apprating.common.Preconditions
 import java.io.Serializable
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * This class represents dialog object produced by [Builder].
@@ -33,8 +38,9 @@ import java.io.Serializable
  * @see Builder
  */
 class AppRatingDialog private constructor(
-    private val fragmentActivity: FragmentActivity,
-    private val data: Builder.Data
+        private val fragmentActivity: FragmentActivity,
+        private val data: Builder.Data,
+        private val context: Context
 ) {
 
     private var fragment: Fragment? = null
@@ -67,6 +73,61 @@ class AppRatingDialog private constructor(
         }
     }
 
+    fun showRateDialogIfMeetsConditions(): Boolean {
+        val isMeetsConditions = shouldShowRateDialog()
+        if (isMeetsConditions) {
+            show()
+        }
+        return isMeetsConditions
+    }
+
+    fun shouldShowRateDialog(): Boolean {
+        return getIsAgreeShowDialog(context) &&
+                isOverLaunchTimes() &&
+                isOverInstallDate() &&
+                isOverRemindDate()
+    }
+
+    private fun isOverLaunchTimes(): Boolean {
+        return getLaunchTimes(context) >= data.numberOfLaunches
+    }
+
+    private fun isOverInstallDate(): Boolean {
+        return isOverDate(getInstallDate(context), data.afterInstallDay)
+    }
+
+    private fun isOverRemindDate(): Boolean {
+        return isOverDate(getRemindInterval(context), data.remindInterval)
+    }
+
+    private fun isOverDate(targetDate: Long, threshold: Int): Boolean {
+        return Date().time - targetDate >= threshold * 24 * 60 * 60 * 1000
+    }
+
+    fun monitor() {
+        if (isFirstLaunch(context)) {
+            Toast.makeText(context, "first", Toast.LENGTH_SHORT).show()
+            setInstallDate(context)
+        }
+        setLaunchTimes(context, getLaunchTimes(context) + 1)
+    }
+
+    fun clearAgreeShowDialog(): AppRatingDialog {
+        PreferenceHelper.setAgreeShowDialog(context, true)
+        return this
+    }
+
+    fun clearSettingsParam(): AppRatingDialog {
+        PreferenceHelper.setAgreeShowDialog(context, true)
+        PreferenceHelper.clearSharedPreferences(context)
+        return this
+    }
+
+    fun setAgreeShowDialog(clear: Boolean): AppRatingDialog {
+        PreferenceHelper.setAgreeShowDialog(context, clear)
+        return this
+    }
+
     /**
      * This class allows to setup rating dialog
      * using builder pattern.
@@ -74,28 +135,31 @@ class AppRatingDialog private constructor(
     class Builder : Serializable {
 
         data class Data(
-            var numberOfStars: Int = MAX_RATING,
-            var defaultRating: Int = DEFAULT_RATING,
-            var defaultThreshold: Int = DEFAULT_THRESHOLD,
-            val positiveButtonText: StringValue = StringValue(),
-            val negativeButtonText: StringValue = StringValue(),
-            val neutralButtonText: StringValue = StringValue(),
-            val title: StringValue = StringValue(),
-            val description: StringValue = StringValue(),
-            val defaultComment: StringValue = StringValue(),
-            val hint: StringValue = StringValue(),
-            var commentInputEnabled: Boolean = true,
-            var starColorResId: Int = 0,
-            var noteDescriptionTextColor: Int = 0,
-            var titleTextColorResId: Int = 0,
-            var descriptionTextColorResId: Int = 0,
-            var hintTextColorResId: Int = 0,
-            var commentTextColorResId: Int = 0,
-            var commentBackgroundColorResId: Int = 0,
-            var windowAnimationResId: Int = 0,
-            var noteDescriptions: ArrayList<String>? = null,
-            var cancelable: Boolean? = null,
-            var canceledOnTouchOutside: Boolean? = null
+                var numberOfStars: Int = MAX_RATING,
+                var defaultRating: Int = DEFAULT_RATING,
+                var defaultThreshold: Int = DEFAULT_THRESHOLD,
+                var afterInstallDay: Int = DEFAULT_AFTER_INSTALL_DAY,   // number of days after Installation day
+                var numberOfLaunches: Int = DEFAULT_NUMBER_OF_LAUNCH,   // number of launch after last show rate dialog
+                var remindInterval: Int = DEFAULT_REMIND_INTERVAL,      // number of days after click on remind me later
+                val positiveButtonText: StringValue = StringValue(),
+                val negativeButtonText: StringValue = StringValue(),
+                val neutralButtonText: StringValue = StringValue(),
+                val title: StringValue = StringValue(),
+                val description: StringValue = StringValue(),
+                val defaultComment: StringValue = StringValue(),
+                val hint: StringValue = StringValue(),
+                var commentInputEnabled: Boolean = true,
+                var starColorResId: Int = 0,
+                var noteDescriptionTextColor: Int = 0,
+                var titleTextColorResId: Int = 0,
+                var descriptionTextColorResId: Int = 0,
+                var hintTextColorResId: Int = 0,
+                var commentTextColorResId: Int = 0,
+                var commentBackgroundColorResId: Int = 0,
+                var windowAnimationResId: Int = 0,
+                var noteDescriptions: ArrayList<String>? = null,
+                var cancelable: Boolean? = null,
+                var canceledOnTouchOutside: Boolean? = null
         ) : Serializable
 
         val data = Data()
@@ -109,7 +173,7 @@ class AppRatingDialog private constructor(
          */
         fun create(activity: FragmentActivity): AppRatingDialog {
             Preconditions.checkNotNull(activity, "FragmentActivity cannot be null")
-            return AppRatingDialog(activity, data)
+            return AppRatingDialog(activity, data, activity.applicationContext)
         }
 
         /**
@@ -122,8 +186,8 @@ class AppRatingDialog private constructor(
          */
         fun setNumberOfStars(maxRating: Int): Builder {
             Preconditions.checkArgument(
-                maxRating in 1..MAX_RATING,
-                "max rating value should be between 1 and $MAX_RATING"
+                    maxRating in 1..MAX_RATING,
+                    "max rating value should be between 1 and $MAX_RATING"
             )
             data.numberOfStars = maxRating
             return this
@@ -141,8 +205,8 @@ class AppRatingDialog private constructor(
             Preconditions.checkNotNull(noteDescriptions, "list cannot be null")
             Preconditions.checkArgument(!noteDescriptions.isEmpty(), "list cannot be empty")
             Preconditions.checkArgument(
-                noteDescriptions.size <= MAX_RATING,
-                "size of the list can be maximally $MAX_RATING"
+                    noteDescriptions.size <= MAX_RATING,
+                    "size of the list can be maximally $MAX_RATING"
             )
             data.noteDescriptions = ArrayList(noteDescriptions)
             return this
@@ -157,8 +221,8 @@ class AppRatingDialog private constructor(
          */
         fun setDefaultRating(defaultRating: Int): Builder {
             Preconditions.checkArgument(
-                defaultRating >= 0 && defaultRating <= data.numberOfStars,
-                "default rating value should be between 0 and " + data.numberOfStars
+                    defaultRating >= 0 && defaultRating <= data.numberOfStars,
+                    "default rating value should be between 0 and " + data.numberOfStars
             )
             data.defaultRating = defaultRating
             return this
@@ -173,10 +237,55 @@ class AppRatingDialog private constructor(
          */
         fun setDefaultThreshold(defaultThreshold: Int): Builder {
             Preconditions.checkArgument(
-                    defaultThreshold >= 0 && defaultThreshold <= data.numberOfStars,
-                    "default rating value should be between 0 and " + data.numberOfStars
+                    defaultThreshold >= 0,
+                    "default threshold value should be more than 0"
             )
             data.defaultThreshold = defaultThreshold
+            return this
+        }
+
+        /**
+         * This method sets afterInstallDay, number of days after Installation day for show rate dialog
+         *
+         * @param afterInstallDay number of days after Installation day for show rate dialog
+         * @return Builder for chaining
+         */
+        fun setAfterInstallDay(afterInstallDay: Int): Builder {
+            Preconditions.checkArgument(
+                    afterInstallDay >= 0,
+                    "AfterInstallDay value should be more than 0"
+            )
+            data.afterInstallDay = afterInstallDay
+            return this
+        }
+
+        /**
+         * This method sets numberOfLaunches, number of launch after last show rate dialog
+         *
+         * @param numberOfLaunches number of launch after last show rate dialog
+         * @return Builder for chaining
+         */
+        fun setNumberOfLaunches(numberOfLaunches: Int): Builder {
+            Preconditions.checkArgument(
+                    numberOfLaunches >= 0,
+                    "NumberOfLaunches value should be more than 0"
+            )
+            data.numberOfLaunches = numberOfLaunches
+            return this
+        }
+
+        /**
+         * This method sets remindInterval, number of days after click on remind me later
+         *
+         * @param remindInterval number of days after click on remind me later
+         * @return Builder for chaining
+         */
+        fun setRemindInterval(remindInterval: Int): Builder {
+            Preconditions.checkArgument(
+                    remindInterval >= 0,
+                    "RemindInterval value should be more than 0"
+            )
+            data.remindInterval = remindInterval
             return this
         }
 
@@ -309,8 +418,8 @@ class AppRatingDialog private constructor(
          */
         fun setPositiveButtonText(positiveButtonText: String): Builder {
             Preconditions.checkArgument(
-                !TextUtils.isEmpty(positiveButtonText),
-                "text cannot be empty"
+                    !TextUtils.isEmpty(positiveButtonText),
+                    "text cannot be empty"
             )
             data.positiveButtonText.text = positiveButtonText
             return this
@@ -337,8 +446,8 @@ class AppRatingDialog private constructor(
          */
         fun setNegativeButtonText(negativeButtonText: String): Builder {
             Preconditions.checkArgument(
-                !TextUtils.isEmpty(negativeButtonText),
-                "text cannot be empty"
+                    !TextUtils.isEmpty(negativeButtonText),
+                    "text cannot be empty"
             )
             data.negativeButtonText.text = negativeButtonText
             return this
@@ -353,8 +462,8 @@ class AppRatingDialog private constructor(
          */
         fun setNeutralButtonText(neutralButtonText: String): Builder {
             Preconditions.checkArgument(
-                !TextUtils.isEmpty(neutralButtonText),
-                "text cannot be empty"
+                    !TextUtils.isEmpty(neutralButtonText),
+                    "text cannot be empty"
             )
             data.neutralButtonText.text = neutralButtonText
             return this

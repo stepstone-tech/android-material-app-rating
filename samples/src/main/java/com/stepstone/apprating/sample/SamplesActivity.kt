@@ -17,6 +17,36 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
         showDialogButton_2.setOnClickListener { showRatingDialog_example2() }
         showDialogButton_3.setOnClickListener { showRatingDialog_example3() }
         showDialogButton_4.setOnClickListener { showRatingDialog_example4() }
+
+        buildRatingDialog().monitor()
+        buildRatingDialog().showRateDialogIfMeetsConditions()
+    }
+
+    private fun buildRatingDialog(): AppRatingDialog {
+        return AppRatingDialog.Builder()
+                .setPositiveButtonText("Submit")
+                .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
+                .setNoteDescriptions(listOf("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
+                .setDefaultRating(2)
+                .setDefaultThreshold(4)
+                .setAfterInstallDay(0)
+                .setNumberOfLaunches(3)
+                .setRemindInterval(2)
+                .setTitle("Rate this application")
+                .setDescription("Please select some stars and give your feedback")
+                .setStarColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
+                .setTitleTextColor(R.color.titleTextColor)
+                .setDescriptionTextColor(R.color.descriptionTextColor)
+                .setCommentTextColor(R.color.commentTextColor)
+                .setCommentBackgroundColor(R.color.colorPrimaryDark)
+                .setWindowAnimation(R.style.MyDialogSlideHorizontalAnimation)
+                .setHint("Please write your comment here ...")
+                .setHintTextColor(R.color.hintTextColor)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
+                .create(this@SamplesActivity)
     }
 
     private fun showRatingDialog_example1() {
@@ -26,6 +56,7 @@ class SamplesActivity : FragmentActivity(), RatingDialogListener {
                 .setNeutralButtonText("Later")
                 .setNoteDescriptions(listOf("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
                 .setDefaultRating(2)
+                .setDefaultThreshold(4)
                 .setTitle("Rate this application")
                 .setDescription("Please select some stars and give your feedback")
                 .setStarColor(R.color.starColor)
