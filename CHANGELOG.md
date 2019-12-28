@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.4.1]
+### Added
+- "setThreshold" method to set threshold. Threshold is number of stars which the user can send a comment for them.
+-  "onPositiveButtonClickedWithComment", "onPositiveButtonClickedWithoutComment" methods instead of "onPositiveButtonClicked", To separate methods of below threshold and more than.
+-  "setAfterInstallDay", "setNumberOfLaunches", "setRemindInterval" methods for auto show app rating dialog
+-  "setDialogBackgroundColor" methods for change dialog background color
+
+[2.4.1]: https://github.com/hosseiniSeyRo/android-app-rating/compare/v2.3.1...v2.4.1
+
 ## [2.3.1]
 ### Fixed
 - crash #56 which occur when set default rating to 0
