@@ -108,7 +108,7 @@ class AppRatingDialogFragment : DialogFragment() {
 
     private fun setupInputBox() {
         dialogView.setCommentInputEnabled(data.commentInputEnabled)
-        dialogView.setThreshold(data.defaultThreshold)
+        dialogView.setThreshold(data.threshold)
     }
 
     private fun setupCancelable() {
@@ -178,7 +178,7 @@ class AppRatingDialogFragment : DialogFragment() {
             builder.setPositiveButton(positiveButtonText) { _, _ ->
                 val rateNumber = dialogView.rateNumber.toInt()
                 setAgreeShowDialog(context, false)
-                if (rateNumber <= data.defaultThreshold) {
+                if (rateNumber <= data.threshold) {
                     val comment = dialogView.comment
                     listener?.onPositiveButtonClickedWithComment(rateNumber, comment)
                 } else { //rating>threshold

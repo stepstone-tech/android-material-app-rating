@@ -136,7 +136,7 @@ class AppRatingDialog private constructor(
         data class Data(
                 var numberOfStars: Int = MAX_RATING,
                 var defaultRating: Int = DEFAULT_RATING,
-                var defaultThreshold: Int = DEFAULT_THRESHOLD,
+                var threshold: Int = DEFAULT_THRESHOLD,
                 var afterInstallDay: Int = DEFAULT_AFTER_INSTALL_DAY,   // number of days after Installation day
                 var numberOfLaunches: Int = DEFAULT_NUMBER_OF_LAUNCH,   // number of launch after last show rate dialog
                 var remindInterval: Int = DEFAULT_REMIND_INTERVAL,      // number of days after click on remind me later
@@ -232,15 +232,15 @@ class AppRatingDialog private constructor(
          * This method sets threshold (number of stars) which the user can send a comment for them.
          * And for the rest, no comment is needed
          *
-         * @param defaultThreshold number of stars which the user can send a comment for them
+         * @param threshold number of stars which the user can send a comment for them
          * @return Builder for chaining
          */
-        fun setDefaultThreshold(defaultThreshold: Int): Builder {
+        fun setThreshold(threshold: Int): Builder {
             Preconditions.checkArgument(
-                    defaultThreshold >= 0,
-                    "default threshold value should be more than 0"
+                    threshold >= 0,
+                    "threshold value should be more than 0"
             )
-            data.defaultThreshold = defaultThreshold
+            data.threshold = threshold
             return this
         }
 

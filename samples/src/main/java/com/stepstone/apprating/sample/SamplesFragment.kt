@@ -30,7 +30,7 @@ class SamplesFragment : Fragment(), RatingDialogListener {
             .setNegativeButtonText("Cancel")
             .setNeutralButtonText("Later")
             .setDefaultRating(2)
-            .setDefaultThreshold(3)
+            .setThreshold(3)
             .setTitle("Rate this application")
             .setDescription("Please select some stars and give your feedback")
             .setStarColor(R.color.starColor)
