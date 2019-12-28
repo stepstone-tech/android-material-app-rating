@@ -106,7 +106,6 @@ class AppRatingDialog private constructor(
 
     fun monitor() {
         if (isFirstLaunch(context)) {
-            Toast.makeText(context, "first", Toast.LENGTH_SHORT).show()
             setInstallDate(context)
         }
         setLaunchTimes(context, getLaunchTimes(context) + 1)
